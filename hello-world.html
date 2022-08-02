@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Hello, World! | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Hello, World! | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Hello, World! | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="basic-data-structures.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1</b> Hello, World!</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>1.1</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="1.2" data-path="hello-world.html"><a href="hello-world.html#the-basics"><i class="fa fa-check"></i><b>1.2</b> The Basics</a></li>
+<li class="chapter" data-level="1.3" data-path="hello-world.html"><a href="hello-world.html#data-types"><i class="fa fa-check"></i><b>1.3</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="hello-world.html"><a href="hello-world.html#numerics"><i class="fa fa-check"></i><b>1.3.1</b> Numerics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="hello-world.html"><a href="hello-world.html#integers"><i class="fa fa-check"></i><b>1.3.2</b> Integers</a></li>
+<li class="chapter" data-level="1.3.3" data-path="hello-world.html"><a href="hello-world.html#complex"><i class="fa fa-check"></i><b>1.3.3</b> Complex</a></li>
+<li class="chapter" data-level="1.3.4" data-path="hello-world.html"><a href="hello-world.html#characters"><i class="fa fa-check"></i><b>1.3.4</b> Characters</a></li>
+<li class="chapter" data-level="1.3.5" data-path="hello-world.html"><a href="hello-world.html#logicals"><i class="fa fa-check"></i><b>1.3.5</b> Logicals</a></li>
+<li class="chapter" data-level="1.3.6" data-path="hello-world.html"><a href="hello-world.html#raws"><i class="fa fa-check"></i><b>1.3.6</b> Raws</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="hello-world.html"><a href="hello-world.html#operations"><i class="fa fa-check"></i><b>1.4</b> Operations</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="hello-world.html"><a href="hello-world.html#arithmetic-operations"><i class="fa fa-check"></i><b>1.4.1</b> Arithmetic Operations</a></li>
+<li class="chapter" data-level="1.4.2" data-path="hello-world.html"><a href="hello-world.html#modular-division-and-integer-division"><i class="fa fa-check"></i><b>1.4.2</b> Modular Division and Integer Division</a></li>
+<li class="chapter" data-level="1.4.3" data-path="hello-world.html"><a href="hello-world.html#relational-operators"><i class="fa fa-check"></i><b>1.4.3</b> Relational Operators</a></li>
+<li class="chapter" data-level="1.4.4" data-path="hello-world.html"><a href="hello-world.html#logical-operators"><i class="fa fa-check"></i><b>1.4.4</b> Logical Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="hello-world.html"><a href="hello-world.html#variable-and-function-assignment"><i class="fa fa-check"></i><b>1.5</b> Variable and Function Assignment</a></li>
+<li class="chapter" data-level="1.6" data-path="hello-world.html"><a href="hello-world.html#control-flow"><i class="fa fa-check"></i><b>1.6</b> Control Flow</a></li>
+<li class="chapter" data-level="1.7" data-path="hello-world.html"><a href="hello-world.html#loops"><i class="fa fa-check"></i><b>1.7</b> Loops</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="hello-world.html"><a href="hello-world.html#for-loops"><i class="fa fa-check"></i><b>1.7.1</b> “for” loops</a></li>
+<li class="chapter" data-level="1.7.2" data-path="hello-world.html"><a href="hello-world.html#while-loops"><i class="fa fa-check"></i><b>1.7.2</b> “while” loops</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-data-structures.html"><a href="basic-data-structures.html"><i class="fa fa-check"></i><b>2</b> Basic Data Structures</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#building-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Building Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#accessing-vector-components"><i class="fa fa-check"></i><b>2.1.2</b> Accessing Vector Components</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic-data-structures.html"><a href="basic-data-structures.html#vector-operations"><i class="fa fa-check"></i><b>2.1.3</b> Vector Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.2</b> Lists</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#constructing-lists-and-accessing-elements"><i class="fa fa-check"></i><b>2.2.1</b> Constructing Lists and Accessing Elements</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#look-ups"><i class="fa fa-check"></i><b>2.2.2</b> Look Ups</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-data-structures.html"><a href="basic-data-structures.html#infix-operators"><i class="fa fa-check"></i><b>2.2.3</b> Infix Operators</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basic-data-structures.html"><a href="basic-data-structures.html#inserting-and-removing-list-items"><i class="fa fa-check"></i><b>2.2.4</b> Inserting and Removing List Items</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basic-data-structures.html"><a href="basic-data-structures.html#nested-lists"><i class="fa fa-check"></i><b>2.2.5</b> Nested Lists</a></li>
+<li class="chapter" data-level="2.2.6" data-path="basic-data-structures.html"><a href="basic-data-structures.html#lapply"><i class="fa fa-check"></i><b>2.2.6</b> lapply()</a></li>
+<li class="chapter" data-level="2.2.7" data-path="basic-data-structures.html"><a href="basic-data-structures.html#joining-lists"><i class="fa fa-check"></i><b>2.2.7</b> Joining Lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>3</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices.html"><a href="matrices.html#constructing-matrices"><i class="fa fa-check"></i><b>3.1</b> Constructing Matrices</a></li>
+<li class="chapter" data-level="3.2" data-path="matrices.html"><a href="matrices.html#special-matrices"><i class="fa fa-check"></i><b>3.2</b> Special Matrices</a></li>
+<li class="chapter" data-level="3.3" data-path="matrices.html"><a href="matrices.html#accessing-matrix-entries"><i class="fa fa-check"></i><b>3.3</b> Accessing Matrix Entries</a></li>
+<li class="chapter" data-level="3.4" data-path="matrices.html"><a href="matrices.html#adding-and-removing-rowscolumns"><i class="fa fa-check"></i><b>3.4</b> Adding and Removing Rows/Columns</a></li>
+<li class="chapter" data-level="3.5" data-path="matrices.html"><a href="matrices.html#matrix-operations"><i class="fa fa-check"></i><b>3.5</b> Matrix Operations</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="matrices.html"><a href="matrices.html#addition"><i class="fa fa-check"></i><b>3.5.1</b> Addition</a></li>
+<li class="chapter" data-level="3.5.2" data-path="matrices.html"><a href="matrices.html#scalar-multiplication"><i class="fa fa-check"></i><b>3.5.2</b> Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.5.3" data-path="matrices.html"><a href="matrices.html#hadamard-product"><i class="fa fa-check"></i><b>3.5.3</b> Hadamard Product</a></li>
+<li class="chapter" data-level="3.5.4" data-path="matrices.html"><a href="matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>3.5.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5.5" data-path="matrices.html"><a href="matrices.html#aside-the-magic-of-matrix-multiplication"><i class="fa fa-check"></i><b>3.5.5</b> Aside: The Magic of Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5.6" data-path="matrices.html"><a href="matrices.html#the-determinant"><i class="fa fa-check"></i><b>3.5.6</b> The Determinant</a></li>
+<li class="chapter" data-level="3.5.7" data-path="matrices.html"><a href="matrices.html#inverses"><i class="fa fa-check"></i><b>3.5.7</b> Inverses</a></li>
+<li class="chapter" data-level="3.5.8" data-path="matrices.html"><a href="matrices.html#transpose"><i class="fa fa-check"></i><b>3.5.8</b> Transpose</a></li>
+<li class="chapter" data-level="3.5.9" data-path="matrices.html"><a href="matrices.html#kronecker-product"><i class="fa fa-check"></i><b>3.5.9</b> Kronecker Product</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>4</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-frames.html"><a href="data-frames.html#summary-and-structure"><i class="fa fa-check"></i><b>4.1</b> Summary and Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="data-frames.html"><a href="data-frames.html#extracting-and-subsetting"><i class="fa fa-check"></i><b>4.2</b> Extracting and Subsetting</a></li>
+<li class="chapter" data-level="4.3" data-path="data-frames.html"><a href="data-frames.html#editing-adding-and-removing-columns"><i class="fa fa-check"></i><b>4.3</b> Editing, Adding and Removing Columns</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Data visualization: ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#grammar-of-graphics"><i class="fa fa-check"></i><b>5.1</b> Grammar of graphics</a></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#loading-ggplot2"><i class="fa fa-check"></i><b>5.2</b> Loading ggplot2</a></li>
+<li class="chapter" data-level="5.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#creating-a-ggplot"><i class="fa fa-check"></i><b>5.3</b> Creating a ggplot</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-1-data-mapping-to-aesthetics"><i class="fa fa-check"></i><b>5.3.1</b> Ingredient 1: data mapping to aesthetics</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-2-layers-of-geometric-objects-equipped-with-mappings"><i class="fa fa-check"></i><b>5.3.2</b> Ingredient 2: layers of geometric objects equipped with mappings</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-3-scales"><i class="fa fa-check"></i><b>5.3.3</b> Ingredient 3: scales</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-4-a-coordinate-system"><i class="fa fa-check"></i><b>5.3.4</b> Ingredient 4: a coordinate system</a></li>
+<li class="chapter" data-level="5.3.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-5-a-facet-specification"><i class="fa fa-check"></i><b>5.3.5</b> Ingredient 5: a facet specification</a></li>
+<li class="chapter" data-level="5.3.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#overwriting-data"><i class="fa fa-check"></i><b>5.3.6</b> Overwriting data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#statistical-transformations"><i class="fa fa-check"></i><b>5.4</b> Statistical Transformations</a></li>
+<li class="chapter" data-level="5.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#position"><i class="fa fa-check"></i><b>5.5</b> Position</a></li>
+<li class="chapter" data-level="5.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#the-anatomy-of-a-graphic"><i class="fa fa-check"></i><b>5.6</b> The anatomy of a graphic</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>6</b> Data transformation with <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-rows-with-filter"><i class="fa fa-check"></i><b>6.2</b> Filtering rows with <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-conditions"><i class="fa fa-check"></i><b>6.2.1</b> Filtering conditions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#dealing-with-missing-values"><i class="fa fa-check"></i><b>6.2.2</b> Dealing with missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#arrange-rows-with-arrange"><i class="fa fa-check"></i><b>6.3</b> Arrange rows with <code>arrange()</code></a></li>
+<li class="chapter" data-level="6.4" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#select-columns-with-select"><i class="fa fa-check"></i><b>6.4</b> Select columns with <code>select()</code></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#helper-functions"><i class="fa fa-check"></i><b>6.4.1</b> Helper functions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#renaming-columns"><i class="fa fa-check"></i><b>6.4.2</b> Renaming columns</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#add-new-variables-with-mutate"><i class="fa fa-check"></i><b>6.5</b> Add new variables with <code>mutate()</code></a></li>
+<li class="chapter" data-level="6.6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-summaries-with-summarise-and-group_by"><i class="fa fa-check"></i><b>6.6</b> Grouped summaries with <code>summarise()</code> and <code>group_by()</code></a></li>
+<li class="chapter" data-level="6.7" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#an-example-analysis"><i class="fa fa-check"></i><b>6.7</b> An example analysis</a></li>
+<li class="chapter" data-level="6.8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#the-pipe-operator"><i class="fa fa-check"></i><b>6.8</b> The pipe operator <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="6.9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#data-heirarchy-with-group_by"><i class="fa fa-check"></i><b>6.9</b> Data heirarchy with <code>group_by()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-process-of-eda"><i class="fa fa-check"></i><b>7.1</b> The process of EDA</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions-of-variation"><i class="fa fa-check"></i><b>7.3</b> Questions of variation</a></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions-of-covariation"><i class="fa fa-check"></i><b>7.4</b> Questions of covariation</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values"><i class="fa fa-check"></i><b>7.5</b> Missing values</a></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#patterns-and-models"><i class="fa fa-check"></i><b>7.6</b> Patterns and models</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html"><i class="fa fa-check"></i><b>8</b> Data import and storage</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#tibbles"><i class="fa fa-check"></i><b>8.1</b> Tibbles</a></li>
+<li class="chapter" data-level="8.2" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#data-import"><i class="fa fa-check"></i><b>8.2</b> Data import</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>9</b> Modeling</a></li>
+<li class="chapter" data-level="10" data-path="linear-regression-models.html"><a href="linear-regression-models.html"><i class="fa fa-check"></i><b>10</b> Linear Regression Models</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="hello-world" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Hello, World!<a href="hello-world.html#hello-world" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="installing-and-loading-packages" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Installing and Loading Packages<a href="hello-world.html#installing-and-loading-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We begin by installing the <code>tidyverse</code> package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="hello-world.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<p>Once a package has been installed, we can load it into the current runtime instance using the <code>library()</code> function.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="hello-world.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
+## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
+## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
+## ✔ readr   2.1.2     ✔ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<p><br />
+</p>
+</div>
+<div id="the-basics" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> The Basics<a href="hello-world.html#the-basics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let us begin with some basic programming in R. We will give a quick rundown of how to do the following topics:</p>
+<ol style="list-style-type: decimal">
+<li>Data types</li>
+<li>Operations</li>
+<li>Variable and function assignment</li>
+<li>Control flow</li>
+<li>Loops</li>
+</ol>
+<p><br />
+</p>
+</div>
+<div id="data-types" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Data Types<a href="hello-world.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are 6 primitive data types in R:</p>
+<ul>
+<li><strong>double</strong> : real numbers.</li>
+<li><strong>integer</strong> : integer values.</li>
+<li><strong>complex</strong> : complex numbers.</li>
+<li><strong>character</strong> : string literals.</li>
+<li><strong>logical</strong> : the usual TRUE/FALSE boolean values.</li>
+<li><strong>raw</strong> : values specified as raw bytes.</li>
+</ul>
+<p><br />
+</p>
+<div id="numerics" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Numerics<a href="hello-world.html#numerics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can check the data type of a given element by using the <code>typeof()</code> function:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="hello-world.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example of a double data type</span></span>
+<span id="cb6-2"><a href="hello-world.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3.14</span></span></code></pre></div>
+<pre><code>## [1] 3.14</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="hello-world.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fl">3.14</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<p><strong>Note:</strong> R by default stores <em>all</em> numbers as <code>double</code>, regardless of whether there is a floating decimal point or not. For example, consider the following outputs:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="hello-world.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="hello-world.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="hello-world.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fl">3.0</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<p>Notice how both the values <code>3</code> and <code>3.0</code> are stored as type <code>double</code>, even though <code>3</code> has no decimal point.</p>
+<p><br />
+</p>
+</div>
+<div id="integers" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Integers<a href="hello-world.html#integers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This leads us to the <code>integer</code> type. Like the name implies an <code>integer</code> is just a whole number. In order to specify an <code>integer</code> to R, we must append an <code>L</code> as a suffix to the value:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="hello-world.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># declare an integer by appending &quot;L&quot; as a suffix</span></span>
+<span id="cb16-2"><a href="hello-world.html#cb16-2" aria-hidden="true" tabindex="-1"></a>3L</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="hello-world.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(3L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="hello-world.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(3L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p><br />
+</p>
+</div>
+<div id="complex" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Complex<a href="hello-world.html#complex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As a gift to all the mathematicians, <code>complex</code> numbers can be stored as a primitive data type in R. To declare a <code>complex</code> value, we use the standard mathematical syntax <code>a + bi</code></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="hello-world.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># delcare a complex number</span></span>
+<span id="cb22-2"><a href="hello-world.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span>5i</span></code></pre></div>
+<pre><code>## [1] 2+5i</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="hello-world.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">2</span><span class="sc">+</span>5i)</span></code></pre></div>
+<pre><code>## [1] &quot;complex&quot;</code></pre>
+<p><br />
+</p>
+</div>
+<div id="characters" class="section level3 hasAnchor" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Characters<a href="hello-world.html#characters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>String literals are also a primitive data type in R, aptly named the <code>character</code> type. As a personal convention, we try to use to use single quotes <code>'a'</code> for a character and double quotes <code>"abc"</code> for a longer string. This is just a personal convention for readability, not an actual rule in the R language.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="hello-world.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;a&#39;</span></span></code></pre></div>
+<pre><code>## [1] &quot;a&quot;</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="hello-world.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&#39;a&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="hello-world.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;abc&quot;</span></span></code></pre></div>
+<pre><code>## [1] &quot;abc&quot;</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="hello-world.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;abc&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p><br />
+</p>
+</div>
+<div id="logicals" class="section level3 hasAnchor" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> Logicals<a href="hello-world.html#logicals" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>logical</code> type is what the R language calls a boolean, i.e. <code>TRUE</code> and <code>FALSE</code> values:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="hello-world.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="hello-world.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="hello-world.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="cn">FALSE</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="hello-world.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<p><strong>Note:</strong> notice that the two boolean values in R must be typed in all caps.</p>
+<p><br />
+</p>
+</div>
+<div id="raws" class="section level3 hasAnchor" number="1.3.6">
+<h3><span class="header-section-number">1.3.6</span> Raws<a href="hello-world.html#raws" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>raw</code> data type is for values stored as raw bytes. Fundamentally, a computer is a bunch of on/off switches that are flickering millions of times to perform a computation. If we label an “on” switch with a 1 and an “off” switch with a 0, then we can theoretically save any value as a sequence of 1’s and 0’s. For example, if we had 8 switchs (which equals 1 <strong>byte</strong>), we could store the integer 2 in computer memory as <code>00000010</code>.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="hello-world.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intToBits</span>(2L)</span></code></pre></div>
+<pre><code>##  [1] 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+## [26] 00 00 00 00 00 00 00</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="hello-world.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">intToBits</span>(2L))</span></code></pre></div>
+<pre><code>## [1] &quot;raw&quot;</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="hello-world.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">charToRaw</span>(<span class="st">&quot;a&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 61</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="hello-world.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">charToRaw</span>(<span class="st">&quot;a&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;raw&quot;</code></pre>
+<p><br />
+</p>
+</div>
+</div>
+<div id="operations" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Operations<a href="hello-world.html#operations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Data types by themselves are cool, but we need to operate on them to make them useful. Different data types can be operated on in different ways. An <strong>operator</strong> takes one or more values and returns a new value (possibly of a different type than the inputs).</p>
+<p><br />
+</p>
+<div id="arithmetic-operations" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Arithmetic Operations<a href="hello-world.html#arithmetic-operations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>double</code>, <code>integer</code>, and <code>complex</code> types represent numbers and so we can do arithmetic on them. Specifically, we can:</p>
+<ol style="list-style-type: decimal">
+<li>Add <code>+</code></li>
+<li>Subtract <code>-</code></li>
+<li>Multiply <code>*</code></li>
+<li>Divide <code>/</code></li>
+<li>Exponentiation <code>^</code></li>
+</ol>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="hello-world.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add two doubles</span></span>
+<span id="cb50-2"><a href="hello-world.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.3</span> <span class="sc">+</span> <span class="fl">4.5</span></span></code></pre></div>
+<pre><code>## [1] 6.8</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="hello-world.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multiply 2 integers</span></span>
+<span id="cb52-2"><a href="hello-world.html#cb52-2" aria-hidden="true" tabindex="-1"></a>3L<span class="sc">*</span>7L</span></code></pre></div>
+<pre><code>## [1] 21</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="hello-world.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># divide 2 complexes</span></span>
+<span id="cb54-2"><a href="hello-world.html#cb54-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">13</span><span class="sc">+</span>0i)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">-</span>3i)</span></code></pre></div>
+<pre><code>## [1] 2+3i</code></pre>
+<p>We can also exponentiate using <code>^</code>, although complex numbers can only be taken to real power. (That being said: it is mathematically possible to raise numbers to a complex power, it just requires a bit of trigonometry!).</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="hello-world.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># double</span></span>
+<span id="cb56-2"><a href="hello-world.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fl">4.5</span><span class="sc">^</span><span class="fl">3.1</span></span></code></pre></div>
+<pre><code>## [1] 105.9153</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="hello-world.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># integer</span></span>
+<span id="cb58-2"><a href="hello-world.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="fl">7.1</span></span></code></pre></div>
+<pre><code>## [1] 137.187</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="hello-world.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># complex</span></span>
+<span id="cb60-2"><a href="hello-world.html#cb60-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">+</span>2i)<span class="sc">^</span>(<span class="fl">3.2</span>)</span></code></pre></div>
+<pre><code>## [1] -12.08939-5.12961i</code></pre>
+<p><br />
+</p>
+<p>We can also take <em>absolute values</em> of numbers as well. This is done via the <code>norm()</code> function in R:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="hello-world.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># norm aka absolute value of the number -3 </span></span>
+<span id="cb62-2"><a href="hello-world.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">norm</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="at">type=</span><span class="st">&quot;2&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="hello-world.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># norm of the number 3</span></span>
+<span id="cb64-2"><a href="hello-world.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">norm</span>(<span class="dv">3</span>, <span class="at">type=</span><span class="st">&quot;2&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="hello-world.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># norm of the complex number 3+4i</span></span>
+<span id="cb66-2"><a href="hello-world.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">norm</span>(<span class="dv">3</span><span class="sc">+</span>4i, <span class="at">type=</span><span class="st">&quot;2&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p><br />
+</p>
+</div>
+<div id="modular-division-and-integer-division" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Modular Division and Integer Division<a href="hello-world.html#modular-division-and-integer-division" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Integers come equipped with two very useful operations: the modulo operation <code>%%</code> and integer division <code>%/%</code></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="hello-world.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regular division</span></span>
+<span id="cb68-2"><a href="hello-world.html#cb68-2" aria-hidden="true" tabindex="-1"></a>13L<span class="sc">/</span>7L</span></code></pre></div>
+<pre><code>## [1] 1.857143</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="hello-world.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># modular division; returns the remainder</span></span>
+<span id="cb70-2"><a href="hello-world.html#cb70-2" aria-hidden="true" tabindex="-1"></a>13L <span class="sc">%%</span> 7L</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="hello-world.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># integer division; returns the nearest integer rounded down</span></span>
+<span id="cb72-2"><a href="hello-world.html#cb72-2" aria-hidden="true" tabindex="-1"></a>13L <span class="sc">%/%</span> 7L</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p><strong>Note:</strong> Given two integers <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, it is always the case that: <span class="math display">\[a = (a \%/\% b)*b + (a \%\% b)\]</span> This is little fact is the backbone of Euclid’s division algorithm.</p>
+<p><br />
+</p>
+</div>
+<div id="relational-operators" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Relational Operators<a href="hello-world.html#relational-operators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Relational operators allow us to <em>compare</em> numerical values. They are:</p>
+<ol style="list-style-type: decimal">
+<li>Less than <code>&lt;</code></li>
+<li>Greater than <code>&gt;</code></li>
+<li>Less than or equal to <code>&lt;=</code></li>
+<li>Greater than or equal to <code>&gt;=</code></li>
+<li>Equals to <code>==</code></li>
+<li>Not equals to <code>!=</code></li>
+</ol>
+<p>These operators compare two numerical values and return a <code>logical</code> value: <code>TRUE</code> if the relationship is true and <code>FALSE</code> if the relationship is false.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="hello-world.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the comparison 2 &lt; 3; returns TRUE since 2 is less than 3</span></span>
+<span id="cb74-2"><a href="hello-world.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="hello-world.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the comparison 10 &lt; 3; returns FALSE since 10 is not less than 3</span></span>
+<span id="cb76-2"><a href="hello-world.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="hello-world.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the comparison 3 &lt;= 3; returns TRUE since 3 is less than or equal to 3</span></span>
+<span id="cb78-2"><a href="hello-world.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&lt;=</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="hello-world.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the comparison 3.01==3; returns FALSE since 3.01 is not equal to 3</span></span>
+<span id="cb80-2"><a href="hello-world.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3.01</span> <span class="sc">==</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="hello-world.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the comparison 3.01 != 3; returns TRUE since 3.01 is not equal to 3</span></span>
+<span id="cb82-2"><a href="hello-world.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3.01</span> <span class="sc">!=</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p><br />
+</p>
+</div>
+<div id="logical-operators" class="section level3 hasAnchor" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> Logical Operators<a href="hello-world.html#logical-operators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Logical operators (like the name implies) operate on the two <code>logical</code> types <code>TRUE</code> and <code>FALSE</code>. They are:</p>
+<ol style="list-style-type: decimal">
+<li>The NOT operator <code>!</code></li>
+<li>The AND operator <code>&amp;</code></li>
+<li>The OR operator <code>|</code></li>
+</ol>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="hello-world.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (TRUE) AND (FALSE) returns FALSE</span></span>
+<span id="cb84-2"><a href="hello-world.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">&amp;</span> <span class="cn">FALSE</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="hello-world.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (TRUE) OR (FALSE) returns TRUE</span></span>
+<span id="cb86-2"><a href="hello-world.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="hello-world.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NOT (TRUE) returns FALSE</span></span>
+<span id="cb88-2"><a href="hello-world.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span><span class="cn">TRUE</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="hello-world.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some boolean algebra :)</span></span>
+<span id="cb90-2"><a href="hello-world.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Observe that the following comparions will return TRUE</span></span>
+<span id="cb90-3"><a href="hello-world.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="do">## indicating that the two sides are equal. This is saying that</span></span>
+<span id="cb90-4"><a href="hello-world.html#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="do">## the NOT operator actually distributes across both the AND and OR operators</span></span>
+<span id="cb90-5"><a href="hello-world.html#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="do">## like how a negative sign distributes across addition.</span></span>
+<span id="cb90-6"><a href="hello-world.html#cb90-6" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>( <span class="cn">TRUE</span> <span class="sc">&amp;</span> <span class="cn">FALSE</span> ) <span class="sc">==</span> (<span class="sc">!</span><span class="cn">TRUE</span> <span class="sc">|</span> <span class="sc">!</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="hello-world.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>( <span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">FALSE</span> ) <span class="sc">==</span> (<span class="sc">!</span><span class="cn">TRUE</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p><br />
+</p>
+</div>
+</div>
+<div id="variable-and-function-assignment" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Variable and Function Assignment<a href="hello-world.html#variable-and-function-assignment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When programming and computing, we will need to be able to store values for later use. In order to do this, we assign values to variables using the syntax <code>&lt;-</code> like so:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="hello-world.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assign the value 2L to the variable x</span></span>
+<span id="cb94-2"><a href="hello-world.html#cb94-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb94-3"><a href="hello-world.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="hello-world.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># assign the value 5L to the variable y</span></span>
+<span id="cb94-5"><a href="hello-world.html#cb94-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">26</span></span></code></pre></div>
+<p>Once the a value has been stored in a variable, we can then manipulate and operate on that value by referencing the variable.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="hello-world.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we have x = 7 and y = 26;</span></span>
+<span id="cb95-2"><a href="hello-world.html#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-3"><a href="hello-world.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="co"># multiply x*y = 7*26</span></span>
+<span id="cb95-4"><a href="hello-world.html#cb95-4" aria-hidden="true" tabindex="-1"></a>x<span class="sc">*</span>y</span></code></pre></div>
+<pre><code>## [1] 182</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="hello-world.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># modular division y %% x = 26 %% 7</span></span>
+<span id="cb97-2"><a href="hello-world.html#cb97-2" aria-hidden="true" tabindex="-1"></a>y <span class="sc">%%</span> x</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="hello-world.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># comparison x &lt; y which is equivalent to 7 &lt; 26</span></span>
+<span id="cb99-2"><a href="hello-world.html#cb99-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&lt;</span> y</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p><strong>Note:</strong> it is important to keep in mind that the variable <code>x</code> is only a reference to the value <code>7</code> in the example above. To clarify what this means, consider the following example:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="hello-world.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assign x = 7</span></span>
+<span id="cb101-2"><a href="hello-world.html#cb101-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb101-3"><a href="hello-world.html#cb101-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-4"><a href="hello-world.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="co"># assign z = x. Since x = 7, we have z = 7</span></span>
+<span id="cb101-5"><a href="hello-world.html#cb101-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x</span>
+<span id="cb101-6"><a href="hello-world.html#cb101-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-7"><a href="hello-world.html#cb101-7" aria-hidden="true" tabindex="-1"></a><span class="co"># now assign x = 3</span></span>
+<span id="cb101-8"><a href="hello-world.html#cb101-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb101-9"><a href="hello-world.html#cb101-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-10"><a href="hello-world.html#cb101-10" aria-hidden="true" tabindex="-1"></a><span class="co"># notice that the variable z does not change to 3</span></span>
+<span id="cb101-11"><a href="hello-world.html#cb101-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;This is the value of z:&quot;</span>, z)</span></code></pre></div>
+<pre><code>## This is the value of z: 7</code></pre>
+<p>Basically, what’s happening here is that: when the assignment <code>x &lt;- 7</code> is made, the variable <code>x</code> is a shortcut to the numerical object <code>7</code>. When we assigned <code>z &lt;- x</code>, we invoked the shortcut and assigned <code>z &lt;- 7</code>. When changing the value of <code>x</code>, it does not affect the value of <code>z</code> since <code>z</code> is attached to the object <code>7</code> and not the shortcut <code>x</code>.</p>
+<p><br />
+</p>
+<p>We can also assign functions to manipulate data directly. This is done using the following syntax:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="hello-world.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define a function called f which takes 2 inputs and does something</span></span>
+<span id="cb103-2"><a href="hello-world.html#cb103-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(input_1, input_2){</span>
+<span id="cb103-3"><a href="hello-world.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb103-4"><a href="hello-world.html#cb103-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the block of text inside the braces is what the function actually does</span></span>
+<span id="cb103-5"><a href="hello-world.html#cb103-5" aria-hidden="true" tabindex="-1"></a>  my_sum <span class="ot">&lt;-</span> input_1<span class="sc">+</span>input_2</span>
+<span id="cb103-6"><a href="hello-world.html#cb103-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb103-7"><a href="hello-world.html#cb103-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we can also return some output value, if we so desire</span></span>
+<span id="cb103-8"><a href="hello-world.html#cb103-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(my_sum)</span>
+<span id="cb103-9"><a href="hello-world.html#cb103-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>We can then call our function using standard function notation:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="hello-world.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="hello-world.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">3</span>,<span class="dv">7</span>)</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="hello-world.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">2</span><span class="sc">+</span>1i,<span class="dv">3</span><span class="sc">-</span>9i)</span></code></pre></div>
+<pre><code>## [1] 5-8i</code></pre>
+<p><br />
+</p>
+</div>
+<div id="control-flow" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Control Flow<a href="hello-world.html#control-flow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Control flow</strong> means the act of controlling how a program behaves (or “flows”) based on the occurrence of different situations. This is usually achieved using <code>if</code> - <code>else if</code> - <code>else</code> statements. Unlike Python, the code block is not organized by indents. Rather, the code block is organized by curly braces <code>{}</code> like in Java.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="hello-world.html#cb110-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">128</span></span>
+<span id="cb110-2"><a href="hello-world.html#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="hello-world.html#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print the statement &quot;x is even&quot;, if x is divisible by 2</span></span>
+<span id="cb110-4"><a href="hello-world.html#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb110-5"><a href="hello-world.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;x is even.&quot;</span>)</span>
+<span id="cb110-6"><a href="hello-world.html#cb110-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;x is even.&quot;</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="hello-world.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that simple conditionals can be written in-line</span></span>
+<span id="cb112-2"><a href="hello-world.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">print</span>(<span class="st">&quot;x is even... again!&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;x is even... again!&quot;</code></pre>
+<p>We can diversify the control flow by adding in <code>else-if</code> and <code>else</code> statements to get more complex behavior:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="hello-world.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the standard FizzBuzz problem</span></span>
+<span id="cb114-2"><a href="hello-world.html#cb114-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-3"><a href="hello-world.html#cb114-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span>  <span class="dv">122465</span></span>
+<span id="cb114-4"><a href="hello-world.html#cb114-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-5"><a href="hello-world.html#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> x <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb114-6"><a href="hello-world.html#cb114-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;FizzBuzz!&quot;</span>)</span>
+<span id="cb114-7"><a href="hello-world.html#cb114-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb114-8"><a href="hello-world.html#cb114-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Fizz!&quot;</span>)</span>
+<span id="cb114-9"><a href="hello-world.html#cb114-9" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">%%</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb114-10"><a href="hello-world.html#cb114-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Buzz!&quot;</span>)</span>
+<span id="cb114-11"><a href="hello-world.html#cb114-11" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb114-12"><a href="hello-world.html#cb114-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;nope!&quot;</span>)</span>
+<span id="cb114-13"><a href="hello-world.html#cb114-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Buzz!&quot;</code></pre>
+<p><br />
+</p>
+</div>
+<div id="loops" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Loops<a href="hello-world.html#loops" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The final element to discuss is loops. Loops allow us to repeat an action many times. Combining loops with control flow will allow us to automate computer tasks and is what happens when a program is “running”.</p>
+<p>Loops come in two flavors:</p>
+<ol style="list-style-type: decimal">
+<li><code>for</code> loops.</li>
+<li><code>while</code> loops.</li>
+</ol>
+<p><br />
+</p>
+<div id="for-loops" class="section level3 hasAnchor" number="1.7.1">
+<h3><span class="header-section-number">1.7.1</span> “for” loops<a href="hello-world.html#for-loops" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A <code>for</code> loop will conduct a loop some predetermined number times, using an iterable (i.e. a “counting system”) to keep track of the number cycles. Again, code blocks for loops use curly braces like Java.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="hello-world.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a loop which uses the numbers 1 through 10 to count the cycles</span></span>
+<span id="cb116-2"><a href="hello-world.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb116-3"><a href="hello-world.html#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Hello... for the %s time!&quot;</span>, i))</span>
+<span id="cb116-4"><a href="hello-world.html#cb116-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Hello... for the 1 time!&quot;
+## [1] &quot;Hello... for the 2 time!&quot;
+## [1] &quot;Hello... for the 3 time!&quot;
+## [1] &quot;Hello... for the 4 time!&quot;
+## [1] &quot;Hello... for the 5 time!&quot;
+## [1] &quot;Hello... for the 6 time!&quot;
+## [1] &quot;Hello... for the 7 time!&quot;
+## [1] &quot;Hello... for the 8 time!&quot;
+## [1] &quot;Hello... for the 9 time!&quot;
+## [1] &quot;Hello... for the 10 time!&quot;</code></pre>
+<p><strong>Note:</strong> Although we haven’t talked about them yet, <code>for</code> loops can use any <code>iterable</code> object as an index (i.e. as a counter). Iterables are data structures in R which organize data into a sequential system. Examples include vectors and lists.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="hello-world.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define a vector with coordinates 1, 2, 2, 8, and 4</span></span>
+<span id="cb118-2"><a href="hello-world.html#cb118-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">8</span>,<span class="dv">4</span>)</span>
+<span id="cb118-3"><a href="hello-world.html#cb118-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-4"><a href="hello-world.html#cb118-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> v){</span>
+<span id="cb118-5"><a href="hello-world.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb118-6"><a href="hello-world.html#cb118-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 2
+## [1] 8
+## [1] 4</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="hello-world.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define a list of fruits</span></span>
+<span id="cb120-2"><a href="hello-world.html#cb120-2" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;kiwi&quot;</span>, <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb120-3"><a href="hello-world.html#cb120-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-4"><a href="hello-world.html#cb120-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (fruit <span class="cf">in</span> fruits){</span>
+<span id="cb120-5"><a href="hello-world.html#cb120-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(fruit)</span>
+<span id="cb120-6"><a href="hello-world.html#cb120-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;apple&quot;
+## [1] &quot;banana&quot;
+## [1] &quot;kiwi&quot;
+## [1] &quot;orange&quot;</code></pre>
+<p><br />
+</p>
+</div>
+<div id="while-loops" class="section level3 hasAnchor" number="1.7.2">
+<h3><span class="header-section-number">1.7.2</span> “while” loops<a href="hello-world.html#while-loops" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Sometimes, it is not always possible to know exactly how many times we need to run a loop before we can stop. For example, consider the following list of numbers:</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="hello-world.html#cb122-1" aria-hidden="true" tabindex="-1"></a>nums <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1233</span>, <span class="dv">2384</span>, <span class="dv">12965</span>, <span class="dv">774</span>, <span class="dv">8823</span>, <span class="dv">3008</span>, <span class="dv">3859</span>, <span class="dv">12309</span>, <span class="dv">304</span>, <span class="dv">6</span>, <span class="dv">3996</span>, <span class="dv">20967</span>,<span class="dv">3290</span>, <span class="dv">485</span>, <span class="dv">869890</span>, <span class="dv">4890</span>,<span class="dv">1209</span>, <span class="dv">12394</span>, <span class="dv">503095</span>,<span class="dv">70609</span>, <span class="dv">309218</span>, <span class="dv">456</span>, <span class="dv">7</span>,<span class="dv">4811</span>)</span></code></pre></div>
+<p>Somewhere in this list of numbers is a value <code>x</code> which is divisible by <code>37</code>. Suppose we were given the following task:</p>
+<pre><code>Write a program which finds a number divisible by 37 as &quot;fast&quot; as possible.</code></pre>
+<p>Now obviously, it’s unclear how many times we would need to loop in order to find the number. We could try a <code>for</code> loop that goes through the entire list, but that would not be “as fast as possible”. Indeed, if the number we want was at the front of the list, our <code>for</code> loop would spend a bunch of time doing needless computations as it ran through the rest of the list.</p>
+<p>Instead what we can do is use a <code>while</code> loop. A <code>while</code> loop will keep on running as long as some condition is <code>TRUE</code>:</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="hello-world.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a &#39;while&#39; loop to search the list for a mutiple of 37 &quot;as fast as possible&quot;</span></span>
+<span id="cb124-2"><a href="hello-world.html#cb124-2" aria-hidden="true" tabindex="-1"></a>still_looking <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb124-3"><a href="hello-world.html#cb124-3" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb124-4"><a href="hello-world.html#cb124-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-5"><a href="hello-world.html#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (still_looking){</span>
+<span id="cb124-6"><a href="hello-world.html#cb124-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if list element is mult. of 37, set still_looking to FALSE terminating the loop</span></span>
+<span id="cb124-7"><a href="hello-world.html#cb124-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (nums[[i]]<span class="sc">%%</span><span class="dv">37</span> <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb124-8"><a href="hello-world.html#cb124-8" aria-hidden="true" tabindex="-1"></a>    still_looking <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb124-9"><a href="hello-world.html#cb124-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;Found multiple of 37 at position&quot;</span>,i, <span class="st">&quot;with value&quot;</span>, nums[[i]])</span>
+<span id="cb124-10"><a href="hello-world.html#cb124-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb124-11"><a href="hello-world.html#cb124-11" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">&lt;-</span> i<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb124-12"><a href="hello-world.html#cb124-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb124-13"><a href="hello-world.html#cb124-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb124-14"><a href="hello-world.html#cb124-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if we run through all 24 elements in the list, terminate loop</span></span>
+<span id="cb124-15"><a href="hello-world.html#cb124-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;=</span> <span class="dv">24</span>){</span>
+<span id="cb124-16"><a href="hello-world.html#cb124-16" aria-hidden="true" tabindex="-1"></a>    still_looking <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb124-17"><a href="hello-world.html#cb124-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Not found&quot;</span>)</span>
+<span id="cb124-18"><a href="hello-world.html#cb124-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb124-19"><a href="hello-world.html#cb124-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Found multiple of 37 at position 11 with value 3996</code></pre>
+<p><br />
+</p>
+<hr />
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-data-structures.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/rmd_src/01_hello_world.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

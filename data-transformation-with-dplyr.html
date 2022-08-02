@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Data transformation with dplyr | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Data transformation with dplyr | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Data transformation with dplyr | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-visualization-ggplot2.html"/>
+<link rel="next" href="exploratory-data-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1</b> Hello, World!</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>1.1</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="1.2" data-path="hello-world.html"><a href="hello-world.html#the-basics"><i class="fa fa-check"></i><b>1.2</b> The Basics</a></li>
+<li class="chapter" data-level="1.3" data-path="hello-world.html"><a href="hello-world.html#data-types"><i class="fa fa-check"></i><b>1.3</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="hello-world.html"><a href="hello-world.html#numerics"><i class="fa fa-check"></i><b>1.3.1</b> Numerics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="hello-world.html"><a href="hello-world.html#integers"><i class="fa fa-check"></i><b>1.3.2</b> Integers</a></li>
+<li class="chapter" data-level="1.3.3" data-path="hello-world.html"><a href="hello-world.html#complex"><i class="fa fa-check"></i><b>1.3.3</b> Complex</a></li>
+<li class="chapter" data-level="1.3.4" data-path="hello-world.html"><a href="hello-world.html#characters"><i class="fa fa-check"></i><b>1.3.4</b> Characters</a></li>
+<li class="chapter" data-level="1.3.5" data-path="hello-world.html"><a href="hello-world.html#logicals"><i class="fa fa-check"></i><b>1.3.5</b> Logicals</a></li>
+<li class="chapter" data-level="1.3.6" data-path="hello-world.html"><a href="hello-world.html#raws"><i class="fa fa-check"></i><b>1.3.6</b> Raws</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="hello-world.html"><a href="hello-world.html#operations"><i class="fa fa-check"></i><b>1.4</b> Operations</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="hello-world.html"><a href="hello-world.html#arithmetic-operations"><i class="fa fa-check"></i><b>1.4.1</b> Arithmetic Operations</a></li>
+<li class="chapter" data-level="1.4.2" data-path="hello-world.html"><a href="hello-world.html#modular-division-and-integer-division"><i class="fa fa-check"></i><b>1.4.2</b> Modular Division and Integer Division</a></li>
+<li class="chapter" data-level="1.4.3" data-path="hello-world.html"><a href="hello-world.html#relational-operators"><i class="fa fa-check"></i><b>1.4.3</b> Relational Operators</a></li>
+<li class="chapter" data-level="1.4.4" data-path="hello-world.html"><a href="hello-world.html#logical-operators"><i class="fa fa-check"></i><b>1.4.4</b> Logical Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="hello-world.html"><a href="hello-world.html#variable-and-function-assignment"><i class="fa fa-check"></i><b>1.5</b> Variable and Function Assignment</a></li>
+<li class="chapter" data-level="1.6" data-path="hello-world.html"><a href="hello-world.html#control-flow"><i class="fa fa-check"></i><b>1.6</b> Control Flow</a></li>
+<li class="chapter" data-level="1.7" data-path="hello-world.html"><a href="hello-world.html#loops"><i class="fa fa-check"></i><b>1.7</b> Loops</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="hello-world.html"><a href="hello-world.html#for-loops"><i class="fa fa-check"></i><b>1.7.1</b> “for” loops</a></li>
+<li class="chapter" data-level="1.7.2" data-path="hello-world.html"><a href="hello-world.html#while-loops"><i class="fa fa-check"></i><b>1.7.2</b> “while” loops</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-data-structures.html"><a href="basic-data-structures.html"><i class="fa fa-check"></i><b>2</b> Basic Data Structures</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#building-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Building Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#accessing-vector-components"><i class="fa fa-check"></i><b>2.1.2</b> Accessing Vector Components</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic-data-structures.html"><a href="basic-data-structures.html#vector-operations"><i class="fa fa-check"></i><b>2.1.3</b> Vector Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.2</b> Lists</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#constructing-lists-and-accessing-elements"><i class="fa fa-check"></i><b>2.2.1</b> Constructing Lists and Accessing Elements</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#look-ups"><i class="fa fa-check"></i><b>2.2.2</b> Look Ups</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-data-structures.html"><a href="basic-data-structures.html#infix-operators"><i class="fa fa-check"></i><b>2.2.3</b> Infix Operators</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basic-data-structures.html"><a href="basic-data-structures.html#inserting-and-removing-list-items"><i class="fa fa-check"></i><b>2.2.4</b> Inserting and Removing List Items</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basic-data-structures.html"><a href="basic-data-structures.html#nested-lists"><i class="fa fa-check"></i><b>2.2.5</b> Nested Lists</a></li>
+<li class="chapter" data-level="2.2.6" data-path="basic-data-structures.html"><a href="basic-data-structures.html#lapply"><i class="fa fa-check"></i><b>2.2.6</b> lapply()</a></li>
+<li class="chapter" data-level="2.2.7" data-path="basic-data-structures.html"><a href="basic-data-structures.html#joining-lists"><i class="fa fa-check"></i><b>2.2.7</b> Joining Lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>3</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices.html"><a href="matrices.html#constructing-matrices"><i class="fa fa-check"></i><b>3.1</b> Constructing Matrices</a></li>
+<li class="chapter" data-level="3.2" data-path="matrices.html"><a href="matrices.html#special-matrices"><i class="fa fa-check"></i><b>3.2</b> Special Matrices</a></li>
+<li class="chapter" data-level="3.3" data-path="matrices.html"><a href="matrices.html#accessing-matrix-entries"><i class="fa fa-check"></i><b>3.3</b> Accessing Matrix Entries</a></li>
+<li class="chapter" data-level="3.4" data-path="matrices.html"><a href="matrices.html#adding-and-removing-rowscolumns"><i class="fa fa-check"></i><b>3.4</b> Adding and Removing Rows/Columns</a></li>
+<li class="chapter" data-level="3.5" data-path="matrices.html"><a href="matrices.html#matrix-operations"><i class="fa fa-check"></i><b>3.5</b> Matrix Operations</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="matrices.html"><a href="matrices.html#addition"><i class="fa fa-check"></i><b>3.5.1</b> Addition</a></li>
+<li class="chapter" data-level="3.5.2" data-path="matrices.html"><a href="matrices.html#scalar-multiplication"><i class="fa fa-check"></i><b>3.5.2</b> Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.5.3" data-path="matrices.html"><a href="matrices.html#hadamard-product"><i class="fa fa-check"></i><b>3.5.3</b> Hadamard Product</a></li>
+<li class="chapter" data-level="3.5.4" data-path="matrices.html"><a href="matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>3.5.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5.5" data-path="matrices.html"><a href="matrices.html#aside-the-magic-of-matrix-multiplication"><i class="fa fa-check"></i><b>3.5.5</b> Aside: The Magic of Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5.6" data-path="matrices.html"><a href="matrices.html#the-determinant"><i class="fa fa-check"></i><b>3.5.6</b> The Determinant</a></li>
+<li class="chapter" data-level="3.5.7" data-path="matrices.html"><a href="matrices.html#inverses"><i class="fa fa-check"></i><b>3.5.7</b> Inverses</a></li>
+<li class="chapter" data-level="3.5.8" data-path="matrices.html"><a href="matrices.html#transpose"><i class="fa fa-check"></i><b>3.5.8</b> Transpose</a></li>
+<li class="chapter" data-level="3.5.9" data-path="matrices.html"><a href="matrices.html#kronecker-product"><i class="fa fa-check"></i><b>3.5.9</b> Kronecker Product</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>4</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-frames.html"><a href="data-frames.html#summary-and-structure"><i class="fa fa-check"></i><b>4.1</b> Summary and Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="data-frames.html"><a href="data-frames.html#extracting-and-subsetting"><i class="fa fa-check"></i><b>4.2</b> Extracting and Subsetting</a></li>
+<li class="chapter" data-level="4.3" data-path="data-frames.html"><a href="data-frames.html#editing-adding-and-removing-columns"><i class="fa fa-check"></i><b>4.3</b> Editing, Adding and Removing Columns</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Data visualization: ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#grammar-of-graphics"><i class="fa fa-check"></i><b>5.1</b> Grammar of graphics</a></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#loading-ggplot2"><i class="fa fa-check"></i><b>5.2</b> Loading ggplot2</a></li>
+<li class="chapter" data-level="5.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#creating-a-ggplot"><i class="fa fa-check"></i><b>5.3</b> Creating a ggplot</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-1-data-mapping-to-aesthetics"><i class="fa fa-check"></i><b>5.3.1</b> Ingredient 1: data mapping to aesthetics</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-2-layers-of-geometric-objects-equipped-with-mappings"><i class="fa fa-check"></i><b>5.3.2</b> Ingredient 2: layers of geometric objects equipped with mappings</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-3-scales"><i class="fa fa-check"></i><b>5.3.3</b> Ingredient 3: scales</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-4-a-coordinate-system"><i class="fa fa-check"></i><b>5.3.4</b> Ingredient 4: a coordinate system</a></li>
+<li class="chapter" data-level="5.3.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-5-a-facet-specification"><i class="fa fa-check"></i><b>5.3.5</b> Ingredient 5: a facet specification</a></li>
+<li class="chapter" data-level="5.3.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#overwriting-data"><i class="fa fa-check"></i><b>5.3.6</b> Overwriting data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#statistical-transformations"><i class="fa fa-check"></i><b>5.4</b> Statistical Transformations</a></li>
+<li class="chapter" data-level="5.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#position"><i class="fa fa-check"></i><b>5.5</b> Position</a></li>
+<li class="chapter" data-level="5.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#the-anatomy-of-a-graphic"><i class="fa fa-check"></i><b>5.6</b> The anatomy of a graphic</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>6</b> Data transformation with <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-rows-with-filter"><i class="fa fa-check"></i><b>6.2</b> Filtering rows with <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-conditions"><i class="fa fa-check"></i><b>6.2.1</b> Filtering conditions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#dealing-with-missing-values"><i class="fa fa-check"></i><b>6.2.2</b> Dealing with missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#arrange-rows-with-arrange"><i class="fa fa-check"></i><b>6.3</b> Arrange rows with <code>arrange()</code></a></li>
+<li class="chapter" data-level="6.4" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#select-columns-with-select"><i class="fa fa-check"></i><b>6.4</b> Select columns with <code>select()</code></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#helper-functions"><i class="fa fa-check"></i><b>6.4.1</b> Helper functions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#renaming-columns"><i class="fa fa-check"></i><b>6.4.2</b> Renaming columns</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#add-new-variables-with-mutate"><i class="fa fa-check"></i><b>6.5</b> Add new variables with <code>mutate()</code></a></li>
+<li class="chapter" data-level="6.6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-summaries-with-summarise-and-group_by"><i class="fa fa-check"></i><b>6.6</b> Grouped summaries with <code>summarise()</code> and <code>group_by()</code></a></li>
+<li class="chapter" data-level="6.7" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#an-example-analysis"><i class="fa fa-check"></i><b>6.7</b> An example analysis</a></li>
+<li class="chapter" data-level="6.8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#the-pipe-operator"><i class="fa fa-check"></i><b>6.8</b> The pipe operator <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="6.9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#data-heirarchy-with-group_by"><i class="fa fa-check"></i><b>6.9</b> Data heirarchy with <code>group_by()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-process-of-eda"><i class="fa fa-check"></i><b>7.1</b> The process of EDA</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions-of-variation"><i class="fa fa-check"></i><b>7.3</b> Questions of variation</a></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions-of-covariation"><i class="fa fa-check"></i><b>7.4</b> Questions of covariation</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values"><i class="fa fa-check"></i><b>7.5</b> Missing values</a></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#patterns-and-models"><i class="fa fa-check"></i><b>7.6</b> Patterns and models</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html"><i class="fa fa-check"></i><b>8</b> Data import and storage</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#tibbles"><i class="fa fa-check"></i><b>8.1</b> Tibbles</a></li>
+<li class="chapter" data-level="8.2" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#data-import"><i class="fa fa-check"></i><b>8.2</b> Data import</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>9</b> Modeling</a></li>
+<li class="chapter" data-level="10" data-path="linear-regression-models.html"><a href="linear-regression-models.html"><i class="fa fa-check"></i><b>10</b> Linear Regression Models</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-transformation-with-dplyr" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Data transformation with <code>dplyr</code><a href="data-transformation-with-dplyr.html#data-transformation-with-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Introduction<a href="data-transformation-with-dplyr.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="data-transformation-with-dplyr.html#cb548-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import libraries</span></span>
+<span id="cb548-2"><a href="data-transformation-with-dplyr.html#cb548-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb548-3"><a href="data-transformation-with-dplyr.html#cb548-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb548-4"><a href="data-transformation-with-dplyr.html#cb548-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-5"><a href="data-transformation-with-dplyr.html#cb548-5" aria-hidden="true" tabindex="-1"></a><span class="co"># load data</span></span>
+<span id="cb548-6"><a href="data-transformation-with-dplyr.html#cb548-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> nycflights13<span class="sc">::</span>flights</span>
+<span id="cb548-7"><a href="data-transformation-with-dplyr.html#cb548-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-8"><a href="data-transformation-with-dplyr.html#cb548-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 19
+##    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+## 1  2013     1     1      517            515         2      830            819
+## 2  2013     1     1      533            529         4      850            830
+## 3  2013     1     1      542            540         2      923            850
+## 4  2013     1     1      544            545        -1     1004           1022
+## 5  2013     1     1      554            600        -6      812            837
+## 6  2013     1     1      554            558        -4      740            728
+## # … with 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="data-transformation-with-dplyr.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre><code>## tibble [336,776 × 19] (S3: tbl_df/tbl/data.frame)
+##  $ year          : int [1:336776] 2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 ...
+##  $ month         : int [1:336776] 1 1 1 1 1 1 1 1 1 1 ...
+##  $ day           : int [1:336776] 1 1 1 1 1 1 1 1 1 1 ...
+##  $ dep_time      : int [1:336776] 517 533 542 544 554 554 555 557 557 558 ...
+##  $ sched_dep_time: int [1:336776] 515 529 540 545 600 558 600 600 600 600 ...
+##  $ dep_delay     : num [1:336776] 2 4 2 -1 -6 -4 -5 -3 -3 -2 ...
+##  $ arr_time      : int [1:336776] 830 850 923 1004 812 740 913 709 838 753 ...
+##  $ sched_arr_time: int [1:336776] 819 830 850 1022 837 728 854 723 846 745 ...
+##  $ arr_delay     : num [1:336776] 11 20 33 -18 -25 12 19 -14 -8 8 ...
+##  $ carrier       : chr [1:336776] &quot;UA&quot; &quot;UA&quot; &quot;AA&quot; &quot;B6&quot; ...
+##  $ flight        : int [1:336776] 1545 1714 1141 725 461 1696 507 5708 79 301 ...
+##  $ tailnum       : chr [1:336776] &quot;N14228&quot; &quot;N24211&quot; &quot;N619AA&quot; &quot;N804JB&quot; ...
+##  $ origin        : chr [1:336776] &quot;EWR&quot; &quot;LGA&quot; &quot;JFK&quot; &quot;JFK&quot; ...
+##  $ dest          : chr [1:336776] &quot;IAH&quot; &quot;IAH&quot; &quot;MIA&quot; &quot;BQN&quot; ...
+##  $ air_time      : num [1:336776] 227 227 160 183 116 150 158 53 140 138 ...
+##  $ distance      : num [1:336776] 1400 1416 1089 1576 762 ...
+##  $ hour          : num [1:336776] 5 5 5 5 6 5 6 6 6 6 ...
+##  $ minute        : num [1:336776] 15 29 40 45 0 58 0 0 0 0 ...
+##  $ time_hour     : POSIXct[1:336776], format: &quot;2013-01-01 05:00:00&quot; &quot;2013-01-01 05:00:00&quot; ...</code></pre>
+<p>Notice that <code>str()</code> is telling us this data frame is a <code>tibble</code> object. A <strong>tibble</strong> is a data frame that’s been augmented underneath the hood for use in the tidyverse.</p>
+<p>The main package we will use to do data transformations is the <code>dplyr</code> package. There are 6 main functions to understand:</p>
+<ol style="list-style-type: decimal">
+<li><code>filter()</code> filters out the rows of a data frame by some specified condition.</li>
+<li><code>arrange()</code> rearranges the rows of a data frame according to some specification.</li>
+<li><code>select()</code> picks out selected columns in a data frame.</li>
+<li><code>mutate()</code> creates new columns by operating on existing ones.</li>
+<li><code>summary()</code> collapses the data frame down to a single row, value or column summary.</li>
+<li><code>group_by()</code> changes the scope of each function to operate on a group-by-group basis.</li>
+</ol>
+<p>The idea is to assemble these functions into a pipeline: each function takes in an existing data frame, creates a new data frame and passes it to the next function.</p>
+<p><br />
+</p>
+</div>
+<div id="filtering-rows-with-filter" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Filtering rows with <code>filter()</code><a href="data-transformation-with-dplyr.html#filtering-rows-with-filter" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="filtering-conditions" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Filtering conditions<a href="data-transformation-with-dplyr.html#filtering-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>filter()</code> allows us to create a subset of a data frame by grabbing the rows which meet some specified logical condition.</p>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="data-transformation-with-dplyr.html#cb552-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return the flights on January 1st</span></span>
+<span id="cb552-2"><a href="data-transformation-with-dplyr.html#cb552-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 842 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 832 more rows, and 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;,
+## #   flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;,
+## #   distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>Notice that the logical comparison <code>month == 1</code> is being made element-wise down the <code>month</code> column. The same is true for <code>day == 1</code>. The general syntax of logical operators and operations on columns is always like this, i.e. if you see a column name in an operation, it is happening element-wise.</p>
+<p>We can combine these logical conditions together using the usual boolean operators:</p>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="data-transformation-with-dplyr.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return the flights in January or February</span></span>
+<span id="cb554-2"><a href="data-transformation-with-dplyr.html#cb554-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 51,955 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 51,945 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="data-transformation-with-dplyr.html#cb556-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return all flights except those by United Airlines</span></span>
+<span id="cb556-2"><a href="data-transformation-with-dplyr.html#cb556-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, carrier <span class="sc">!=</span> <span class="st">&quot;UA&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 278,111 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      542            540         2      923            850
+##  2  2013     1     1      544            545        -1     1004           1022
+##  3  2013     1     1      554            600        -6      812            837
+##  4  2013     1     1      555            600        -5      913            854
+##  5  2013     1     1      557            600        -3      709            723
+##  6  2013     1     1      557            600        -3      838            846
+##  7  2013     1     1      558            600        -2      753            745
+##  8  2013     1     1      558            600        -2      849            851
+##  9  2013     1     1      558            600        -2      853            856
+## 10  2013     1     1      559            600        -1      941            910
+## # … with 278,101 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="data-transformation-with-dplyr.html#cb558-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return all flights except United flights originating from JFK</span></span>
+<span id="cb558-2"><a href="data-transformation-with-dplyr.html#cb558-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, <span class="sc">!</span>(carrier <span class="sc">==</span> <span class="st">&quot;UA&quot;</span> <span class="sc">&amp;</span> origin <span class="sc">==</span> <span class="st">&quot;JFK&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 332,242 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 332,232 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>Any operator which returns a logical value is a valid condition. For example, let’s say we wanted to get all the flights from January to June of 2013. Instead of chaining together 6 different “OR” statements, we can instead use the <code>%in%</code> operator:</p>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="data-transformation-with-dplyr.html#cb560-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return the flights from Jan to June</span></span>
+<span id="cb560-2"><a href="data-transformation-with-dplyr.html#cb560-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, year <span class="sc">==</span> <span class="dv">2013</span>, month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 166,158 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 166,148 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p><br />
+</p>
+</div>
+<div id="dealing-with-missing-values" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Dealing with missing values<a href="data-transformation-with-dplyr.html#dealing-with-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The null value in R is the <code>NA</code> value (short for “Not Available”). An <code>NA</code> value represents a missing piece of information (whatever the cause maybe) and should be treated as an “I don’t know” value. For example, <code>John_age &lt;- NA</code> should be interpreted as “we don’t know John’s age”.</p>
+<p><code>NA</code> values in R behave very interestingly from a computer science perspective. Here are some examples its quirky behavior:</p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="data-transformation-with-dplyr.html#cb562-1" aria-hidden="true" tabindex="-1"></a><span class="co"># is NA greater than 5?</span></span>
+<span id="cb562-2"><a href="data-transformation-with-dplyr.html#cb562-2" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">&gt;</span> <span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="data-transformation-with-dplyr.html#cb564-1" aria-hidden="true" tabindex="-1"></a><span class="co"># is NA equivalent to 10?</span></span>
+<span id="cb564-2"><a href="data-transformation-with-dplyr.html#cb564-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">==</span> <span class="cn">NA</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="data-transformation-with-dplyr.html#cb566-1" aria-hidden="true" tabindex="-1"></a><span class="co"># can we add 10 to NA?</span></span>
+<span id="cb566-2"><a href="data-transformation-with-dplyr.html#cb566-2" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">+</span> <span class="dv">10</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="data-transformation-with-dplyr.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="co"># can we divide NA by 2?</span></span>
+<span id="cb568-2"><a href="data-transformation-with-dplyr.html#cb568-2" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span><span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Notice we always get back <code>NA</code> for each of the comparisons and operations. This is because <code>NA</code> represents “I don’t know” so the validity of each operation and conditional is also “I don’t know”.</p>
+<p>Even more amusing is the following phenomena:</p>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="data-transformation-with-dplyr.html#cb570-1" aria-hidden="true" tabindex="-1"></a><span class="co"># is NA the same as NA?</span></span>
+<span id="cb570-2"><a href="data-transformation-with-dplyr.html#cb570-2" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">==</span> <span class="cn">NA</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>R is saying “I don’t know if <code>NA</code> is equal to <code>NA</code>.” Again this makes sense if we interpret <code>NA</code> as “I don’t know”: if R doesn’t know what the 2 values are, then R doesn’t know if they are equal. This interpretation is also helpful for understanding the following situations:</p>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="data-transformation-with-dplyr.html#cb572-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">|</span> <span class="cn">TRUE</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="data-transformation-with-dplyr.html#cb574-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">&amp;</span> <span class="cn">FALSE</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Notice that both conditionals returned a logical value. This is because ” anything OR true” is always true, while “anything AND false” is always false. In these two cases, we don’t need to know the value of <code>NA</code> in order to decide on the value of the overall expression.</p>
+<p>However, things get baffling once again when considering the following example and counterexample:</p>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="data-transformation-with-dplyr.html#cb576-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span><span class="sc">^</span><span class="dv">0</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="data-transformation-with-dplyr.html#cb578-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">*</span> <span class="dv">0</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>The expression <code>NA^0</code> returns 1 since “anything raised to the 0th power returns 1” and we shouldn’t need to know the value of <code>NA</code> to evaluate the expression. However the same logic goes out the window when considering <code>NA*0</code> which returns <code>NA</code>: theoretically “anything times 0 returns 0” so the value so we shouldn’t need to know hte value of <code>NA</code> to evaluate this expression either. Yet, the expression still returns <code>NA</code>. The latter behavior actually makes more sense since <code>Inf^0</code> and <code>Inf*0</code> are both indeterminate forms.</p>
+<p>The fundamental issue isn’t actually one of mathematics but one of computer science. Specifically, R (and most programming languanges) come equipped with abstract data values to present missing values, null values, and infinity: <code>NA</code>, <code>NaN</code>, <code>Inf</code>, <code>-Inf</code>. The general paradigm in computer science is that these values should propagate through computations that use them. For example <code>2*NaN+7</code> should return <code>NaN</code> to indicate something is the appearance of a <code>NaN</code> value in the original expression. This makes debuggin easier since we wouldn’t have to check a chain of functions <code>f_1 -&gt; f_2 -&gt; f_3 -&gt; ... -&gt; f_1000</code> for possible <code>NaN</code> values; if any <code>NaN</code>s show up, we’ll see them in the final output.</p>
+<p>However, one exception to this paradigm is is the <code>pow(x,y)</code> function which returns <code>x^y</code>. As defined by the Institute of Electrical and Electronics Engineering (IEEE) Standard for Floating-Point Arithmetic in 2008, the power functions <code>pow(x,y)</code> should have <code>pow(qNaN,0)</code> return 1. Thus <code>NA^0</code> returning 1 is the exception, not the norm.</p>
+<p>Despite being humorous and a bit charming, this <code>NA == NA</code> returning <code>NA</code> phenomenon actually presents problem: how do we filter out missing values? In our data frame, the <code>dep_time</code> column has 8255 missing values and let’s say we wanted to purge them. Consider the following code:</p>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="data-transformation-with-dplyr.html#cb580-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out rows with missing values in the dep_time column</span></span>
+<span id="cb580-2"><a href="data-transformation-with-dplyr.html#cb580-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, dep_time <span class="sc">!=</span> <span class="cn">NA</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 0 × 19
+## # … with 19 variables: year &lt;int&gt;, month &lt;int&gt;, day &lt;int&gt;, dep_time &lt;int&gt;,
+## #   sched_dep_time &lt;int&gt;, dep_delay &lt;dbl&gt;, arr_time &lt;int&gt;,
+## #   sched_arr_time &lt;int&gt;, arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>Notice that the condition <code>dep_time != NA</code> filtered out all the rows! What happened is that <code>dep_time != NA</code> returned an <code>NA</code> value for all rows, hence all rows got filtered out.</p>
+<p>The proper way to filter out missing values is to use the <code>is.na()</code> operator. This returns <code>TRUE</code> if the value is an <code>NA</code> and <code>FALSE</code> otherwise.</p>
+<div class="sourceCode" id="cb582"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb582-1"><a href="data-transformation-with-dplyr.html#cb582-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select missing values from the dep_time column</span></span>
+<span id="cb582-2"><a href="data-transformation-with-dplyr.html#cb582-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, <span class="fu">is.na</span>(dep_time))</span></code></pre></div>
+<pre><code>## # A tibble: 8,255 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1       NA           1630        NA       NA           1815
+##  2  2013     1     1       NA           1935        NA       NA           2240
+##  3  2013     1     1       NA           1500        NA       NA           1825
+##  4  2013     1     1       NA            600        NA       NA            901
+##  5  2013     1     2       NA           1540        NA       NA           1747
+##  6  2013     1     2       NA           1620        NA       NA           1746
+##  7  2013     1     2       NA           1355        NA       NA           1459
+##  8  2013     1     2       NA           1420        NA       NA           1644
+##  9  2013     1     2       NA           1321        NA       NA           1536
+## 10  2013     1     2       NA           1545        NA       NA           1910
+## # … with 8,245 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="data-transformation-with-dplyr.html#cb584-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter out the missing values from the dep_time column</span></span>
+<span id="cb584-2"><a href="data-transformation-with-dplyr.html#cb584-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, <span class="sc">!</span>(<span class="fu">is.na</span>(dep_time)))</span></code></pre></div>
+<pre><code>## # A tibble: 328,521 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 328,511 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p><code>is.na()</code> can also be used to quickly count up the number of <code>NA</code>s in each column by pairing it with the <code>colSums()</code> function:</p>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="data-transformation-with-dplyr.html#cb586-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(df))</span></code></pre></div>
+<pre><code>##           year          month            day       dep_time sched_dep_time 
+##              0              0              0           8255              0 
+##      dep_delay       arr_time sched_arr_time      arr_delay        carrier 
+##           8255           8713              0           9430              0 
+##         flight        tailnum         origin           dest       air_time 
+##              0           2512              0              0           9430 
+##       distance           hour         minute      time_hour 
+##              0              0              0              0</code></pre>
+<p>We see 8255 missing values in the <code>dep_time</code> column, 8255 missing values in the <code>dep_delay</code> column, 8713 missing values in <code>arr_time</code> column and so on.</p>
+<p><br />
+</p>
+</div>
+</div>
+<div id="arrange-rows-with-arrange" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Arrange rows with <code>arrange()</code><a href="data-transformation-with-dplyr.html#arrange-rows-with-arrange" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>arrange()</code> function essentially sorts rows by values. The default is to sort in ascending order from smallest to largest values.</p>
+<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="data-transformation-with-dplyr.html#cb588-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sort flights from shortest to longest airtime</span></span>
+<span id="cb588-2"><a href="data-transformation-with-dplyr.html#cb588-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(df, air_time)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1    16     1355           1315        40     1442           1411
+##  2  2013     4    13      537            527        10      622            628
+##  3  2013    12     6      922            851        31     1021            954
+##  4  2013     2     3     2153           2129        24     2247           2224
+##  5  2013     2     5     1303           1315       -12     1342           1411
+##  6  2013     2    12     2123           2130        -7     2211           2225
+##  7  2013     3     2     1450           1500       -10     1547           1608
+##  8  2013     3     8     2026           1935        51     2131           2056
+##  9  2013     3    18     1456           1329        87     1533           1426
+## 10  2013     3    19     2226           2145        41     2305           2246
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>Recall that the <code>air_time</code> column had 9430 <code>NA</code> values. The <code>arrange()</code> function always places <code>NA</code> values at the bottom of the data frame.</p>
+<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb590-1"><a href="data-transformation-with-dplyr.html#cb590-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the bottom 6 rows of the sorted data frame</span></span>
+<span id="cb590-2"><a href="data-transformation-with-dplyr.html#cb590-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">arrange</span>(df, air_time))</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 19
+##    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+## 1  2013     9    30       NA           1842        NA       NA           2019
+## 2  2013     9    30       NA           1455        NA       NA           1634
+## 3  2013     9    30       NA           2200        NA       NA           2312
+## 4  2013     9    30       NA           1210        NA       NA           1330
+## 5  2013     9    30       NA           1159        NA       NA           1344
+## 6  2013     9    30       NA            840        NA       NA           1020
+## # … with 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>We can also order in descending order from largest to smallest by calling the <code>desc()</code> function:</p>
+<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="data-transformation-with-dplyr.html#cb592-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(df, <span class="fu">desc</span>(air_time))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     3    17     1337           1335         2     1937           1836
+##  2  2013     2     6      853            900        -7     1542           1540
+##  3  2013     3    15     1001           1000         1     1551           1530
+##  4  2013     3    17     1006           1000         6     1607           1530
+##  5  2013     3    16     1001           1000         1     1544           1530
+##  6  2013     2     5      900            900         0     1555           1540
+##  7  2013    11    12      936            930         6     1630           1530
+##  8  2013     3    14      958           1000        -2     1542           1530
+##  9  2013    11    20     1006           1000         6     1639           1555
+## 10  2013     3    15     1342           1335         7     1924           1836
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>We can combine this <code>desc()</code> with <code>is.na()</code> to sort all missing values to the top. To understand how, recall that <code>is.na()</code> returns a logical vector where <code>NA</code> values converted to <code>TRUE</code>. Since <code>TRUE</code> is stored as 1 and <code>FALSE</code> is stored as a 0, we can call <code>desc()</code> to then sort the <code>TRUE</code>s to the top. Here is the implementation:</p>
+<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="data-transformation-with-dplyr.html#cb594-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(df, <span class="fu">desc</span>(<span class="fu">is.na</span>(air_time)))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1     1525           1530        -5     1934           1805
+##  2  2013     1     1     1528           1459        29     2002           1647
+##  3  2013     1     1     1740           1745        -5     2158           2020
+##  4  2013     1     1     1807           1738        29     2251           2103
+##  5  2013     1     1     1939           1840        59       29           2151
+##  6  2013     1     1     1952           1930        22     2358           2207
+##  7  2013     1     1     2016           1930        46       NA           2220
+##  8  2013     1     1       NA           1630        NA       NA           1815
+##  9  2013     1     1       NA           1935        NA       NA           2240
+## 10  2013     1     1       NA           1500        NA       NA           1825
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p><br />
+</p>
+</div>
+<div id="select-columns-with-select" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Select columns with <code>select()</code><a href="data-transformation-with-dplyr.html#select-columns-with-select" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Often times, we want to focus on a subset of columns from the data frame (e.g. when doing EDA). We can select specific columns from a data frame using the <code>select()</code> function.</p>
+<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="data-transformation-with-dplyr.html#cb596-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the year, month, dep_time, origin, destination and carrier columns</span></span>
+<span id="cb596-2"><a href="data-transformation-with-dplyr.html#cb596-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, year, month, dep_time, origin, dest, carrier)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 6
+##     year month dep_time origin dest  carrier
+##    &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  
+##  1  2013     1      517 EWR    IAH   UA     
+##  2  2013     1      533 LGA    IAH   UA     
+##  3  2013     1      542 JFK    MIA   AA     
+##  4  2013     1      544 JFK    BQN   B6     
+##  5  2013     1      554 LGA    ATL   DL     
+##  6  2013     1      554 EWR    ORD   UA     
+##  7  2013     1      555 EWR    FLL   B6     
+##  8  2013     1      557 LGA    IAD   EV     
+##  9  2013     1      557 JFK    MCO   B6     
+## 10  2013     1      558 LGA    ORD   AA     
+## # … with 336,766 more rows</code></pre>
+<p>One neat trick with <code>select()</code> is using it to reorder the columns:</p>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="data-transformation-with-dplyr.html#cb598-1" aria-hidden="true" tabindex="-1"></a><span class="co"># move the origin and destination columns to the front</span></span>
+<span id="cb598-2"><a href="data-transformation-with-dplyr.html#cb598-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, origin, dest, <span class="fu">everything</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+##    origin dest   year month   day dep_time sched_dep_time dep_delay arr_time
+##    &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
+##  1 EWR    IAH    2013     1     1      517            515         2      830
+##  2 LGA    IAH    2013     1     1      533            529         4      850
+##  3 JFK    MIA    2013     1     1      542            540         2      923
+##  4 JFK    BQN    2013     1     1      544            545        -1     1004
+##  5 LGA    ATL    2013     1     1      554            600        -6      812
+##  6 EWR    ORD    2013     1     1      554            558        -4      740
+##  7 EWR    FLL    2013     1     1      555            600        -5      913
+##  8 LGA    IAD    2013     1     1      557            600        -3      709
+##  9 JFK    MCO    2013     1     1      557            600        -3      838
+## 10 LGA    ORD    2013     1     1      558            600        -2      753
+## # … with 336,766 more rows, and 10 more variables: sched_arr_time &lt;int&gt;,
+## #   arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<div id="helper-functions" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Helper functions<a href="data-transformation-with-dplyr.html#helper-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>everything()</code> function is an example of a <strong>helper function</strong> which is a sub-function composed with the main <code>select()</code> function to help augment the behavior of <code>select()</code>. Other important helper functions include:</p>
+<ul>
+<li><code>starts_with("abc")</code> matches column names that begin with <code>"abc"</code>.</li>
+<li><code>ends_with("xyz")</code> matches column names that ends with <code>"xyz"</code>.</li>
+<li><code>contains("ijk")</code> matches column names that contain <code>"ijk"</code>.</li>
+<li><code>matches("(.)\\1")</code> selects column names that match the regular expression <code>"(.)\\1"</code>. This specific regex matches any column names with repeated characters.</li>
+<li><code>num_range("x", 1:3)</code> matches columns named <code>x1</code>, <code>x2</code>, and <code>x3</code></li>
+</ul>
+<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb600-1"><a href="data-transformation-with-dplyr.html#cb600-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, <span class="fu">starts_with</span>(<span class="st">&quot;dep&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 2
+##    dep_time dep_delay
+##       &lt;int&gt;     &lt;dbl&gt;
+##  1      517         2
+##  2      533         4
+##  3      542         2
+##  4      544        -1
+##  5      554        -6
+##  6      554        -4
+##  7      555        -5
+##  8      557        -3
+##  9      557        -3
+## 10      558        -2
+## # … with 336,766 more rows</code></pre>
+<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="data-transformation-with-dplyr.html#cb602-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, <span class="fu">ends_with</span>(<span class="st">&quot;time&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 5
+##    dep_time sched_dep_time arr_time sched_arr_time air_time
+##       &lt;int&gt;          &lt;int&gt;    &lt;int&gt;          &lt;int&gt;    &lt;dbl&gt;
+##  1      517            515      830            819      227
+##  2      533            529      850            830      227
+##  3      542            540      923            850      160
+##  4      544            545     1004           1022      183
+##  5      554            600      812            837      116
+##  6      554            558      740            728      150
+##  7      555            600      913            854      158
+##  8      557            600      709            723       53
+##  9      557            600      838            846      140
+## 10      558            600      753            745      138
+## # … with 336,766 more rows</code></pre>
+<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="data-transformation-with-dplyr.html#cb604-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, <span class="fu">contains</span>(<span class="st">&quot;_&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 8
+##    dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay air_time
+##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1      517            515         2      830            819        11      227
+##  2      533            529         4      850            830        20      227
+##  3      542            540         2      923            850        33      160
+##  4      544            545        -1     1004           1022       -18      183
+##  5      554            600        -6      812            837       -25      116
+##  6      554            558        -4      740            728        12      150
+##  7      555            600        -5      913            854        19      158
+##  8      557            600        -3      709            723       -14       53
+##  9      557            600        -3      838            846        -8      140
+## 10      558            600        -2      753            745         8      138
+## # … with 336,766 more rows, and 1 more variable: time_hour &lt;dttm&gt;</code></pre>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="data-transformation-with-dplyr.html#cb606-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, <span class="fu">matches</span>(<span class="st">&quot;(.)</span><span class="sc">\\</span><span class="st">1&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 4
+##    arr_time sched_arr_time arr_delay carrier
+##       &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;  
+##  1      830            819        11 UA     
+##  2      850            830        20 UA     
+##  3      923            850        33 AA     
+##  4     1004           1022       -18 B6     
+##  5      812            837       -25 DL     
+##  6      740            728        12 UA     
+##  7      913            854        19 B6     
+##  8      709            723       -14 EV     
+##  9      838            846        -8 B6     
+## 10      753            745         8 AA     
+## # … with 336,766 more rows</code></pre>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="data-transformation-with-dplyr.html#cb608-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use multiple helpers at once</span></span>
+<span id="cb608-2"><a href="data-transformation-with-dplyr.html#cb608-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, <span class="fu">starts_with</span>(<span class="st">&quot;dep&quot;</span>), <span class="fu">starts_with</span>(<span class="st">&quot;arr&quot;</span>), <span class="fu">ends_with</span>(<span class="st">&quot;hour&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 6
+##    dep_time dep_delay arr_time arr_delay  hour time_hour          
+##       &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;             
+##  1      517         2      830        11     5 2013-01-01 05:00:00
+##  2      533         4      850        20     5 2013-01-01 05:00:00
+##  3      542         2      923        33     5 2013-01-01 05:00:00
+##  4      544        -1     1004       -18     5 2013-01-01 05:00:00
+##  5      554        -6      812       -25     6 2013-01-01 06:00:00
+##  6      554        -4      740        12     5 2013-01-01 05:00:00
+##  7      555        -5      913        19     6 2013-01-01 06:00:00
+##  8      557        -3      709       -14     6 2013-01-01 06:00:00
+##  9      557        -3      838        -8     6 2013-01-01 06:00:00
+## 10      558        -2      753         8     6 2013-01-01 06:00:00
+## # … with 336,766 more rows</code></pre>
+</div>
+<div id="renaming-columns" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Renaming columns<a href="data-transformation-with-dplyr.html#renaming-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can also rename columns using <code>select()</code> by simply declaring what the new name should be:</p>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="data-transformation-with-dplyr.html#cb610-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(</span>
+<span id="cb610-2"><a href="data-transformation-with-dplyr.html#cb610-2" aria-hidden="true" tabindex="-1"></a>  df,</span>
+<span id="cb610-3"><a href="data-transformation-with-dplyr.html#cb610-3" aria-hidden="true" tabindex="-1"></a>  year,</span>
+<span id="cb610-4"><a href="data-transformation-with-dplyr.html#cb610-4" aria-hidden="true" tabindex="-1"></a>  month,</span>
+<span id="cb610-5"><a href="data-transformation-with-dplyr.html#cb610-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">airline =</span> carrier,    <span class="co"># rename &quot;carrier&quot; column to &quot;airline&quot;</span></span>
+<span id="cb610-6"><a href="data-transformation-with-dplyr.html#cb610-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">departure =</span> dep_time, <span class="co"># rename &quot;dep_time&quot; column to &quot;departure&quot;</span></span>
+<span id="cb610-7"><a href="data-transformation-with-dplyr.html#cb610-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">arrival =</span> arr_time,   <span class="co"># rename &quot;arr_time&quot; column to &quot;arrival&quot;</span></span>
+<span id="cb610-8"><a href="data-transformation-with-dplyr.html#cb610-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> origin,        <span class="co"># rename &quot;origin&quot; column to &quot;from&quot;</span></span>
+<span id="cb610-9"><a href="data-transformation-with-dplyr.html#cb610-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> dest             <span class="co"># rename &quot;dest&quot; column to &quot;to&quot;</span></span>
+<span id="cb610-10"><a href="data-transformation-with-dplyr.html#cb610-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 7
+##     year month airline departure arrival from  to   
+##    &lt;int&gt; &lt;int&gt; &lt;chr&gt;       &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+##  1  2013     1 UA            517     830 EWR   IAH  
+##  2  2013     1 UA            533     850 LGA   IAH  
+##  3  2013     1 AA            542     923 JFK   MIA  
+##  4  2013     1 B6            544    1004 JFK   BQN  
+##  5  2013     1 DL            554     812 LGA   ATL  
+##  6  2013     1 UA            554     740 EWR   ORD  
+##  7  2013     1 B6            555     913 EWR   FLL  
+##  8  2013     1 EV            557     709 LGA   IAD  
+##  9  2013     1 B6            557     838 JFK   MCO  
+## 10  2013     1 AA            558     753 LGA   ORD  
+## # … with 336,766 more rows</code></pre>
+<p><br />
+</p>
+</div>
+</div>
+<div id="add-new-variables-with-mutate" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Add new variables with <code>mutate()</code><a href="data-transformation-with-dplyr.html#add-new-variables-with-mutate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can do a lot of data cleaning by subsetting the data, but we will need to be able to engineer new features from existing columns to really obtain insights. Feature engineering usually requires operating and combining our existing columns to get new columns. We can do this using the <code>mutate()</code> function:</p>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="data-transformation-with-dplyr.html#cb612-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the airspeed of each flight by engineering a new column</span></span>
+<span id="cb612-2"><a href="data-transformation-with-dplyr.html#cb612-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb612-3"><a href="data-transformation-with-dplyr.html#cb612-3" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">c</span>(<span class="st">&quot;carrier&quot;</span>, <span class="st">&quot;flight&quot;</span>, <span class="st">&quot;distance&quot;</span>, <span class="st">&quot;air_time&quot;</span>)],</span>
+<span id="cb612-4"><a href="data-transformation-with-dplyr.html#cb612-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">airspeed =</span> (distance<span class="sc">/</span>air_time)<span class="sc">*</span><span class="dv">60</span></span>
+<span id="cb612-5"><a href="data-transformation-with-dplyr.html#cb612-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 5
+##    carrier flight distance air_time airspeed
+##    &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1 UA        1545     1400      227     370.
+##  2 UA        1714     1416      227     374.
+##  3 AA        1141     1089      160     408.
+##  4 B6         725     1576      183     517.
+##  5 DL         461      762      116     394.
+##  6 UA        1696      719      150     288.
+##  7 B6         507     1065      158     404.
+##  8 EV        5708      229       53     259.
+##  9 B6          79      944      140     405.
+## 10 AA         301      733      138     319.
+## # … with 336,766 more rows</code></pre>
+<p>We can also engineer new features and immediately use them in other column mutations within the same function call:</p>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="data-transformation-with-dplyr.html#cb614-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb614-2"><a href="data-transformation-with-dplyr.html#cb614-2" aria-hidden="true" tabindex="-1"></a>  df,</span>
+<span id="cb614-3"><a href="data-transformation-with-dplyr.html#cb614-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
+<span id="cb614-4"><a href="data-transformation-with-dplyr.html#cb614-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">hours =</span> air_time<span class="sc">/</span><span class="dv">60</span>,</span>
+<span id="cb614-5"><a href="data-transformation-with-dplyr.html#cb614-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">airspeed =</span> (distance<span class="sc">/</span>air_time)<span class="sc">*</span><span class="dv">60</span>,</span>
+<span id="cb614-6"><a href="data-transformation-with-dplyr.html#cb614-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">gain_per_hour =</span> gain<span class="sc">/</span>hours</span>
+<span id="cb614-7"><a href="data-transformation-with-dplyr.html#cb614-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 23
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 336,766 more rows, and 15 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;,
+## #   gain &lt;dbl&gt;, hours &lt;dbl&gt;, airspeed &lt;dbl&gt;, gain_per_hour &lt;dbl&gt;</code></pre>
+<p>By default, <code>mutate()</code> returns all columns of the original data frame along with any new columns that have been engineered (so the new features are added on to the end of the column space). If we only want to view the engineered columns, we can use the <code>transmute()</code> function instead of <code>mutate()</code></p>
+<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="data-transformation-with-dplyr.html#cb616-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the same data frame as above, but using transmute()</span></span>
+<span id="cb616-2"><a href="data-transformation-with-dplyr.html#cb616-2" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(</span>
+<span id="cb616-3"><a href="data-transformation-with-dplyr.html#cb616-3" aria-hidden="true" tabindex="-1"></a>  df,</span>
+<span id="cb616-4"><a href="data-transformation-with-dplyr.html#cb616-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">flight_id =</span> <span class="fu">paste</span>(carrier, flight),</span>
+<span id="cb616-5"><a href="data-transformation-with-dplyr.html#cb616-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
+<span id="cb616-6"><a href="data-transformation-with-dplyr.html#cb616-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">airspeed =</span> (distance<span class="sc">/</span>air_time)<span class="sc">*</span><span class="dv">60</span></span>
+<span id="cb616-7"><a href="data-transformation-with-dplyr.html#cb616-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 3
+##    flight_id  gain airspeed
+##    &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 UA 1545      -9     370.
+##  2 UA 1714     -16     374.
+##  3 AA 1141     -31     408.
+##  4 B6 725       17     517.
+##  5 DL 461       19     394.
+##  6 UA 1696     -16     288.
+##  7 B6 507      -24     404.
+##  8 EV 5708      11     259.
+##  9 B6 79         5     405.
+## 10 AA 301      -10     319.
+## # … with 336,766 more rows</code></pre>
+<p>We can mix-and-match existing with new columns by calling <code>select()</code> after <code>mutate()</code>:</p>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="data-transformation-with-dplyr.html#cb618-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(</span>
+<span id="cb618-2"><a href="data-transformation-with-dplyr.html#cb618-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb618-3"><a href="data-transformation-with-dplyr.html#cb618-3" aria-hidden="true" tabindex="-1"></a>    df,</span>
+<span id="cb618-4"><a href="data-transformation-with-dplyr.html#cb618-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">flight_id =</span> <span class="fu">paste</span>(carrier,flight),</span>
+<span id="cb618-5"><a href="data-transformation-with-dplyr.html#cb618-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
+<span id="cb618-6"><a href="data-transformation-with-dplyr.html#cb618-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">airspeed =</span> (distance<span class="sc">/</span>air_time)<span class="sc">*</span><span class="dv">60</span></span>
+<span id="cb618-7"><a href="data-transformation-with-dplyr.html#cb618-7" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb618-8"><a href="data-transformation-with-dplyr.html#cb618-8" aria-hidden="true" tabindex="-1"></a>  year,</span>
+<span id="cb618-9"><a href="data-transformation-with-dplyr.html#cb618-9" aria-hidden="true" tabindex="-1"></a>  month,</span>
+<span id="cb618-10"><a href="data-transformation-with-dplyr.html#cb618-10" aria-hidden="true" tabindex="-1"></a>  flight_id,</span>
+<span id="cb618-11"><a href="data-transformation-with-dplyr.html#cb618-11" aria-hidden="true" tabindex="-1"></a>  gain,</span>
+<span id="cb618-12"><a href="data-transformation-with-dplyr.html#cb618-12" aria-hidden="true" tabindex="-1"></a>  airspeed</span>
+<span id="cb618-13"><a href="data-transformation-with-dplyr.html#cb618-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 5
+##     year month flight_id  gain airspeed
+##    &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2013     1 UA 1545      -9     370.
+##  2  2013     1 UA 1714     -16     374.
+##  3  2013     1 AA 1141     -31     408.
+##  4  2013     1 B6 725       17     517.
+##  5  2013     1 DL 461       19     394.
+##  6  2013     1 UA 1696     -16     288.
+##  7  2013     1 B6 507      -24     404.
+##  8  2013     1 EV 5708      11     259.
+##  9  2013     1 B6 79         5     405.
+## 10  2013     1 AA 301      -10     319.
+## # … with 336,766 more rows</code></pre>
+<p><br />
+</p>
+</div>
+<div id="grouped-summaries-with-summarise-and-group_by" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Grouped summaries with <code>summarise()</code> and <code>group_by()</code><a href="data-transformation-with-dplyr.html#grouped-summaries-with-summarise-and-group_by" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>summarise()</code> function tries to summary the existing data using single values. On its own, <code>summarise()</code> actually does nothing:</p>
+<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="data-transformation-with-dplyr.html#cb620-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(df)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 0</code></pre>
+<p>What’s going on? Recall the philosophy: each function should take-in a data frame and <em>return</em> a data frame. Thus <code>summarise()</code> is returning a data frame, but it is up to use to actually fill the data frame with values.</p>
+<p>We have to tell <code>summarise()</code> how to actually summarize the data set. For example:</p>
+<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="data-transformation-with-dplyr.html#cb622-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the mean air_time of all flights</span></span>
+<span id="cb622-2"><a href="data-transformation-with-dplyr.html#cb622-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(df, <span class="at">mean_airtime =</span> <span class="fu">mean</span>(air_time, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   mean_airtime
+##          &lt;dbl&gt;
+## 1         151.</code></pre>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="data-transformation-with-dplyr.html#cb624-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the median distance and mean air_time</span></span>
+<span id="cb624-2"><a href="data-transformation-with-dplyr.html#cb624-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
+<span id="cb624-3"><a href="data-transformation-with-dplyr.html#cb624-3" aria-hidden="true" tabindex="-1"></a>  df,</span>
+<span id="cb624-4"><a href="data-transformation-with-dplyr.html#cb624-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_distance =</span> <span class="fu">median</span>(distance, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb624-5"><a href="data-transformation-with-dplyr.html#cb624-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_airtime =</span> <span class="fu">mean</span>(air_time, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb624-6"><a href="data-transformation-with-dplyr.html#cb624-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##   median_distance mean_airtime
+##             &lt;dbl&gt;        &lt;dbl&gt;
+## 1             872         151.</code></pre>
+<p>The parameter <code>na.rm = TRUE</code> tells the function to remove the <code>NA</code> values when carrying out the computation.</p>
+<p>The <code>summarise()</code> function becomes very powerful when we combine it with the <code>group_by()</code> function. The <code>group_by()</code> function splits the data set into subsets based on some list of features. Here is an example of the first <code>summarise()</code> code snippet but paired with a <code>group_by()</code> function:</p>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="data-transformation-with-dplyr.html#cb626-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
+<span id="cb626-2"><a href="data-transformation-with-dplyr.html#cb626-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df, year, month, day),          <span class="co"># groups rows by year x month x day</span></span>
+<span id="cb626-3"><a href="data-transformation-with-dplyr.html#cb626-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="co"># computes mean for each grouping</span></span>
+<span id="cb626-4"><a href="data-transformation-with-dplyr.html#cb626-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;month&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 365 × 4
+## # Groups:   year, month [12]
+##     year month   day mean_delay
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt;
+##  1  2013     1     1      11.5 
+##  2  2013     1     2      13.9 
+##  3  2013     1     3      11.0 
+##  4  2013     1     4       8.95
+##  5  2013     1     5       5.73
+##  6  2013     1     6       7.15
+##  7  2013     1     7       5.42
+##  8  2013     1     8       2.55
+##  9  2013     1     9       2.28
+## 10  2013     1    10       2.84
+## # … with 355 more rows</code></pre>
+<p>The <code>group_by()</code> and <code>summarise()</code> combo forms the bread and butter of data analysis in the tidyverse. For example, we can look at average delay times for departing flights by airport.</p>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="data-transformation-with-dplyr.html#cb629-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
+<span id="cb629-2"><a href="data-transformation-with-dplyr.html#cb629-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df, origin),</span>
+<span id="cb629-3"><a href="data-transformation-with-dplyr.html#cb629-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb629-4"><a href="data-transformation-with-dplyr.html#cb629-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">count =</span> <span class="fu">n</span>()</span>
+<span id="cb629-5"><a href="data-transformation-with-dplyr.html#cb629-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   origin delay  count
+##   &lt;chr&gt;  &lt;dbl&gt;  &lt;int&gt;
+## 1 EWR     15.1 120835
+## 2 JFK     12.1 111279
+## 3 LGA     10.3 104662</code></pre>
+<p>This summary suggests that Newark Liberty International Airport (code <code>EWR</code>) has the worst problem with delays of departing flights.</p>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="data-transformation-with-dplyr.html#cb631-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
+<span id="cb631-2"><a href="data-transformation-with-dplyr.html#cb631-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df, origin),</span>
+<span id="cb631-3"><a href="data-transformation-with-dplyr.html#cb631-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance =</span> <span class="fu">median</span>(distance, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb631-4"><a href="data-transformation-with-dplyr.html#cb631-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">count =</span> <span class="fu">n</span>()</span>
+<span id="cb631-5"><a href="data-transformation-with-dplyr.html#cb631-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   origin distance  count
+##   &lt;chr&gt;     &lt;dbl&gt;  &lt;int&gt;
+## 1 EWR         872 120835
+## 2 JFK        1069 111279
+## 3 LGA         762 104662</code></pre>
+<p>This data frame suggests that John F. Kennedy International Airport (code <code>JFK</code>) is more likely to be a hub for long distance flights and international travel. Using these 2 grouped summaries, we can already begin formulating some hypotheses about the nature of the data and the real world.</p>
+<p><br />
+</p>
+</div>
+<div id="an-example-analysis" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> An example analysis<a href="data-transformation-with-dplyr.html#an-example-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s do a quick example of how we would carryout analysis using the tools from this chapter so far. The question we are interested in is “what is the relationship between flight distance and delays?” First off, delays come in 2 flavors <code>dep_delay</code> and <code>arr_delay</code>. Let’s begin by isolating the relevant columns into a subframe.</p>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="data-transformation-with-dplyr.html#cb633-1" aria-hidden="true" tabindex="-1"></a>distance_delays_df <span class="ot">&lt;-</span> <span class="fu">select</span>(df, origin, dest, distance, air_time, <span class="fu">contains</span>(<span class="st">&quot;delay&quot;</span>))</span>
+<span id="cb633-2"><a href="data-transformation-with-dplyr.html#cb633-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb633-3"><a href="data-transformation-with-dplyr.html#cb633-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(distance_delays_df)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##   origin dest  distance air_time dep_delay arr_delay
+##   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 EWR    IAH       1400      227         2        11
+## 2 LGA    IAH       1416      227         4        20
+## 3 JFK    MIA       1089      160         2        33
+## 4 JFK    BQN       1576      183        -1       -18
+## 5 LGA    ATL        762      116        -6       -25
+## 6 EWR    ORD        719      150        -4        12</code></pre>
+<p>We can engineer a new feature <code>net_loss</code> which adds the <code>dep_delay</code> and <code>arr_delay</code> into a single value that gives the total time loss by passengers due to delays.</p>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb635-1"><a href="data-transformation-with-dplyr.html#cb635-1" aria-hidden="true" tabindex="-1"></a>net_loss_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb635-2"><a href="data-transformation-with-dplyr.html#cb635-2" aria-hidden="true" tabindex="-1"></a>  distance_delays_df,</span>
+<span id="cb635-3"><a href="data-transformation-with-dplyr.html#cb635-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">net_loss =</span> dep_delay<span class="sc">+</span>arr_delay</span>
+<span id="cb635-4"><a href="data-transformation-with-dplyr.html#cb635-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb635-5"><a href="data-transformation-with-dplyr.html#cb635-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb635-6"><a href="data-transformation-with-dplyr.html#cb635-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(net_loss_df)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 7
+##   origin dest  distance air_time dep_delay arr_delay net_loss
+##   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 EWR    IAH       1400      227         2        11       13
+## 2 LGA    IAH       1416      227         4        20       24
+## 3 JFK    MIA       1089      160         2        33       35
+## 4 JFK    BQN       1576      183        -1       -18      -19
+## 5 LGA    ATL        762      116        -6       -25      -31
+## 6 EWR    ORD        719      150        -4        12        8</code></pre>
+<p>The relationship between <code>distance</code> and each of the columns measuring delay can be visualized using scatter plots.</p>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="data-transformation-with-dplyr.html#cb637-1" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot of distance vs departure delay</span></span>
+<span id="cb637-2"><a href="data-transformation-with-dplyr.html#cb637-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> net_loss_df) <span class="sc">+</span> </span>
+<span id="cb637-3"><a href="data-transformation-with-dplyr.html#cb637-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>distance, <span class="at">y=</span>dep_delay), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) </span></code></pre></div>
+<pre><code>## Warning: Removed 8255 rows containing missing values (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-229-1.png" width="672" /></p>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="data-transformation-with-dplyr.html#cb639-1" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot of distance vs arrival delay</span></span>
+<span id="cb639-2"><a href="data-transformation-with-dplyr.html#cb639-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> net_loss_df) <span class="sc">+</span> </span>
+<span id="cb639-3"><a href="data-transformation-with-dplyr.html#cb639-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>distance, <span class="at">y=</span>arr_delay), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) </span></code></pre></div>
+<pre><code>## Warning: Removed 9430 rows containing missing values (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-230-1.png" width="672" /></p>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="data-transformation-with-dplyr.html#cb641-1" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot of distance vs net time loss</span></span>
+<span id="cb641-2"><a href="data-transformation-with-dplyr.html#cb641-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> net_loss_df) <span class="sc">+</span> </span>
+<span id="cb641-3"><a href="data-transformation-with-dplyr.html#cb641-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>distance, <span class="at">y=</span>net_loss), <span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) </span></code></pre></div>
+<pre><code>## Warning: Removed 9430 rows containing missing values (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-231-1.png" width="672" /></p>
+<p>The scatter plots seem a bit cluttered and there isn’t an obvious pattern that can be gleaned immediately. Overall, delays and distance both seem right-skewed: most data points are concentrated at lower values with a select few having very high values.</p>
+<p>We can try to get a better feel of things by looking at groupings of flights. A good starting point would be to group by origin and destination</p>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="data-transformation-with-dplyr.html#cb643-1" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot of distance vs dep_delay</span></span>
+<span id="cb643-2"><a href="data-transformation-with-dplyr.html#cb643-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> net_loss_df) <span class="sc">+</span> </span>
+<span id="cb643-3"><a href="data-transformation-with-dplyr.html#cb643-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb643-4"><a href="data-transformation-with-dplyr.html#cb643-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>distance, <span class="at">y=</span>dep_delay, <span class="at">color =</span> origin), </span>
+<span id="cb643-5"><a href="data-transformation-with-dplyr.html#cb643-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.5</span>, </span>
+<span id="cb643-6"><a href="data-transformation-with-dplyr.html#cb643-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&quot;jitter&quot;</span></span>
+<span id="cb643-7"><a href="data-transformation-with-dplyr.html#cb643-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> </span>
+<span id="cb643-8"><a href="data-transformation-with-dplyr.html#cb643-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>origin)</span></code></pre></div>
+<pre><code>## Warning: Removed 8255 rows containing missing values (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-232-1.png" width="672" /></p>
+<p>Here we glean mini-insight: LaGuardia <code>LGA</code> generally tends to have shorter distance flights. Nonetheless, there seems to be no clear relationship between distance vs departure delays. This makes which makes sense to us since it is unlikely that the distance of the trip affects whether planes depart on time.</p>
+<p>We can also attempt to group flights by destination:</p>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="data-transformation-with-dplyr.html#cb645-1" aria-hidden="true" tabindex="-1"></a>by_dest <span class="ot">&lt;-</span> <span class="fu">group_by</span>(net_loss_df, dest)</span>
+<span id="cb645-2"><a href="data-transformation-with-dplyr.html#cb645-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb645-3"><a href="data-transformation-with-dplyr.html#cb645-3" aria-hidden="true" tabindex="-1"></a>arr_delay_summary <span class="ot">&lt;-</span> <span class="fu">summarise</span>(</span>
+<span id="cb645-4"><a href="data-transformation-with-dplyr.html#cb645-4" aria-hidden="true" tabindex="-1"></a>  by_dest,</span>
+<span id="cb645-5"><a href="data-transformation-with-dplyr.html#cb645-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb645-6"><a href="data-transformation-with-dplyr.html#cb645-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb645-7"><a href="data-transformation-with-dplyr.html#cb645-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_arr_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb645-8"><a href="data-transformation-with-dplyr.html#cb645-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb645-9"><a href="data-transformation-with-dplyr.html#cb645-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb645-10"><a href="data-transformation-with-dplyr.html#cb645-10" aria-hidden="true" tabindex="-1"></a>sorted_arr_delay_summary <span class="ot">&lt;-</span> <span class="fu">arrange</span>(arr_delay_summary, mean_arr_delay)</span>
+<span id="cb645-11"><a href="data-transformation-with-dplyr.html#cb645-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb645-12"><a href="data-transformation-with-dplyr.html#cb645-12" aria-hidden="true" tabindex="-1"></a>sorted_arr_delay_summary</span></code></pre></div>
+<pre><code>## # A tibble: 105 × 4
+##    dest  count mean_dist mean_arr_delay
+##    &lt;chr&gt; &lt;int&gt;     &lt;dbl&gt;          &lt;dbl&gt;
+##  1 LEX       1      604        -22     
+##  2 PSP      19     2378        -12.7   
+##  3 SNA     825     2434         -7.87  
+##  4 STT     522     1627.        -3.84  
+##  5 ANC       8     3370         -2.5   
+##  6 HNL     707     4973.        -1.37  
+##  7 SEA    3923     2413.        -1.10  
+##  8 MVY     221      173         -0.286 
+##  9 LGB     668     2465         -0.0620
+## 10 SLC    2467     1987.         0.176 
+## # … with 95 more rows</code></pre>
+<p>So <code>LEX</code> has a mean arrival delay of -22 mins, i.e. flights generally arrive 22 mins early. But we see that <code>LEX</code> only has 1 flight, which means the airport is likely to have very few arriving flights in general. <code>PSP</code> is in second place but only has 19 flights. <code>SNA</code> and <code>STT</code> are both in the negative (which is good!) and both have a decent number of flights to make them interesting. The first major airport is <code>SEA</code> with flights generally arriving 1 minute early.</p>
+<p>Here we glean our first major insight: there are 9 destinations which have a negative arrival time; 7 of those are at least 1500 miles away and 6 of them are at least 2000 miles away.</p>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="data-transformation-with-dplyr.html#cb647-1" aria-hidden="true" tabindex="-1"></a>filtered_sorted_arr_delay <span class="ot">=</span> <span class="fu">filter</span>(sorted_arr_delay_summary, mean_arr_delay <span class="sc">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb647-2"><a href="data-transformation-with-dplyr.html#cb647-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb647-3"><a href="data-transformation-with-dplyr.html#cb647-3" aria-hidden="true" tabindex="-1"></a>filtered_sorted_arr_delay</span></code></pre></div>
+<pre><code>## # A tibble: 14 × 4
+##    dest  count mean_dist mean_arr_delay
+##    &lt;chr&gt; &lt;int&gt;     &lt;dbl&gt;          &lt;dbl&gt;
+##  1 LEX       1      604        -22     
+##  2 PSP      19     2378        -12.7   
+##  3 SNA     825     2434         -7.87  
+##  4 STT     522     1627.        -3.84  
+##  5 ANC       8     3370         -2.5   
+##  6 HNL     707     4973.        -1.37  
+##  7 SEA    3923     2413.        -1.10  
+##  8 MVY     221      173         -0.286 
+##  9 LGB     668     2465         -0.0620
+## 10 SLC    2467     1987.         0.176 
+## 11 LAS    5997     2241.         0.258 
+## 12 MIA   11728     1092.         0.299 
+## 13 DFW    8738     1383.         0.322 
+## 14 LAX   16174     2469.         0.547</code></pre>
+<p>14 airports in total have mean arrival delays under 1 minute. All but 2 of those airports are at least 1000 miles away. If we were to hypothesize a relationship between distance and arrival delays, we suspect that longer distance flights generally have shorter arrival delays. We use a scatter plot to provide evidence for or against this hypothesis:</p>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="data-transformation-with-dplyr.html#cb649-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sorted_arr_delay_summary, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x =</span> mean_dist, <span class="at">y=</span>mean_arr_delay)) <span class="sc">+</span> </span>
+<span id="cb649-2"><a href="data-transformation-with-dplyr.html#cb649-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">size =</span> count), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb649-3"><a href="data-transformation-with-dplyr.html#cb649-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-235-1.png" width="672" /></p>
+<p>The scatter plot and trendline provides evidence that our hypothesis is correct. Note that we can only say “there is evidence to suggest the hypothesis is correct”. Two follow-up questions we could ask are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Does the hypothesis generalize? Is there a general negative association between flight distance and arrival delays for all flights in the world and at all times.</p></li>
+<li><p>Is the hypothesis casual? Do longer flight distances cause shorter arrival delays?</p></li>
+</ol>
+<p>In order to answer (1) we would need to get sample data from flights all over the world and across many different years. In order to answer (2) we would need to run a randomized controlled trial (RCT). Getting more sample data may or may not be easy, but there is no real way around it if we want to answer question (1). Question (2) is more interesting: it isn’t feasible to run randomized control trials airline flights. We would need to:</p>
+<ol style="list-style-type: decimal">
+<li>Randomly assign many different flights (including crews, passengers, and plane models) to each of the different destinations.</li>
+<li>Carry out the actual flights and measure the arrival delays at the gate.</li>
+<li>Conduct a hypothesis test to weed out any random noise from the experimental procedure.</li>
+</ol>
+<p>Notice that steps 1 and 2 are both costly and probably illegal (we can’t force passengers to fly to random airports against their will), so an RCT is not possible. Therefore, it is impossible to demonstrably prove that longer flights cause shorter arrival delays. However, we can instead ask for the alternative of “can provide a reasonable amount of evidence in favor of the hypothesis?”</p>
+<p>One way to provide some evidence is to fit a mathematical model to the data which controls for some subset of factors (like originating airport, date, carrier, etc.). We will never be able to fit a model that controls for all <em>possible</em> factors, but we can try to build a model that controls for all <em>reasonable</em> factors. What constitutes as “reasonable” is left to the discretion of the modeler and is why data science, at the time of this writing, can’t be fully automated. Model building is a topic for later discussion. For now, let us return to data analysis using feature engineering and grouping summaries.</p>
+<p>We can try to hypothesize why this relationship between distance and arrival delays exists in the first place. One possible explanation: longer flights have more room travel faster and beat their expected arrival times. We can look for evidence of this by engineering a new feature called <code>airspeed</code> which is the ratio of <code>distance/air_time</code> and measures the average speed the plane was traveling throughout the journey.</p>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="data-transformation-with-dplyr.html#cb653-1" aria-hidden="true" tabindex="-1"></a>airtime_df <span class="ot">&lt;-</span> <span class="fu">select</span>(df, carrier, origin, dest, distance, air_time, arr_delay)</span>
+<span id="cb653-2"><a href="data-transformation-with-dplyr.html#cb653-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb653-3"><a href="data-transformation-with-dplyr.html#cb653-3" aria-hidden="true" tabindex="-1"></a>airspeed_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb653-4"><a href="data-transformation-with-dplyr.html#cb653-4" aria-hidden="true" tabindex="-1"></a>  airtime_df,</span>
+<span id="cb653-5"><a href="data-transformation-with-dplyr.html#cb653-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">airspeed =</span> (distance<span class="sc">/</span>air_time)<span class="sc">*</span><span class="dv">60</span></span>
+<span id="cb653-6"><a href="data-transformation-with-dplyr.html#cb653-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb653-7"><a href="data-transformation-with-dplyr.html#cb653-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb653-8"><a href="data-transformation-with-dplyr.html#cb653-8" aria-hidden="true" tabindex="-1"></a>airspeed_df</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 7
+##    carrier origin dest  distance air_time arr_delay airspeed
+##    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+##  1 UA      EWR    IAH       1400      227        11     370.
+##  2 UA      LGA    IAH       1416      227        20     374.
+##  3 AA      JFK    MIA       1089      160        33     408.
+##  4 B6      JFK    BQN       1576      183       -18     517.
+##  5 DL      LGA    ATL        762      116       -25     394.
+##  6 UA      EWR    ORD        719      150        12     288.
+##  7 B6      EWR    FLL       1065      158        19     404.
+##  8 EV      LGA    IAD        229       53       -14     259.
+##  9 B6      JFK    MCO        944      140        -8     405.
+## 10 AA      LGA    ORD        733      138         8     319.
+## # … with 336,766 more rows</code></pre>
+<p>Our conjecture is that longer flights have higher airspeeds, allowing them to arrive early. We can look for evidence of this using a scatter plot:</p>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="data-transformation-with-dplyr.html#cb655-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(airspeed_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>distance, <span class="at">y=</span>airspeed)) <span class="sc">+</span> </span>
+<span id="cb655-2"><a href="data-transformation-with-dplyr.html#cb655-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.3</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 9430 rows containing missing values (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-237-1.png" width="672" /></p>
+<p>We do in fact see an upward trend between distance and airspeed. We can get a more granular understanding by controlling for carrier, since different companies might have different technical specifications on their planes.</p>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="data-transformation-with-dplyr.html#cb657-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(airspeed_df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>distance, <span class="at">y=</span>airspeed)) <span class="sc">+</span> </span>
+<span id="cb657-2"><a href="data-transformation-with-dplyr.html#cb657-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.3</span>, <span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb657-3"><a href="data-transformation-with-dplyr.html#cb657-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>carrier, <span class="at">nrow=</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 9430 rows containing missing values (geom_point).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-238-1.png" width="672" /></p>
+<p>The upward trend seems to exist even across carriers. This provides a reasonable amount of evidence that longer distance flights have room to make-up time by flying faster.</p>
+<p>We can also summarize the data by grouping by destination:</p>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="data-transformation-with-dplyr.html#cb659-1" aria-hidden="true" tabindex="-1"></a>dest_grouping <span class="ot">&lt;-</span> <span class="fu">group_by</span>(airspeed_df, carrier)</span>
+<span id="cb659-2"><a href="data-transformation-with-dplyr.html#cb659-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb659-3"><a href="data-transformation-with-dplyr.html#cb659-3" aria-hidden="true" tabindex="-1"></a>airspeed_summary <span class="ot">&lt;-</span> <span class="fu">summarise</span>(</span>
+<span id="cb659-4"><a href="data-transformation-with-dplyr.html#cb659-4" aria-hidden="true" tabindex="-1"></a>  dest_grouping,</span>
+<span id="cb659-5"><a href="data-transformation-with-dplyr.html#cb659-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb659-6"><a href="data-transformation-with-dplyr.html#cb659-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb659-7"><a href="data-transformation-with-dplyr.html#cb659-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_speed =</span> <span class="fu">mean</span>(airspeed, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb659-8"><a href="data-transformation-with-dplyr.html#cb659-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb659-9"><a href="data-transformation-with-dplyr.html#cb659-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb659-10"><a href="data-transformation-with-dplyr.html#cb659-10" aria-hidden="true" tabindex="-1"></a>airspeed_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(airspeed_summary, <span class="fu">desc</span>(mean_speed))</span>
+<span id="cb659-11"><a href="data-transformation-with-dplyr.html#cb659-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb659-12"><a href="data-transformation-with-dplyr.html#cb659-12" aria-hidden="true" tabindex="-1"></a>airspeed_sorted</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 4
+##    carrier count mean_dist mean_speed
+##    &lt;chr&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 HA        342     4983        480.
+##  2 VX       5162     2499.       446.
+##  3 AS        714     2402        444.
+##  4 F9        685     1620        425.
+##  5 UA      58665     1529.       421.
+##  6 DL      48110     1237.       418.
+##  7 AA      32729     1340.       417.
+##  8 WN      12275      996.       401.
+##  9 B6      54635     1069.       400.
+## 10 FL       3260      665.       394.
+## 11 MQ      26397      570.       368.
+## 12 OO         32      501.       366.
+## 13 EV      54173      563.       363.
+## 14 9E      18460      530.       345.
+## 15 US      20536      553.       342.
+## 16 YV        601      375.       332.</code></pre>
+<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="data-transformation-with-dplyr.html#cb661-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(airspeed_summary, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>mean_dist, <span class="at">y=</span>mean_speed)) <span class="sc">+</span> </span>
+<span id="cb661-2"><a href="data-transformation-with-dplyr.html#cb661-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">size =</span> count), <span class="at">alpha=</span><span class="fl">0.3</span>) <span class="sc">+</span> </span>
+<span id="cb661-3"><a href="data-transformation-with-dplyr.html#cb661-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-240-1.png" width="672" /></p>
+<p><br />
+</p>
+</div>
+<div id="the-pipe-operator" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> The pipe operator <code>%&gt;%</code><a href="data-transformation-with-dplyr.html#the-pipe-operator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The main purpose of the analysis in the previous section is to demonstrate how to use the various tools to perform data analysis. A secondary purpose was to motivate the need for the pipe operator <code>%&gt;%</code>. Explaining what the pipe operator <code>%&gt;%</code> does and why it’s necessary is best by looking back at the analysis from the previous section and asking ourselves “what was the most annoying aspect of writing the code?”</p>
+<p>We may have noticed: performing analysis usually requires calling a sequence of different functions. One major pain point was having to save the results of each function into a data frame. For example, here is the code snippet we wrote to get a read-out of average airspeed, sorted from highest to lowest:</p>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="data-transformation-with-dplyr.html#cb663-1" aria-hidden="true" tabindex="-1"></a>airtime_df <span class="ot">&lt;-</span> <span class="fu">select</span>(df, carrier, origin, dest, distance, air_time, arr_delay)</span>
+<span id="cb663-2"><a href="data-transformation-with-dplyr.html#cb663-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb663-3"><a href="data-transformation-with-dplyr.html#cb663-3" aria-hidden="true" tabindex="-1"></a>airspeed_df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb663-4"><a href="data-transformation-with-dplyr.html#cb663-4" aria-hidden="true" tabindex="-1"></a>  airtime_df,</span>
+<span id="cb663-5"><a href="data-transformation-with-dplyr.html#cb663-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">airspeed =</span> (distance<span class="sc">/</span>air_time)<span class="sc">*</span><span class="dv">60</span></span>
+<span id="cb663-6"><a href="data-transformation-with-dplyr.html#cb663-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb663-7"><a href="data-transformation-with-dplyr.html#cb663-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb663-8"><a href="data-transformation-with-dplyr.html#cb663-8" aria-hidden="true" tabindex="-1"></a>dest_grouping <span class="ot">&lt;-</span> <span class="fu">group_by</span>(airspeed_df, carrier)</span>
+<span id="cb663-9"><a href="data-transformation-with-dplyr.html#cb663-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb663-10"><a href="data-transformation-with-dplyr.html#cb663-10" aria-hidden="true" tabindex="-1"></a>airspeed_summary <span class="ot">&lt;-</span> <span class="fu">summarise</span>(</span>
+<span id="cb663-11"><a href="data-transformation-with-dplyr.html#cb663-11" aria-hidden="true" tabindex="-1"></a>  dest_grouping,</span>
+<span id="cb663-12"><a href="data-transformation-with-dplyr.html#cb663-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb663-13"><a href="data-transformation-with-dplyr.html#cb663-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb663-14"><a href="data-transformation-with-dplyr.html#cb663-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_speed =</span> <span class="fu">mean</span>(airspeed, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb663-15"><a href="data-transformation-with-dplyr.html#cb663-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb663-16"><a href="data-transformation-with-dplyr.html#cb663-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb663-17"><a href="data-transformation-with-dplyr.html#cb663-17" aria-hidden="true" tabindex="-1"></a>airspeed_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(airspeed_summary, <span class="fu">desc</span>(mean_speed))</span>
+<span id="cb663-18"><a href="data-transformation-with-dplyr.html#cb663-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb663-19"><a href="data-transformation-with-dplyr.html#cb663-19" aria-hidden="true" tabindex="-1"></a>airspeed_sorted</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 4
+##    carrier count mean_dist mean_speed
+##    &lt;chr&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 HA        342     4983        480.
+##  2 VX       5162     2499.       446.
+##  3 AS        714     2402        444.
+##  4 F9        685     1620        425.
+##  5 UA      58665     1529.       421.
+##  6 DL      48110     1237.       418.
+##  7 AA      32729     1340.       417.
+##  8 WN      12275      996.       401.
+##  9 B6      54635     1069.       400.
+## 10 FL       3260      665.       394.
+## 11 MQ      26397      570.       368.
+## 12 OO         32      501.       366.
+## 13 EV      54173      563.       363.
+## 14 9E      18460      530.       345.
+## 15 US      20536      553.       342.
+## 16 YV        601      375.       332.</code></pre>
+<p>We had to call 5 different functions in sequential order and save each output to a data frame. This can be memory inefficient for large data frames and also clutters the R environment with one-off variables that we will never use again.</p>
+<p>So what should we do instead. One option is to compose the functions by making nested calls:</p>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb665-1"><a href="data-transformation-with-dplyr.html#cb665-1" aria-hidden="true" tabindex="-1"></a>airspeed_sorted <span class="ot">&lt;-</span> <span class="fu">arrange</span>(</span>
+<span id="cb665-2"><a href="data-transformation-with-dplyr.html#cb665-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb665-3"><a href="data-transformation-with-dplyr.html#cb665-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(</span>
+<span id="cb665-4"><a href="data-transformation-with-dplyr.html#cb665-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(</span>
+<span id="cb665-5"><a href="data-transformation-with-dplyr.html#cb665-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(df, carrier, origin, dest, distance, air_time, arr_delay),</span>
+<span id="cb665-6"><a href="data-transformation-with-dplyr.html#cb665-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">airspeed =</span> (distance<span class="sc">/</span>air_time)<span class="sc">*</span><span class="dv">60</span></span>
+<span id="cb665-7"><a href="data-transformation-with-dplyr.html#cb665-7" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb665-8"><a href="data-transformation-with-dplyr.html#cb665-8" aria-hidden="true" tabindex="-1"></a>      carrier</span>
+<span id="cb665-9"><a href="data-transformation-with-dplyr.html#cb665-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb665-10"><a href="data-transformation-with-dplyr.html#cb665-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb665-11"><a href="data-transformation-with-dplyr.html#cb665-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb665-12"><a href="data-transformation-with-dplyr.html#cb665-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_speed =</span> <span class="fu">mean</span>(airspeed, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb665-13"><a href="data-transformation-with-dplyr.html#cb665-13" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb665-14"><a href="data-transformation-with-dplyr.html#cb665-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">desc</span>(mean_speed)</span>
+<span id="cb665-15"><a href="data-transformation-with-dplyr.html#cb665-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb665-16"><a href="data-transformation-with-dplyr.html#cb665-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb665-17"><a href="data-transformation-with-dplyr.html#cb665-17" aria-hidden="true" tabindex="-1"></a>airspeed_sorted</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 4
+##    carrier count mean_dist mean_speed
+##    &lt;chr&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 HA        342     4983        480.
+##  2 VX       5162     2499.       446.
+##  3 AS        714     2402        444.
+##  4 F9        685     1620        425.
+##  5 UA      58665     1529.       421.
+##  6 DL      48110     1237.       418.
+##  7 AA      32729     1340.       417.
+##  8 WN      12275      996.       401.
+##  9 B6      54635     1069.       400.
+## 10 FL       3260      665.       394.
+## 11 MQ      26397      570.       368.
+## 12 OO         32      501.       366.
+## 13 EV      54173      563.       363.
+## 14 9E      18460      530.       345.
+## 15 US      20536      553.       342.
+## 16 YV        601      375.       332.</code></pre>
+<p>Of course, these nested calls are a nightmare to code since we essentially have to work backwards from what we want and sequentially backtrack to the starting data frame. Nested function calls also make the code insanely hard to read and can make debugging very painful.</p>
+<p>The pipe operator <code>%&gt;%</code> is the solution to the issue at hand. The idea is to compose functions without without having to make nested calls. This is done by calling a function, executing the transformation, then “piping” the output immediately into the next function. Let’s see how it works:</p>
+<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb667-1"><a href="data-transformation-with-dplyr.html#cb667-1" aria-hidden="true" tabindex="-1"></a>airspeed_sorted <span class="ot">&lt;-</span> <span class="fu">select</span>(df, carrier, dest, distance, air_time, arr_delay) <span class="sc">%&gt;%</span> </span>
+<span id="cb667-2"><a href="data-transformation-with-dplyr.html#cb667-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb667-3"><a href="data-transformation-with-dplyr.html#cb667-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">airspeed =</span> (distance<span class="sc">/</span>air_time)<span class="sc">*</span><span class="dv">60</span></span>
+<span id="cb667-4"><a href="data-transformation-with-dplyr.html#cb667-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb667-5"><a href="data-transformation-with-dplyr.html#cb667-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">%&gt;%</span> </span>
+<span id="cb667-6"><a href="data-transformation-with-dplyr.html#cb667-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb667-7"><a href="data-transformation-with-dplyr.html#cb667-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb667-8"><a href="data-transformation-with-dplyr.html#cb667-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb667-9"><a href="data-transformation-with-dplyr.html#cb667-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_speed =</span> <span class="fu">mean</span>(airspeed, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb667-10"><a href="data-transformation-with-dplyr.html#cb667-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb667-11"><a href="data-transformation-with-dplyr.html#cb667-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_speed))</span>
+<span id="cb667-12"><a href="data-transformation-with-dplyr.html#cb667-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb667-13"><a href="data-transformation-with-dplyr.html#cb667-13" aria-hidden="true" tabindex="-1"></a>airspeed_sorted</span></code></pre></div>
+<pre><code>## # A tibble: 16 × 4
+##    carrier count mean_dist mean_speed
+##    &lt;chr&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 HA        342     4983        480.
+##  2 VX       5162     2499.       446.
+##  3 AS        714     2402        444.
+##  4 F9        685     1620        425.
+##  5 UA      58665     1529.       421.
+##  6 DL      48110     1237.       418.
+##  7 AA      32729     1340.       417.
+##  8 WN      12275      996.       401.
+##  9 B6      54635     1069.       400.
+## 10 FL       3260      665.       394.
+## 11 MQ      26397      570.       368.
+## 12 OO         32      501.       366.
+## 13 EV      54173      563.       363.
+## 14 9E      18460      530.       345.
+## 15 US      20536      553.       342.
+## 16 YV        601      375.       332.</code></pre>
+<p>To breakdown the code, the <code>select()</code> function is called first, executed and its output is “piped” in as the input of the next function <code>mutate()</code>. The output from <code>mutate()</code> is then piped into the function <code>group_by()</code> and so on until we get the final output, which is then saved to <code>airspeed_sorted</code>. Diagramatically:</p>
+<p><code>select() %&gt;% mutate() %&gt;% group_by() %&gt;% summarise() %&gt;% arrange() -&gt; airspeed_sorted</code></p>
+<p>In general, the pipe operation <code>x %&gt;% f()</code> inserts the LHS <code>x</code> as the first argument of the RHS <code>f()</code>. The entire <code>dplyr</code> package was designed with this mind: functions take data frames as their first input and returns a data frame as an output, thereby allowing <code>%&gt;%</code> to effortlessly chain functions together into a pipeline.</p>
+<p><br />
+</p>
+</div>
+<div id="data-heirarchy-with-group_by" class="section level2 hasAnchor" number="6.9">
+<h2><span class="header-section-number">6.9</span> Data heirarchy with <code>group_by()</code><a href="data-transformation-with-dplyr.html#data-heirarchy-with-group_by" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>group_by()</code> is used with <code>summarise()</code> but we can also use <code>group_by()</code> with <code>mutate()</code> and <code>filter()</code>. Recall that <code>group_by()</code> technically changes the scope of functions to act on each grouping.</p>
+<p>The proper way to conceptualize <code>group_by()</code> is to think of hierarchical data. A <code>group_by()</code> function creates a hierarchy of data. For example, we can create 3 levels of data by grouping by year, then month, then day.</p>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="data-transformation-with-dplyr.html#cb669-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(df, year, month, day)</span></code></pre></div>
+<pre><code>## # A tibble: 336,776 × 19
+## # Groups:   year, month, day [365]
+##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+##  1  2013     1     1      517            515         2      830            819
+##  2  2013     1     1      533            529         4      850            830
+##  3  2013     1     1      542            540         2      923            850
+##  4  2013     1     1      544            545        -1     1004           1022
+##  5  2013     1     1      554            600        -6      812            837
+##  6  2013     1     1      554            558        -4      740            728
+##  7  2013     1     1      555            600        -5      913            854
+##  8  2013     1     1      557            600        -3      709            723
+##  9  2013     1     1      557            600        -3      838            846
+## 10  2013     1     1      558            600        -2      753            745
+## # … with 336,766 more rows, and 11 more variables: arr_delay &lt;dbl&gt;,
+## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+<p>In this data frame, data points are grouped by <code>year</code>. Then each <code>year</code> group is subdivided by <code>month</code>. Then each <code>year</code> x <code>month</code> group is subdivided by <code>day</code>. Heirarchical data can be aggregated by each individual level; each aggregation removes the lowest level:</p>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="data-transformation-with-dplyr.html#cb671-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(df, year, month, day) <span class="sc">%&gt;%</span> </span>
+<span id="cb671-2"><a href="data-transformation-with-dplyr.html#cb671-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb671-3"><a href="data-transformation-with-dplyr.html#cb671-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">daily_count =</span> <span class="fu">n</span>()  <span class="co"># counts the number of flights for each year x month x day grouping</span></span>
+<span id="cb671-4"><a href="data-transformation-with-dplyr.html#cb671-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;month&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 365 × 4
+## # Groups:   year, month [12]
+##     year month   day daily_count
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;       &lt;int&gt;
+##  1  2013     1     1         842
+##  2  2013     1     2         943
+##  3  2013     1     3         914
+##  4  2013     1     4         915
+##  5  2013     1     5         720
+##  6  2013     1     6         832
+##  7  2013     1     7         933
+##  8  2013     1     8         899
+##  9  2013     1     9         902
+## 10  2013     1    10         932
+## # … with 355 more rows</code></pre>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="data-transformation-with-dplyr.html#cb674-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(df, year, month, day) <span class="sc">%&gt;%</span> </span>
+<span id="cb674-2"><a href="data-transformation-with-dplyr.html#cb674-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb674-3"><a href="data-transformation-with-dplyr.html#cb674-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">daily_count =</span> <span class="fu">n</span>()</span>
+<span id="cb674-4"><a href="data-transformation-with-dplyr.html#cb674-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb674-5"><a href="data-transformation-with-dplyr.html#cb674-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb674-6"><a href="data-transformation-with-dplyr.html#cb674-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">monthly_count =</span> <span class="fu">sum</span>(daily_count) <span class="co"># counts the number of flights by year x month group</span></span>
+<span id="cb674-7"><a href="data-transformation-with-dplyr.html#cb674-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;month&#39;. You can override using the
+## `.groups` argument.
+## `summarise()` has grouped output by &#39;year&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 12 × 3
+## # Groups:   year [1]
+##     year month monthly_count
+##    &lt;int&gt; &lt;int&gt;         &lt;int&gt;
+##  1  2013     1         27004
+##  2  2013     2         24951
+##  3  2013     3         28834
+##  4  2013     4         28330
+##  5  2013     5         28796
+##  6  2013     6         28243
+##  7  2013     7         29425
+##  8  2013     8         29327
+##  9  2013     9         27574
+## 10  2013    10         28889
+## 11  2013    11         27268
+## 12  2013    12         28135</code></pre>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb677-1"><a href="data-transformation-with-dplyr.html#cb677-1" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(df, year, month, day) <span class="sc">%&gt;%</span> </span>
+<span id="cb677-2"><a href="data-transformation-with-dplyr.html#cb677-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb677-3"><a href="data-transformation-with-dplyr.html#cb677-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">daily_count =</span> <span class="fu">n</span>()</span>
+<span id="cb677-4"><a href="data-transformation-with-dplyr.html#cb677-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb677-5"><a href="data-transformation-with-dplyr.html#cb677-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb677-6"><a href="data-transformation-with-dplyr.html#cb677-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">monthly_count =</span> <span class="fu">sum</span>(daily_count)</span>
+<span id="cb677-7"><a href="data-transformation-with-dplyr.html#cb677-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb677-8"><a href="data-transformation-with-dplyr.html#cb677-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb677-9"><a href="data-transformation-with-dplyr.html#cb677-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">yearly_count =</span> <span class="fu">sum</span>(monthly_count) <span class="co"># counts the number flights in all of 2013</span></span>
+<span id="cb677-10"><a href="data-transformation-with-dplyr.html#cb677-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;month&#39;. You can override using the
+## `.groups` argument.
+## `summarise()` has grouped output by &#39;year&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##    year yearly_count
+##   &lt;int&gt;        &lt;int&gt;
+## 1  2013       336776</code></pre>
+<p><br />
+</p>
+<p>We can leverage <code>group_by()</code> with <code>summarise()</code> but also with the other functions like <code>mutate()</code> and <code>filter()</code>. For example, we can use <code>filter()</code> to find the 5 most delayed flights in the entire data set like so:</p>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="data-transformation-with-dplyr.html#cb680-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df, <span class="fu">rank</span>(<span class="fu">desc</span>(arr_delay))<span class="sc">&lt;=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb680-2"><a href="data-transformation-with-dplyr.html#cb680-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year,month,day,carrier, flight, arr_delay)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 6
+##    year month   day carrier flight arr_delay
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1  2013     1     9 HA          51      1272
+## 2  2013     1    10 MQ        3695      1109
+## 3  2013     6    15 MQ        3535      1127
+## 4  2013     7    22 MQ        3075       989
+## 5  2013     9    20 AA         177      1007</code></pre>
+<p>Since <code>group_by()</code> alters the scope of the <code>filter()</code> function, we can combine this code snippet with <code>group_by()</code> to find the 5 most delayed flights for <em>each day</em>:</p>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="data-transformation-with-dplyr.html#cb682-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, year, month, day, carrier, flight, arr_delay) <span class="sc">%&gt;%</span> </span>
+<span id="cb682-2"><a href="data-transformation-with-dplyr.html#cb682-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month, day) <span class="sc">%&gt;%</span> </span>
+<span id="cb682-3"><a href="data-transformation-with-dplyr.html#cb682-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">rank</span>(<span class="fu">desc</span>(arr_delay))<span class="sc">&lt;=</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 1,805 × 6
+## # Groups:   year, month, day [365]
+##     year month   day carrier flight arr_delay
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt;     &lt;dbl&gt;
+##  1  2013     1     1 MQ        3944       851
+##  2  2013     1     1 EV        4417       338
+##  3  2013     1     1 EV        4633       263
+##  4  2013     1     1 9E        3347       250
+##  5  2013     1     1 EV        4321       456
+##  6  2013     1     2 EV        4364       288
+##  7  2013     1     2 UA         468       323
+##  8  2013     1     2 AA         179       368
+##  9  2013     1     2 UA         488       359
+## 10  2013     1     2 EV        4204       252
+## # … with 1,795 more rows</code></pre>
+<p><br />
+</p>
+<p>The same logic works for <code>mutate()</code> as well. For example, let’s say we wanted to measure the <code>arr_delay</code> times for each flight, controlling for the destination (e.g. we want to measure arrival delays controlling for how busy each airport was on that day). One way to do: group the flights by date and destination, find the mean of each group, then compute how far above or below each flight is from their group’s mean.</p>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="data-transformation-with-dplyr.html#cb684-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df, year, month, day, dest, carrier, flight, arr_delay) <span class="sc">%&gt;%</span></span>
+<span id="cb684-2"><a href="data-transformation-with-dplyr.html#cb684-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month, day, dest) <span class="sc">%&gt;%</span> </span>
+<span id="cb684-3"><a href="data-transformation-with-dplyr.html#cb684-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(<span class="fu">is.na</span>(arr_delay))) <span class="sc">%&gt;%</span> </span>
+<span id="cb684-4"><a href="data-transformation-with-dplyr.html#cb684-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb684-5"><a href="data-transformation-with-dplyr.html#cb684-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">true_delay =</span> arr_delay <span class="sc">-</span> <span class="fu">mean</span>(arr_delay)</span>
+<span id="cb684-6"><a href="data-transformation-with-dplyr.html#cb684-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 327,346 × 8
+## # Groups:   year, month, day, dest [30,984]
+##     year month   day dest  carrier flight arr_delay true_delay
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;    &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1  2013     1     1 IAH   UA        1545        11     -6.85 
+##  2  2013     1     1 IAH   UA        1714        20      2.15 
+##  3  2013     1     1 MIA   AA        1141        33     27.2  
+##  4  2013     1     1 BQN   B6         725       -18     -6.67 
+##  5  2013     1     1 ATL   DL         461       -25    -30.4  
+##  6  2013     1     1 ORD   UA        1696        12     -0.170
+##  7  2013     1     1 FLL   B6         507        19     17.7  
+##  8  2013     1     1 IAD   EV        5708       -14    -32.9  
+##  9  2013     1     1 MCO   B6          79        -8     -6.59 
+## 10  2013     1     1 ORD   AA         301         8     -4.17 
+## # … with 327,336 more rows</code></pre>
+<p>For example, United flight <code>UA 1545</code> actually beat the average arrival delay by 6.85 mins among all flights into Washington Dulles <code>IAH</code> on January 1st, 2013.</p>
+<p><br />
+</p>
+<p><br />
+</p>
+<hr />
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-visualization-ggplot2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exploratory-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/rmd_src/06_data_transformations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

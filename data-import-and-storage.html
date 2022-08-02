@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Data import and storage | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Data import and storage | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Data import and storage | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-data-analysis.html"/>
+<link rel="next" href="modeling.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1</b> Hello, World!</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>1.1</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="1.2" data-path="hello-world.html"><a href="hello-world.html#the-basics"><i class="fa fa-check"></i><b>1.2</b> The Basics</a></li>
+<li class="chapter" data-level="1.3" data-path="hello-world.html"><a href="hello-world.html#data-types"><i class="fa fa-check"></i><b>1.3</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="hello-world.html"><a href="hello-world.html#numerics"><i class="fa fa-check"></i><b>1.3.1</b> Numerics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="hello-world.html"><a href="hello-world.html#integers"><i class="fa fa-check"></i><b>1.3.2</b> Integers</a></li>
+<li class="chapter" data-level="1.3.3" data-path="hello-world.html"><a href="hello-world.html#complex"><i class="fa fa-check"></i><b>1.3.3</b> Complex</a></li>
+<li class="chapter" data-level="1.3.4" data-path="hello-world.html"><a href="hello-world.html#characters"><i class="fa fa-check"></i><b>1.3.4</b> Characters</a></li>
+<li class="chapter" data-level="1.3.5" data-path="hello-world.html"><a href="hello-world.html#logicals"><i class="fa fa-check"></i><b>1.3.5</b> Logicals</a></li>
+<li class="chapter" data-level="1.3.6" data-path="hello-world.html"><a href="hello-world.html#raws"><i class="fa fa-check"></i><b>1.3.6</b> Raws</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="hello-world.html"><a href="hello-world.html#operations"><i class="fa fa-check"></i><b>1.4</b> Operations</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="hello-world.html"><a href="hello-world.html#arithmetic-operations"><i class="fa fa-check"></i><b>1.4.1</b> Arithmetic Operations</a></li>
+<li class="chapter" data-level="1.4.2" data-path="hello-world.html"><a href="hello-world.html#modular-division-and-integer-division"><i class="fa fa-check"></i><b>1.4.2</b> Modular Division and Integer Division</a></li>
+<li class="chapter" data-level="1.4.3" data-path="hello-world.html"><a href="hello-world.html#relational-operators"><i class="fa fa-check"></i><b>1.4.3</b> Relational Operators</a></li>
+<li class="chapter" data-level="1.4.4" data-path="hello-world.html"><a href="hello-world.html#logical-operators"><i class="fa fa-check"></i><b>1.4.4</b> Logical Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="hello-world.html"><a href="hello-world.html#variable-and-function-assignment"><i class="fa fa-check"></i><b>1.5</b> Variable and Function Assignment</a></li>
+<li class="chapter" data-level="1.6" data-path="hello-world.html"><a href="hello-world.html#control-flow"><i class="fa fa-check"></i><b>1.6</b> Control Flow</a></li>
+<li class="chapter" data-level="1.7" data-path="hello-world.html"><a href="hello-world.html#loops"><i class="fa fa-check"></i><b>1.7</b> Loops</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="hello-world.html"><a href="hello-world.html#for-loops"><i class="fa fa-check"></i><b>1.7.1</b> “for” loops</a></li>
+<li class="chapter" data-level="1.7.2" data-path="hello-world.html"><a href="hello-world.html#while-loops"><i class="fa fa-check"></i><b>1.7.2</b> “while” loops</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-data-structures.html"><a href="basic-data-structures.html"><i class="fa fa-check"></i><b>2</b> Basic Data Structures</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#building-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Building Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#accessing-vector-components"><i class="fa fa-check"></i><b>2.1.2</b> Accessing Vector Components</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic-data-structures.html"><a href="basic-data-structures.html#vector-operations"><i class="fa fa-check"></i><b>2.1.3</b> Vector Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.2</b> Lists</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#constructing-lists-and-accessing-elements"><i class="fa fa-check"></i><b>2.2.1</b> Constructing Lists and Accessing Elements</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#look-ups"><i class="fa fa-check"></i><b>2.2.2</b> Look Ups</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-data-structures.html"><a href="basic-data-structures.html#infix-operators"><i class="fa fa-check"></i><b>2.2.3</b> Infix Operators</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basic-data-structures.html"><a href="basic-data-structures.html#inserting-and-removing-list-items"><i class="fa fa-check"></i><b>2.2.4</b> Inserting and Removing List Items</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basic-data-structures.html"><a href="basic-data-structures.html#nested-lists"><i class="fa fa-check"></i><b>2.2.5</b> Nested Lists</a></li>
+<li class="chapter" data-level="2.2.6" data-path="basic-data-structures.html"><a href="basic-data-structures.html#lapply"><i class="fa fa-check"></i><b>2.2.6</b> lapply()</a></li>
+<li class="chapter" data-level="2.2.7" data-path="basic-data-structures.html"><a href="basic-data-structures.html#joining-lists"><i class="fa fa-check"></i><b>2.2.7</b> Joining Lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>3</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices.html"><a href="matrices.html#constructing-matrices"><i class="fa fa-check"></i><b>3.1</b> Constructing Matrices</a></li>
+<li class="chapter" data-level="3.2" data-path="matrices.html"><a href="matrices.html#special-matrices"><i class="fa fa-check"></i><b>3.2</b> Special Matrices</a></li>
+<li class="chapter" data-level="3.3" data-path="matrices.html"><a href="matrices.html#accessing-matrix-entries"><i class="fa fa-check"></i><b>3.3</b> Accessing Matrix Entries</a></li>
+<li class="chapter" data-level="3.4" data-path="matrices.html"><a href="matrices.html#adding-and-removing-rowscolumns"><i class="fa fa-check"></i><b>3.4</b> Adding and Removing Rows/Columns</a></li>
+<li class="chapter" data-level="3.5" data-path="matrices.html"><a href="matrices.html#matrix-operations"><i class="fa fa-check"></i><b>3.5</b> Matrix Operations</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="matrices.html"><a href="matrices.html#addition"><i class="fa fa-check"></i><b>3.5.1</b> Addition</a></li>
+<li class="chapter" data-level="3.5.2" data-path="matrices.html"><a href="matrices.html#scalar-multiplication"><i class="fa fa-check"></i><b>3.5.2</b> Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.5.3" data-path="matrices.html"><a href="matrices.html#hadamard-product"><i class="fa fa-check"></i><b>3.5.3</b> Hadamard Product</a></li>
+<li class="chapter" data-level="3.5.4" data-path="matrices.html"><a href="matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>3.5.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5.5" data-path="matrices.html"><a href="matrices.html#aside-the-magic-of-matrix-multiplication"><i class="fa fa-check"></i><b>3.5.5</b> Aside: The Magic of Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5.6" data-path="matrices.html"><a href="matrices.html#the-determinant"><i class="fa fa-check"></i><b>3.5.6</b> The Determinant</a></li>
+<li class="chapter" data-level="3.5.7" data-path="matrices.html"><a href="matrices.html#inverses"><i class="fa fa-check"></i><b>3.5.7</b> Inverses</a></li>
+<li class="chapter" data-level="3.5.8" data-path="matrices.html"><a href="matrices.html#transpose"><i class="fa fa-check"></i><b>3.5.8</b> Transpose</a></li>
+<li class="chapter" data-level="3.5.9" data-path="matrices.html"><a href="matrices.html#kronecker-product"><i class="fa fa-check"></i><b>3.5.9</b> Kronecker Product</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>4</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-frames.html"><a href="data-frames.html#summary-and-structure"><i class="fa fa-check"></i><b>4.1</b> Summary and Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="data-frames.html"><a href="data-frames.html#extracting-and-subsetting"><i class="fa fa-check"></i><b>4.2</b> Extracting and Subsetting</a></li>
+<li class="chapter" data-level="4.3" data-path="data-frames.html"><a href="data-frames.html#editing-adding-and-removing-columns"><i class="fa fa-check"></i><b>4.3</b> Editing, Adding and Removing Columns</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Data visualization: ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#grammar-of-graphics"><i class="fa fa-check"></i><b>5.1</b> Grammar of graphics</a></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#loading-ggplot2"><i class="fa fa-check"></i><b>5.2</b> Loading ggplot2</a></li>
+<li class="chapter" data-level="5.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#creating-a-ggplot"><i class="fa fa-check"></i><b>5.3</b> Creating a ggplot</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-1-data-mapping-to-aesthetics"><i class="fa fa-check"></i><b>5.3.1</b> Ingredient 1: data mapping to aesthetics</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-2-layers-of-geometric-objects-equipped-with-mappings"><i class="fa fa-check"></i><b>5.3.2</b> Ingredient 2: layers of geometric objects equipped with mappings</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-3-scales"><i class="fa fa-check"></i><b>5.3.3</b> Ingredient 3: scales</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-4-a-coordinate-system"><i class="fa fa-check"></i><b>5.3.4</b> Ingredient 4: a coordinate system</a></li>
+<li class="chapter" data-level="5.3.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-5-a-facet-specification"><i class="fa fa-check"></i><b>5.3.5</b> Ingredient 5: a facet specification</a></li>
+<li class="chapter" data-level="5.3.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#overwriting-data"><i class="fa fa-check"></i><b>5.3.6</b> Overwriting data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#statistical-transformations"><i class="fa fa-check"></i><b>5.4</b> Statistical Transformations</a></li>
+<li class="chapter" data-level="5.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#position"><i class="fa fa-check"></i><b>5.5</b> Position</a></li>
+<li class="chapter" data-level="5.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#the-anatomy-of-a-graphic"><i class="fa fa-check"></i><b>5.6</b> The anatomy of a graphic</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>6</b> Data transformation with <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-rows-with-filter"><i class="fa fa-check"></i><b>6.2</b> Filtering rows with <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-conditions"><i class="fa fa-check"></i><b>6.2.1</b> Filtering conditions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#dealing-with-missing-values"><i class="fa fa-check"></i><b>6.2.2</b> Dealing with missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#arrange-rows-with-arrange"><i class="fa fa-check"></i><b>6.3</b> Arrange rows with <code>arrange()</code></a></li>
+<li class="chapter" data-level="6.4" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#select-columns-with-select"><i class="fa fa-check"></i><b>6.4</b> Select columns with <code>select()</code></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#helper-functions"><i class="fa fa-check"></i><b>6.4.1</b> Helper functions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#renaming-columns"><i class="fa fa-check"></i><b>6.4.2</b> Renaming columns</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#add-new-variables-with-mutate"><i class="fa fa-check"></i><b>6.5</b> Add new variables with <code>mutate()</code></a></li>
+<li class="chapter" data-level="6.6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-summaries-with-summarise-and-group_by"><i class="fa fa-check"></i><b>6.6</b> Grouped summaries with <code>summarise()</code> and <code>group_by()</code></a></li>
+<li class="chapter" data-level="6.7" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#an-example-analysis"><i class="fa fa-check"></i><b>6.7</b> An example analysis</a></li>
+<li class="chapter" data-level="6.8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#the-pipe-operator"><i class="fa fa-check"></i><b>6.8</b> The pipe operator <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="6.9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#data-heirarchy-with-group_by"><i class="fa fa-check"></i><b>6.9</b> Data heirarchy with <code>group_by()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-process-of-eda"><i class="fa fa-check"></i><b>7.1</b> The process of EDA</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions-of-variation"><i class="fa fa-check"></i><b>7.3</b> Questions of variation</a></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions-of-covariation"><i class="fa fa-check"></i><b>7.4</b> Questions of covariation</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values"><i class="fa fa-check"></i><b>7.5</b> Missing values</a></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#patterns-and-models"><i class="fa fa-check"></i><b>7.6</b> Patterns and models</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html"><i class="fa fa-check"></i><b>8</b> Data import and storage</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#tibbles"><i class="fa fa-check"></i><b>8.1</b> Tibbles</a></li>
+<li class="chapter" data-level="8.2" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#data-import"><i class="fa fa-check"></i><b>8.2</b> Data import</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>9</b> Modeling</a></li>
+<li class="chapter" data-level="10" data-path="linear-regression-models.html"><a href="linear-regression-models.html"><i class="fa fa-check"></i><b>10</b> Linear Regression Models</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-import-and-storage" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Data import and storage<a href="data-import-and-storage.html#data-import-and-storage" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="tibbles" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Tibbles<a href="data-import-and-storage.html#tibbles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The tidyverse uses <code>tibble</code> objects to store data. Tibbles are data frames with some tweaks. In this chapter, we’ll play around with tibbles to understand their properties and advantages.</p>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="data-import-and-storage.html#cb709-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p><br />
+</p>
+<p>First we should talk about how to create a tibble. The easiest approach is to convert an existing <code>data.frame</code> object into a tibble. This can be done with the <code>as_tibble()</code> function:</p>
+<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="data-import-and-storage.html#cb710-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(iris)</span></code></pre></div>
+<pre><code>## # A tibble: 150 × 5
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+##  1          5.1         3.5          1.4         0.2 setosa 
+##  2          4.9         3            1.4         0.2 setosa 
+##  3          4.7         3.2          1.3         0.2 setosa 
+##  4          4.6         3.1          1.5         0.2 setosa 
+##  5          5           3.6          1.4         0.2 setosa 
+##  6          5.4         3.9          1.7         0.4 setosa 
+##  7          4.6         3.4          1.4         0.3 setosa 
+##  8          5           3.4          1.5         0.2 setosa 
+##  9          4.4         2.9          1.4         0.2 setosa 
+## 10          4.9         3.1          1.5         0.1 setosa 
+## # … with 140 more rows</code></pre>
+<p><br />
+</p>
+<p>If we want to create a new tibble from scratch, we can use the <code>tibble()</code> constructor function. The <code>tibble()</code> function takes vectors as the inputs for the columns.</p>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb712-1"><a href="data-import-and-storage.html#cb712-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb712-2"><a href="data-import-and-storage.html#cb712-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">8</span>),</span>
+<span id="cb712-3"><a href="data-import-and-storage.html#cb712-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb712-4"><a href="data-import-and-storage.html#cb712-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">z =</span> x<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>y</span>
+<span id="cb712-5"><a href="data-import-and-storage.html#cb712-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##       x     y     z
+##   &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
+## 1     1     2     5
+## 2     1     3     7
+## 3     2     4    10
+## 4     3     5    13
+## 5     8     6    20</code></pre>
+<p>We can use <strong>backticks</strong> if we need to use non-syntactic column names:</p>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="data-import-and-storage.html#cb714-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb714-2"><a href="data-import-and-storage.html#cb714-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;_non&#39;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">8</span>),</span>
+<span id="cb714-3"><a href="data-import-and-storage.html#cb714-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39; valid&#39;</span> <span class="ot">=</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb714-4"><a href="data-import-and-storage.html#cb714-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;:)&#39;</span> <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb714-5"><a href="data-import-and-storage.html#cb714-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   `_non` ` valid`  `:)`
+##    &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;
+## 1      1        2     0
+## 2      1        3     0
+## 3      2        4     0
+## 4      3        5     0
+## 5      8        6     0</code></pre>
+<p><br />
+</p>
+<p>The <code>tibble()</code> constructor takes the inputted vectors as columns. We can also construct a tibble row-by-row using the <code>tribble()</code> constructor function:</p>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="data-import-and-storage.html#cb716-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tribble</span>(</span>
+<span id="cb716-2"><a href="data-import-and-storage.html#cb716-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>name, <span class="sc">~</span>pts, <span class="sc">~</span>turnovers,</span>
+<span id="cb716-3"><a href="data-import-and-storage.html#cb716-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;john&quot;</span>, <span class="dv">12</span>, <span class="dv">4</span>,</span>
+<span id="cb716-4"><a href="data-import-and-storage.html#cb716-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;mary&quot;</span>, <span class="dv">14</span>, <span class="dv">4</span>,</span>
+<span id="cb716-5"><a href="data-import-and-storage.html#cb716-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;elijah&quot;</span>, <span class="dv">8</span>, <span class="dv">0</span>,</span>
+<span id="cb716-6"><a href="data-import-and-storage.html#cb716-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;alice&quot;</span>, <span class="dv">20</span>, <span class="dv">5</span></span>
+<span id="cb716-7"><a href="data-import-and-storage.html#cb716-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   name     pts turnovers
+##   &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+## 1 john      12         4
+## 2 mary      14         4
+## 3 elijah     8         0
+## 4 alice     20         5</code></pre>
+<p><br />
+</p>
+<p>So what separates a <code>tibble</code> from a <code>data.frame</code> and why should we use tibbles instead? The major difference is subsetting: tibbles will never do partial matching for column names and will always generate a warning when accessing a column that does not exist. This makes it easy to catch typos and errors when writing code.</p>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="data-import-and-storage.html#cb718-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb718-2"><a href="data-import-and-storage.html#cb718-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">first =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb718-3"><a href="data-import-and-storage.html#cb718-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">second =</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">14</span>,</span>
+<span id="cb718-4"><a href="data-import-and-storage.html#cb718-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">third =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb718-5"><a href="data-import-and-storage.html#cb718-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb718-6"><a href="data-import-and-storage.html#cb718-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb718-7"><a href="data-import-and-storage.html#cb718-7" aria-hidden="true" tabindex="-1"></a><span class="co"># no warning is generated on mis-typed column name</span></span>
+<span id="cb718-8"><a href="data-import-and-storage.html#cb718-8" aria-hidden="true" tabindex="-1"></a>my_df<span class="sc">$</span>fist</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb720-1"><a href="data-import-and-storage.html#cb720-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb720-2"><a href="data-import-and-storage.html#cb720-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">first =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb720-3"><a href="data-import-and-storage.html#cb720-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">second =</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">14</span>,</span>
+<span id="cb720-4"><a href="data-import-and-storage.html#cb720-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">third =</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb720-5"><a href="data-import-and-storage.html#cb720-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb720-6"><a href="data-import-and-storage.html#cb720-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb720-7"><a href="data-import-and-storage.html#cb720-7" aria-hidden="true" tabindex="-1"></a><span class="co"># warning generated on mistyped column name</span></span>
+<span id="cb720-8"><a href="data-import-and-storage.html#cb720-8" aria-hidden="true" tabindex="-1"></a>my_tibble<span class="sc">$</span>fist</span></code></pre></div>
+<pre><code>## Warning: Unknown or uninitialised column: `fist`.</code></pre>
+<pre><code>## NULL</code></pre>
+<p><br />
+</p>
+</div>
+<div id="data-import" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Data import<a href="data-import-and-storage.html#data-import" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now that we have a way to store data, the next thing to understand is how to import data from outside files into R. The main package used to read files into R is the <code>readr</code> package which comes in the tidyverse bundle.</p>
+<p>The <code>readr</code> function we will use depends on the type of data file we are trying to read. For example, the <code>read_csv()</code> function reads in comma separated (csv) files, where the comma <code>,</code> is used as a delimiter.</p>
+<p>To read a csv file, we input file path to <code>read_csv()</code>. We can also just play around with <code>read_csv()</code> by supplying an inline argument:</p>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="data-import-and-storage.html#cb723-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb723-2"><a href="data-import-and-storage.html#cb723-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;x,y,z</span></span>
+<span id="cb723-3"><a href="data-import-and-storage.html#cb723-3" aria-hidden="true" tabindex="-1"></a><span class="st">  1,2,3</span></span>
+<span id="cb723-4"><a href="data-import-and-storage.html#cb723-4" aria-hidden="true" tabindex="-1"></a><span class="st">  4,5,6</span></span>
+<span id="cb723-5"><a href="data-import-and-storage.html#cb723-5" aria-hidden="true" tabindex="-1"></a><span class="st">  7,8,9&quot;</span></span>
+<span id="cb723-6"><a href="data-import-and-storage.html#cb723-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Rows: 3 Columns: 3
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (3): x, y, z
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##       x     y     z
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     2     3
+## 2     4     5     6
+## 3     7     8     9</code></pre>
+<p>Notice that <code>read_csv()</code> always reads the first row of the file as a header (column names). If we wanted to read-in the first row as actual values, we can use set the <code>col_names</code> parameter to <code>FALSE</code>.</p>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="data-import-and-storage.html#cb726-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb726-2"><a href="data-import-and-storage.html#cb726-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;x,y,z</span></span>
+<span id="cb726-3"><a href="data-import-and-storage.html#cb726-3" aria-hidden="true" tabindex="-1"></a><span class="st">  1,2,3</span></span>
+<span id="cb726-4"><a href="data-import-and-storage.html#cb726-4" aria-hidden="true" tabindex="-1"></a><span class="st">  4,5,6</span></span>
+<span id="cb726-5"><a href="data-import-and-storage.html#cb726-5" aria-hidden="true" tabindex="-1"></a><span class="st">  7,8,9&quot;</span>,</span>
+<span id="cb726-6"><a href="data-import-and-storage.html#cb726-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="cn">FALSE</span></span>
+<span id="cb726-7"><a href="data-import-and-storage.html#cb726-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Rows: 4 Columns: 3
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (3): X1, X2, X3
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   X1    X2    X3   
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 x     y     z    
+## 2 1     2     3    
+## 3 4     5     6    
+## 4 7     8     9</code></pre>
+<p><strong>Notice:</strong> the function <code>read_csv()</code> automatically tries to infer the data type of each column.
+* In the first example, the row <code>"x,y,z"</code> was a header, so the values were <code>"1,2,3"</code>, <code>"4,5,6"</code> and <code>"7,8,9"</code> which was inferred as numerical data.
+* In the second example, the row <code>"x,y,z"</code> was no longer a header and read-in as values, so the function inferred a character data type.</p>
+<p>If the data set is missing a header, we can pass a vector of column names to use as the header:</p>
+<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="data-import-and-storage.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb729-2"><a href="data-import-and-storage.html#cb729-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;0,0,0</span></span>
+<span id="cb729-3"><a href="data-import-and-storage.html#cb729-3" aria-hidden="true" tabindex="-1"></a><span class="st">  1,2,3</span></span>
+<span id="cb729-4"><a href="data-import-and-storage.html#cb729-4" aria-hidden="true" tabindex="-1"></a><span class="st">  4,5,6</span></span>
+<span id="cb729-5"><a href="data-import-and-storage.html#cb729-5" aria-hidden="true" tabindex="-1"></a><span class="st">  7,8,9&quot;</span>,</span>
+<span id="cb729-6"><a href="data-import-and-storage.html#cb729-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>)</span>
+<span id="cb729-7"><a href="data-import-and-storage.html#cb729-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Rows: 4 Columns: 3
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (3): x, y, z
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##       x     y     z
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0     0     0
+## 2     1     2     3
+## 3     4     5     6
+## 4     7     8     9</code></pre>
+<p><br />
+</p>
+<p>Sometimes, raw data files will have a few lines of metadata at the top. We can tell <code>read_csv()</code> to skip these lines by using the <code>skip</code> parameter</p>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="data-import-and-storage.html#cb732-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb732-2"><a href="data-import-and-storage.html#cb732-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;This csv file contains the age and height of 5 people.</span></span>
+<span id="cb732-3"><a href="data-import-and-storage.html#cb732-3" aria-hidden="true" tabindex="-1"></a><span class="st">  Height is given in inches.</span></span>
+<span id="cb732-4"><a href="data-import-and-storage.html#cb732-4" aria-hidden="true" tabindex="-1"></a><span class="st">  name, age, height</span></span>
+<span id="cb732-5"><a href="data-import-and-storage.html#cb732-5" aria-hidden="true" tabindex="-1"></a><span class="st">  john, 23, 61</span></span>
+<span id="cb732-6"><a href="data-import-and-storage.html#cb732-6" aria-hidden="true" tabindex="-1"></a><span class="st">  silvia, 25, 58</span></span>
+<span id="cb732-7"><a href="data-import-and-storage.html#cb732-7" aria-hidden="true" tabindex="-1"></a><span class="st">  alison, 22, 59</span></span>
+<span id="cb732-8"><a href="data-import-and-storage.html#cb732-8" aria-hidden="true" tabindex="-1"></a><span class="st">  james, 24, 56</span></span>
+<span id="cb732-9"><a href="data-import-and-storage.html#cb732-9" aria-hidden="true" tabindex="-1"></a><span class="st">  francine, 22, 56</span></span>
+<span id="cb732-10"><a href="data-import-and-storage.html#cb732-10" aria-hidden="true" tabindex="-1"></a><span class="st">  &quot;</span>,</span>
+<span id="cb732-11"><a href="data-import-and-storage.html#cb732-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">2</span></span>
+<span id="cb732-12"><a href="data-import-and-storage.html#cb732-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Rows: 5 Columns: 3
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): name
+## dbl (2): age, height
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## # A tibble: 5 × 3
+##   name       age height
+##   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+## 1 john        23     61
+## 2 silvia      25     58
+## 3 alison      22     59
+## 4 james       24     56
+## 5 francine    22     56</code></pre>
+<p><br />
+</p>
+<p>One more basic thing to know is the <code>na</code> parameter, which tells <code>read_csv()</code> how to detect for missing values.</p>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="data-import-and-storage.html#cb735-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(</span>
+<span id="cb735-2"><a href="data-import-and-storage.html#cb735-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;x,y,z</span></span>
+<span id="cb735-3"><a href="data-import-and-storage.html#cb735-3" aria-hidden="true" tabindex="-1"></a><span class="st">  1,.,3</span></span>
+<span id="cb735-4"><a href="data-import-and-storage.html#cb735-4" aria-hidden="true" tabindex="-1"></a><span class="st">  4,5,.</span></span>
+<span id="cb735-5"><a href="data-import-and-storage.html#cb735-5" aria-hidden="true" tabindex="-1"></a><span class="st">  .,.,9&quot;</span>,</span>
+<span id="cb735-6"><a href="data-import-and-storage.html#cb735-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">&#39;.&#39;</span></span>
+<span id="cb735-7"><a href="data-import-and-storage.html#cb735-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Rows: 3 Columns: 3
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (3): x, y, z
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##       x     y     z
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    NA     3
+## 2     4     5    NA
+## 3    NA    NA     9</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/rmd_src/08_data_import_storage.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

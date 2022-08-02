@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Matrices | _main.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Matrices | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Matrices | _main.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basic-data-structures.html"/>
+<link rel="next" href="data-frames.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="hello-world.html"><a href="hello-world.html"><i class="fa fa-check"></i><b>1</b> Hello, World!</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="hello-world.html"><a href="hello-world.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>1.1</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="1.2" data-path="hello-world.html"><a href="hello-world.html#the-basics"><i class="fa fa-check"></i><b>1.2</b> The Basics</a></li>
+<li class="chapter" data-level="1.3" data-path="hello-world.html"><a href="hello-world.html#data-types"><i class="fa fa-check"></i><b>1.3</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="hello-world.html"><a href="hello-world.html#numerics"><i class="fa fa-check"></i><b>1.3.1</b> Numerics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="hello-world.html"><a href="hello-world.html#integers"><i class="fa fa-check"></i><b>1.3.2</b> Integers</a></li>
+<li class="chapter" data-level="1.3.3" data-path="hello-world.html"><a href="hello-world.html#complex"><i class="fa fa-check"></i><b>1.3.3</b> Complex</a></li>
+<li class="chapter" data-level="1.3.4" data-path="hello-world.html"><a href="hello-world.html#characters"><i class="fa fa-check"></i><b>1.3.4</b> Characters</a></li>
+<li class="chapter" data-level="1.3.5" data-path="hello-world.html"><a href="hello-world.html#logicals"><i class="fa fa-check"></i><b>1.3.5</b> Logicals</a></li>
+<li class="chapter" data-level="1.3.6" data-path="hello-world.html"><a href="hello-world.html#raws"><i class="fa fa-check"></i><b>1.3.6</b> Raws</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="hello-world.html"><a href="hello-world.html#operations"><i class="fa fa-check"></i><b>1.4</b> Operations</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="hello-world.html"><a href="hello-world.html#arithmetic-operations"><i class="fa fa-check"></i><b>1.4.1</b> Arithmetic Operations</a></li>
+<li class="chapter" data-level="1.4.2" data-path="hello-world.html"><a href="hello-world.html#modular-division-and-integer-division"><i class="fa fa-check"></i><b>1.4.2</b> Modular Division and Integer Division</a></li>
+<li class="chapter" data-level="1.4.3" data-path="hello-world.html"><a href="hello-world.html#relational-operators"><i class="fa fa-check"></i><b>1.4.3</b> Relational Operators</a></li>
+<li class="chapter" data-level="1.4.4" data-path="hello-world.html"><a href="hello-world.html#logical-operators"><i class="fa fa-check"></i><b>1.4.4</b> Logical Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="hello-world.html"><a href="hello-world.html#variable-and-function-assignment"><i class="fa fa-check"></i><b>1.5</b> Variable and Function Assignment</a></li>
+<li class="chapter" data-level="1.6" data-path="hello-world.html"><a href="hello-world.html#control-flow"><i class="fa fa-check"></i><b>1.6</b> Control Flow</a></li>
+<li class="chapter" data-level="1.7" data-path="hello-world.html"><a href="hello-world.html#loops"><i class="fa fa-check"></i><b>1.7</b> Loops</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="hello-world.html"><a href="hello-world.html#for-loops"><i class="fa fa-check"></i><b>1.7.1</b> “for” loops</a></li>
+<li class="chapter" data-level="1.7.2" data-path="hello-world.html"><a href="hello-world.html#while-loops"><i class="fa fa-check"></i><b>1.7.2</b> “while” loops</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-data-structures.html"><a href="basic-data-structures.html"><i class="fa fa-check"></i><b>2</b> Basic Data Structures</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#vectors"><i class="fa fa-check"></i><b>2.1</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#building-vectors"><i class="fa fa-check"></i><b>2.1.1</b> Building Vectors</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#accessing-vector-components"><i class="fa fa-check"></i><b>2.1.2</b> Accessing Vector Components</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basic-data-structures.html"><a href="basic-data-structures.html#vector-operations"><i class="fa fa-check"></i><b>2.1.3</b> Vector Operations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.2</b> Lists</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basic-data-structures.html"><a href="basic-data-structures.html#constructing-lists-and-accessing-elements"><i class="fa fa-check"></i><b>2.2.1</b> Constructing Lists and Accessing Elements</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basic-data-structures.html"><a href="basic-data-structures.html#look-ups"><i class="fa fa-check"></i><b>2.2.2</b> Look Ups</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basic-data-structures.html"><a href="basic-data-structures.html#infix-operators"><i class="fa fa-check"></i><b>2.2.3</b> Infix Operators</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basic-data-structures.html"><a href="basic-data-structures.html#inserting-and-removing-list-items"><i class="fa fa-check"></i><b>2.2.4</b> Inserting and Removing List Items</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basic-data-structures.html"><a href="basic-data-structures.html#nested-lists"><i class="fa fa-check"></i><b>2.2.5</b> Nested Lists</a></li>
+<li class="chapter" data-level="2.2.6" data-path="basic-data-structures.html"><a href="basic-data-structures.html#lapply"><i class="fa fa-check"></i><b>2.2.6</b> lapply()</a></li>
+<li class="chapter" data-level="2.2.7" data-path="basic-data-structures.html"><a href="basic-data-structures.html#joining-lists"><i class="fa fa-check"></i><b>2.2.7</b> Joining Lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>3</b> Matrices</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="matrices.html"><a href="matrices.html#constructing-matrices"><i class="fa fa-check"></i><b>3.1</b> Constructing Matrices</a></li>
+<li class="chapter" data-level="3.2" data-path="matrices.html"><a href="matrices.html#special-matrices"><i class="fa fa-check"></i><b>3.2</b> Special Matrices</a></li>
+<li class="chapter" data-level="3.3" data-path="matrices.html"><a href="matrices.html#accessing-matrix-entries"><i class="fa fa-check"></i><b>3.3</b> Accessing Matrix Entries</a></li>
+<li class="chapter" data-level="3.4" data-path="matrices.html"><a href="matrices.html#adding-and-removing-rowscolumns"><i class="fa fa-check"></i><b>3.4</b> Adding and Removing Rows/Columns</a></li>
+<li class="chapter" data-level="3.5" data-path="matrices.html"><a href="matrices.html#matrix-operations"><i class="fa fa-check"></i><b>3.5</b> Matrix Operations</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="matrices.html"><a href="matrices.html#addition"><i class="fa fa-check"></i><b>3.5.1</b> Addition</a></li>
+<li class="chapter" data-level="3.5.2" data-path="matrices.html"><a href="matrices.html#scalar-multiplication"><i class="fa fa-check"></i><b>3.5.2</b> Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.5.3" data-path="matrices.html"><a href="matrices.html#hadamard-product"><i class="fa fa-check"></i><b>3.5.3</b> Hadamard Product</a></li>
+<li class="chapter" data-level="3.5.4" data-path="matrices.html"><a href="matrices.html#matrix-multiplication"><i class="fa fa-check"></i><b>3.5.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5.5" data-path="matrices.html"><a href="matrices.html#aside-the-magic-of-matrix-multiplication"><i class="fa fa-check"></i><b>3.5.5</b> Aside: The Magic of Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5.6" data-path="matrices.html"><a href="matrices.html#the-determinant"><i class="fa fa-check"></i><b>3.5.6</b> The Determinant</a></li>
+<li class="chapter" data-level="3.5.7" data-path="matrices.html"><a href="matrices.html#inverses"><i class="fa fa-check"></i><b>3.5.7</b> Inverses</a></li>
+<li class="chapter" data-level="3.5.8" data-path="matrices.html"><a href="matrices.html#transpose"><i class="fa fa-check"></i><b>3.5.8</b> Transpose</a></li>
+<li class="chapter" data-level="3.5.9" data-path="matrices.html"><a href="matrices.html#kronecker-product"><i class="fa fa-check"></i><b>3.5.9</b> Kronecker Product</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>4</b> Data Frames</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="data-frames.html"><a href="data-frames.html#summary-and-structure"><i class="fa fa-check"></i><b>4.1</b> Summary and Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="data-frames.html"><a href="data-frames.html#extracting-and-subsetting"><i class="fa fa-check"></i><b>4.2</b> Extracting and Subsetting</a></li>
+<li class="chapter" data-level="4.3" data-path="data-frames.html"><a href="data-frames.html#editing-adding-and-removing-columns"><i class="fa fa-check"></i><b>4.3</b> Editing, Adding and Removing Columns</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Data visualization: ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#grammar-of-graphics"><i class="fa fa-check"></i><b>5.1</b> Grammar of graphics</a></li>
+<li class="chapter" data-level="5.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#loading-ggplot2"><i class="fa fa-check"></i><b>5.2</b> Loading ggplot2</a></li>
+<li class="chapter" data-level="5.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#creating-a-ggplot"><i class="fa fa-check"></i><b>5.3</b> Creating a ggplot</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-1-data-mapping-to-aesthetics"><i class="fa fa-check"></i><b>5.3.1</b> Ingredient 1: data mapping to aesthetics</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-2-layers-of-geometric-objects-equipped-with-mappings"><i class="fa fa-check"></i><b>5.3.2</b> Ingredient 2: layers of geometric objects equipped with mappings</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-3-scales"><i class="fa fa-check"></i><b>5.3.3</b> Ingredient 3: scales</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-4-a-coordinate-system"><i class="fa fa-check"></i><b>5.3.4</b> Ingredient 4: a coordinate system</a></li>
+<li class="chapter" data-level="5.3.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#ingredient-5-a-facet-specification"><i class="fa fa-check"></i><b>5.3.5</b> Ingredient 5: a facet specification</a></li>
+<li class="chapter" data-level="5.3.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#overwriting-data"><i class="fa fa-check"></i><b>5.3.6</b> Overwriting data</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#statistical-transformations"><i class="fa fa-check"></i><b>5.4</b> Statistical Transformations</a></li>
+<li class="chapter" data-level="5.5" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#position"><i class="fa fa-check"></i><b>5.5</b> Position</a></li>
+<li class="chapter" data-level="5.6" data-path="data-visualization-ggplot2.html"><a href="data-visualization-ggplot2.html#the-anatomy-of-a-graphic"><i class="fa fa-check"></i><b>5.6</b> The anatomy of a graphic</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html"><i class="fa fa-check"></i><b>6</b> Data transformation with <code>dplyr</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-rows-with-filter"><i class="fa fa-check"></i><b>6.2</b> Filtering rows with <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#filtering-conditions"><i class="fa fa-check"></i><b>6.2.1</b> Filtering conditions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#dealing-with-missing-values"><i class="fa fa-check"></i><b>6.2.2</b> Dealing with missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#arrange-rows-with-arrange"><i class="fa fa-check"></i><b>6.3</b> Arrange rows with <code>arrange()</code></a></li>
+<li class="chapter" data-level="6.4" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#select-columns-with-select"><i class="fa fa-check"></i><b>6.4</b> Select columns with <code>select()</code></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#helper-functions"><i class="fa fa-check"></i><b>6.4.1</b> Helper functions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#renaming-columns"><i class="fa fa-check"></i><b>6.4.2</b> Renaming columns</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#add-new-variables-with-mutate"><i class="fa fa-check"></i><b>6.5</b> Add new variables with <code>mutate()</code></a></li>
+<li class="chapter" data-level="6.6" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#grouped-summaries-with-summarise-and-group_by"><i class="fa fa-check"></i><b>6.6</b> Grouped summaries with <code>summarise()</code> and <code>group_by()</code></a></li>
+<li class="chapter" data-level="6.7" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#an-example-analysis"><i class="fa fa-check"></i><b>6.7</b> An example analysis</a></li>
+<li class="chapter" data-level="6.8" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#the-pipe-operator"><i class="fa fa-check"></i><b>6.8</b> The pipe operator <code>%&gt;%</code></a></li>
+<li class="chapter" data-level="6.9" data-path="data-transformation-with-dplyr.html"><a href="data-transformation-with-dplyr.html#data-heirarchy-with-group_by"><i class="fa fa-check"></i><b>6.9</b> Data heirarchy with <code>group_by()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#the-process-of-eda"><i class="fa fa-check"></i><b>7.1</b> The process of EDA</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions-of-variation"><i class="fa fa-check"></i><b>7.3</b> Questions of variation</a></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions-of-covariation"><i class="fa fa-check"></i><b>7.4</b> Questions of covariation</a></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values"><i class="fa fa-check"></i><b>7.5</b> Missing values</a></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#patterns-and-models"><i class="fa fa-check"></i><b>7.6</b> Patterns and models</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html"><i class="fa fa-check"></i><b>8</b> Data import and storage</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#tibbles"><i class="fa fa-check"></i><b>8.1</b> Tibbles</a></li>
+<li class="chapter" data-level="8.2" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#data-import"><i class="fa fa-check"></i><b>8.2</b> Data import</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>9</b> Modeling</a></li>
+<li class="chapter" data-level="10" data-path="linear-regression-models.html"><a href="linear-regression-models.html"><i class="fa fa-check"></i><b>10</b> Linear Regression Models</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="matrices" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Matrices<a href="matrices.html#matrices" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>A <strong>matrix</strong> is just a sequence of vectors. Better yet, a matrix is just a <em>vector of vectors</em>.</p>
+<p><br />
+</p>
+<div id="constructing-matrices" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Constructing Matrices<a href="matrices.html#constructing-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Unfortunately, if we try to define it as such in R, we just end up concatenating the vectors:</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="matrices.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define three vectors</span></span>
+<span id="cb245-2"><a href="matrices.html#cb245-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb245-3"><a href="matrices.html#cb245-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb245-4"><a href="matrices.html#cb245-4" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb245-5"><a href="matrices.html#cb245-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-6"><a href="matrices.html#cb245-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create a &quot;vector of vectors&quot;</span></span>
+<span id="cb245-7"><a href="matrices.html#cb245-7" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">c</span>(v, u, w)</span>
+<span id="cb245-8"><a href="matrices.html#cb245-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-9"><a href="matrices.html#cb245-9" aria-hidden="true" tabindex="-1"></a><span class="co"># result is a single, concatenated vector</span></span>
+<span id="cb245-10"><a href="matrices.html#cb245-10" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5 6</code></pre>
+<p><br />
+</p>
+<p>To build an actual matrix, the proper syntax is to use the <code>matrix()</code> function. The arguments we need to pass are:</p>
+<ol style="list-style-type: decimal">
+<li>a vector of values <code>c(a_11, a_12, ..., a_mn)</code>.</li>
+<li>the number of rows desired <code>m</code>.</li>
+<li>the number of columns desired <code>n</code></li>
+</ol>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="matrices.html#cb247-1" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb247-2"><a href="matrices.html#cb247-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb247-3"><a href="matrices.html#cb247-3" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<p><br />
+</p>
+<p><strong>Note:</strong> <code>matrix()</code> is functionally equivalent to the <code>reshape()</code> method in NumPy for a 1d-array to a nd-array.</p>
+<p>Notice what R is doing: it is recognizing that the <em>columns</em> of the matrix should be size 3, so R takes the long vector <code>c(1,2,3,4,5,6)</code> into 2 sub-vectors <code>c(1,2,3)</code> and <code>c(4,5,6)</code> of length 3. It then uses these two vectors as the columns of the resulting matrix.</p>
+<p>If we wanted R to make the splits by the <em>row</em> size of 2 instead, we specify this in the <code>byrow=TRUE</code> parameter:</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="matrices.html#cb249-1" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb249-2"><a href="matrices.html#cb249-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-3"><a href="matrices.html#cb249-3" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4
+## [3,]    5    6</code></pre>
+<p><br />
+</p>
+<p>Notice in this case, R recognizes that the <em>rows</em> of the matrix should be size 2, so R takes <code>c(1,2,3,4,5,6)</code> and splits it into vectors of size 2: <code>c(1,2)</code>, <code>c(3,4)</code>, <code>c(5,6)</code> and uses these as the rows of the resulting matrix.</p>
+<p><br />
+</p>
+</div>
+<div id="special-matrices" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Special Matrices<a href="matrices.html#special-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Linear algebra</strong> is the algebra of matrices and vectors. On arbitrary matrices and vectors, linear algebra can get rather obnoxious but there are certain “special” matrices for which linear algebra is very pleasant and, ultimately, easy. In this section, we will list out some of the most important special matrices and shortcuts for building. We wait until section 3.3.5 Matrix Operations to explain why these matrices are actually special.</p>
+<p>The first kind of special matrices are the <strong>zero matrices</strong>, which are just matrices of all 0 entries. Zero matrices can be constructed in R very quickly by passing the value <code>0</code> as the input vector:</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="matrices.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># construct a 7 x 10 zero matrix</span></span>
+<span id="cb251-2"><a href="matrices.html#cb251-2" aria-hidden="true" tabindex="-1"></a>zero <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span><span class="dv">7</span>, <span class="at">ncol=</span><span class="dv">10</span>)</span>
+<span id="cb251-3"><a href="matrices.html#cb251-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-4"><a href="matrices.html#cb251-4" aria-hidden="true" tabindex="-1"></a>zero</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]    0    0    0    0    0    0    0    0    0     0
+## [2,]    0    0    0    0    0    0    0    0    0     0
+## [3,]    0    0    0    0    0    0    0    0    0     0
+## [4,]    0    0    0    0    0    0    0    0    0     0
+## [5,]    0    0    0    0    0    0    0    0    0     0
+## [6,]    0    0    0    0    0    0    0    0    0     0
+## [7,]    0    0    0    0    0    0    0    0    0     0</code></pre>
+<p><br />
+</p>
+<p>The second kind of special matrices are the <strong>all-ones matrices</strong>. Like the name suggests, these matrices have all 1’s in their entries.</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="matrices.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 5 x 6 matrix of all-ones</span></span>
+<span id="cb253-2"><a href="matrices.html#cb253-2" aria-hidden="true" tabindex="-1"></a>ones <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow=</span><span class="dv">5</span>, <span class="at">ncol=</span><span class="dv">6</span>)</span>
+<span id="cb253-3"><a href="matrices.html#cb253-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-4"><a href="matrices.html#cb253-4" aria-hidden="true" tabindex="-1"></a>ones</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    1    1    1    1    1
+## [2,]    1    1    1    1    1    1
+## [3,]    1    1    1    1    1    1
+## [4,]    1    1    1    1    1    1
+## [5,]    1    1    1    1    1    1</code></pre>
+<p><br />
+The third kind of special matrix are the <strong>diagonal matrices</strong>. A diagonal matrix is a square matrix with 0’s on the off-diagonal entries. Diagonal matrices can be constructed in R using the <code>diag()</code> function</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="matrices.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 5x5 diagonal matrix</span></span>
+<span id="cb255-2"><a href="matrices.html#cb255-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="sc">-</span><span class="dv">3</span>,<span class="dv">4</span>,<span class="sc">-</span><span class="dv">5</span>))</span>
+<span id="cb255-3"><a href="matrices.html#cb255-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-4"><a href="matrices.html#cb255-4" aria-hidden="true" tabindex="-1"></a>D</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]   -1    0    0    0    0
+## [2,]    0    2    0    0    0
+## [3,]    0    0   -3    0    0
+## [4,]    0    0    0    4    0
+## [5,]    0    0    0    0   -5</code></pre>
+<p><br />
+</p>
+<p>Of the diagonal matrices, there is a subset of matrices that are extra special. These are the <strong>identity matrices</strong> which are diagonal matrices whose diagonal entries are all 1. Identity matrices can be constructed quickly using the following syntax:</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="matrices.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the 5x5 identity matrix</span></span>
+<span id="cb257-2"><a href="matrices.html#cb257-2" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">5</span>)</span>
+<span id="cb257-3"><a href="matrices.html#cb257-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-4"><a href="matrices.html#cb257-4" aria-hidden="true" tabindex="-1"></a>I</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    0    0    0    0
+## [2,]    0    1    0    0    0
+## [3,]    0    0    1    0    0
+## [4,]    0    0    0    1    0
+## [5,]    0    0    0    0    1</code></pre>
+<p><br />
+</p>
+<p>Notice that passing only scalar integer into <code>diag()</code> creates an identity matrix of the specified dimension (e.g. 5x5 in our case).</p>
+<p><br />
+</p>
+</div>
+<div id="accessing-matrix-entries" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Accessing Matrix Entries<a href="matrices.html#accessing-matrix-entries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To access entries of a matrix, we use the syntax <code>A[i,j]</code>, where <code>A</code> is the matrix, where <code>i</code> specifies the row number and <code>j</code> specifies the column number.</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="matrices.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a 3 x 2 matrix of numerics</span></span>
+<span id="cb259-2"><a href="matrices.html#cb259-2" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span><span class="dv">2</span>)</span>
+<span id="cb259-3"><a href="matrices.html#cb259-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-4"><a href="matrices.html#cb259-4" aria-hidden="true" tabindex="-1"></a>my_matrix</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="matrices.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access the entry of my_matrix located in row 1, column 2</span></span>
+<span id="cb261-2"><a href="matrices.html#cb261-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="dv">1</span>,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p><br />
+</p>
+<p><strong>Note</strong>: recall that for vectors, we can access multiple elements by passing a “vector of indices”. The same logic is true for matrices. Because a matrix is built out of a single long vector (just reorganized with a sub-index), it is still possible to reference each entry by their original positions in the original long vector</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="matrices.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create matrix out of the long vector c(1,2,3,4,5,6)</span></span>
+<span id="cb263-2"><a href="matrices.html#cb263-2" aria-hidden="true" tabindex="-1"></a>my_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb263-3"><a href="matrices.html#cb263-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb263-4"><a href="matrices.html#cb263-4" aria-hidden="true" tabindex="-1"></a><span class="co"># access the 1st, 3rd, and 4th elements in the original long vector</span></span>
+<span id="cb263-5"><a href="matrices.html#cb263-5" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)]</span></code></pre></div>
+<pre><code>## [1] 1 3 4</code></pre>
+<p><br />
+</p>
+<p>Abstractly, a matrix is just a “vector of vectors” so we should be able to access individual rows and columns as these are just vectors (rows/columns) sitting inside of a bigger vector (the matrix). The syntax for accessing entire rows/columns is to leave one index blank:</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="matrices.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access the 1st row of my_matrix</span></span>
+<span id="cb265-2"><a href="matrices.html#cb265-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>## [1] 1 4</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="matrices.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access the 3rd row of my_matrix</span></span>
+<span id="cb267-2"><a href="matrices.html#cb267-2" aria-hidden="true" tabindex="-1"></a>my_matrix[<span class="dv">3</span>,]</span></code></pre></div>
+<pre><code>## [1] 3 6</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="matrices.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access the 2nd column of my_matrix</span></span>
+<span id="cb269-2"><a href="matrices.html#cb269-2" aria-hidden="true" tabindex="-1"></a>my_matrix[,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 4 5 6</code></pre>
+<p><br />
+</p>
+<p>The “vector of indices” syntax also holds when selecting entire rows/columns:</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="matrices.html#cb271-1" aria-hidden="true" tabindex="-1"></a>big_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">63</span>, <span class="at">nrow =</span> <span class="dv">7</span>, <span class="at">ncol =</span> <span class="dv">9</span>)</span>
+<span id="cb271-2"><a href="matrices.html#cb271-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb271-3"><a href="matrices.html#cb271-3" aria-hidden="true" tabindex="-1"></a>big_matrix</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+## [1,]    1    8   15   22   29   36   43   50   57
+## [2,]    2    9   16   23   30   37   44   51   58
+## [3,]    3   10   17   24   31   38   45   52   59
+## [4,]    4   11   18   25   32   39   46   53   60
+## [5,]    5   12   19   26   33   40   47   54   61
+## [6,]    6   13   20   27   34   41   48   55   62
+## [7,]    7   14   21   28   35   42   49   56   63</code></pre>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="matrices.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access rows 2, 4, and 6 from big_matrix</span></span>
+<span id="cb273-2"><a href="matrices.html#cb273-2" aria-hidden="true" tabindex="-1"></a>big_matrix[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>),]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+## [1,]    2    9   16   23   30   37   44   51   58
+## [2,]    4   11   18   25   32   39   46   53   60
+## [3,]    6   13   20   27   34   41   48   55   62</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="matrices.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="co"># access columns 1, 3, 5, 7, 9 from big_matrix</span></span>
+<span id="cb275-2"><a href="matrices.html#cb275-2" aria-hidden="true" tabindex="-1"></a>big_matrix[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>)]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1   15   29   43   57
+## [2,]    2   16   30   44   58
+## [3,]    3   17   31   45   59
+## [4,]    4   18   32   46   60
+## [5,]    5   19   33   47   61
+## [6,]    6   20   34   48   62
+## [7,]    7   21   35   49   63</code></pre>
+<p><br />
+</p>
+<p>Recall that we can also <em>slice</em> lists and vectors by passing a range for the index. The same logic and syntax holds for matrices, allowing us to <em>slice</em> out minor matrices.</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="matrices.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the submatrix of rows 1-4, columns 1-3 from big_matrix</span></span>
+<span id="cb277-2"><a href="matrices.html#cb277-2" aria-hidden="true" tabindex="-1"></a>big_matrix[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    8   15
+## [2,]    2    9   16
+## [3,]    3   10   17
+## [4,]    4   11   18</code></pre>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="matrices.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the bottom lower 2x2 square of big_matrix</span></span>
+<span id="cb279-2"><a href="matrices.html#cb279-2" aria-hidden="true" tabindex="-1"></a>big_matrix[<span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">8</span><span class="sc">:</span><span class="dv">9</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   55   62
+## [2,]   56   63</code></pre>
+<p><br />
+</p>
+<p>Slicing can also be done in reverse order. This will have the effect of taking a “mirror image” along the direction of the slice:</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="matrices.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get rows 1, 2, and 3 in that order</span></span>
+<span id="cb281-2"><a href="matrices.html#cb281-2" aria-hidden="true" tabindex="-1"></a>big_matrix[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+## [1,]    1    8   15   22   29   36   43   50   57
+## [2,]    2    9   16   23   30   37   44   51   58
+## [3,]    3   10   17   24   31   38   45   52   59</code></pre>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="matrices.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get rows 3, 2, and 1 in that order</span></span>
+<span id="cb283-2"><a href="matrices.html#cb283-2" aria-hidden="true" tabindex="-1"></a>big_matrix[<span class="dv">3</span><span class="sc">:</span><span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+## [1,]    3   10   17   24   31   38   45   52   59
+## [2,]    2    9   16   23   30   37   44   51   58
+## [3,]    1    8   15   22   29   36   43   50   57</code></pre>
+<p><br />
+</p>
+<p>And just like with vectors, we can overwrite entries by accessing them:</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="matrices.html#cb285-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb285-2"><a href="matrices.html#cb285-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb285-3"><a href="matrices.html#cb285-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="matrices.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace entry (1,1) with -2</span></span>
+<span id="cb287-2"><a href="matrices.html#cb287-2" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span></span>
+<span id="cb287-3"><a href="matrices.html#cb287-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-4"><a href="matrices.html#cb287-4" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   -2    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="matrices.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace row 1 with c(-1, -4, -7, -10)</span></span>
+<span id="cb289-2"><a href="matrices.html#cb289-2" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">4</span>, <span class="sc">-</span><span class="dv">7</span>, <span class="sc">-</span><span class="dv">10</span>)</span>
+<span id="cb289-3"><a href="matrices.html#cb289-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb289-4"><a href="matrices.html#cb289-4" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   -1   -4   -7  -10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="matrices.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace column 2 with c(-4, -5, -6)</span></span>
+<span id="cb291-2"><a href="matrices.html#cb291-2" aria-hidden="true" tabindex="-1"></a>A[,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>,<span class="sc">-</span><span class="dv">6</span>)</span>
+<span id="cb291-3"><a href="matrices.html#cb291-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb291-4"><a href="matrices.html#cb291-4" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   -1   -2   -7  -10
+## [2,]    2   -4    8   11
+## [3,]    3   -6    9   12</code></pre>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="matrices.html#cb293-1" aria-hidden="true" tabindex="-1"></a>low_right_sq <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">90</span>, <span class="dv">110</span>, <span class="dv">120</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb293-2"><a href="matrices.html#cb293-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb293-3"><a href="matrices.html#cb293-3" aria-hidden="true" tabindex="-1"></a><span class="co"># replace the lower right 2x2 square with low_right_sq</span></span>
+<span id="cb293-4"><a href="matrices.html#cb293-4" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> low_right_sq</span>
+<span id="cb293-5"><a href="matrices.html#cb293-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb293-6"><a href="matrices.html#cb293-6" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   -1   -2   -7  -10
+## [2,]    2   -4   80  110
+## [3,]    3   -6   90  120</code></pre>
+<p><br />
+</p>
+</div>
+<div id="adding-and-removing-rowscolumns" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Adding and Removing Rows/Columns<a href="matrices.html#adding-and-removing-rowscolumns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can add rows and columns to a matrix by using the <code>rbind()</code> and <code>cbind()</code> functions (<code>rbind()</code> for <strong>row </strong> bind and <code>cbind()</code> for <strong>column</strong> bind).</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="matrices.html#cb295-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb295-2"><a href="matrices.html#cb295-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb295-3"><a href="matrices.html#cb295-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<p><br />
+</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="matrices.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add c(13, 14, 15) as 5th column of matrix</span></span>
+<span id="cb297-2"><a href="matrices.html#cb297-2" aria-hidden="true" tabindex="-1"></a>A_new_col <span class="ot">&lt;-</span> <span class="fu">cbind</span>(A, <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">15</span>))</span>
+<span id="cb297-3"><a href="matrices.html#cb297-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb297-4"><a href="matrices.html#cb297-4" aria-hidden="true" tabindex="-1"></a>A_new_col</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    4    7   10   12
+## [2,]    2    5    8   11   14
+## [3,]    3    6    9   12   15</code></pre>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="matrices.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add c(-3, -6, -9, -12) as 4th row</span></span>
+<span id="cb299-2"><a href="matrices.html#cb299-2" aria-hidden="true" tabindex="-1"></a>A_new_row <span class="ot">&lt;-</span> <span class="fu">rbind</span>(A, <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">6</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="sc">-</span><span class="dv">12</span>))</span>
+<span id="cb299-3"><a href="matrices.html#cb299-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb299-4"><a href="matrices.html#cb299-4" aria-hidden="true" tabindex="-1"></a>A_new_row</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12
+## [4,]   -3   -6   -9  -12</code></pre>
+<p><br />
+</p>
+<p>But <code>rbind()</code> and <code>cbind()</code> are not just limited to single rows/columns, we can in fact concatenate <em>entire matrices</em>!</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="matrices.html#cb301-1" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="matrices.html#cb303-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">13</span><span class="sc">:</span><span class="dv">21</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb303-2"><a href="matrices.html#cb303-2" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:-</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb303-3"><a href="matrices.html#cb303-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-4"><a href="matrices.html#cb303-4" aria-hidden="true" tabindex="-1"></a>B</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   13   16   19
+## [2,]   14   17   20
+## [3,]   15   18   21</code></pre>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="matrices.html#cb305-1" aria-hidden="true" tabindex="-1"></a>C</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]   -1   -6  -11  -16
+## [2,]   -2   -7  -12  -17
+## [3,]   -3   -8  -13  -18
+## [4,]   -4   -9  -14  -19
+## [5,]   -5  -10  -15  -20</code></pre>
+<p><br />
+</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="matrices.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="co"># concatneate matrix A and B along the column dimension</span></span>
+<span id="cb307-2"><a href="matrices.html#cb307-2" aria-hidden="true" tabindex="-1"></a>AB <span class="ot">&lt;-</span> <span class="fu">cbind</span>(A,B)</span>
+<span id="cb307-3"><a href="matrices.html#cb307-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb307-4"><a href="matrices.html#cb307-4" aria-hidden="true" tabindex="-1"></a>AB</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+## [1,]    1    4    7   10   13   16   19
+## [2,]    2    5    8   11   14   17   20
+## [3,]    3    6    9   12   15   18   21</code></pre>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="matrices.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="co"># concatenate matrix A and C along the row dimension</span></span>
+<span id="cb309-2"><a href="matrices.html#cb309-2" aria-hidden="true" tabindex="-1"></a>AC <span class="ot">&lt;-</span> <span class="fu">rbind</span>(A,C)</span>
+<span id="cb309-3"><a href="matrices.html#cb309-3" aria-hidden="true" tabindex="-1"></a>AC</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12
+## [4,]   -1   -6  -11  -16
+## [5,]   -2   -7  -12  -17
+## [6,]   -3   -8  -13  -18
+## [7,]   -4   -9  -14  -19
+## [8,]   -5  -10  -15  -20</code></pre>
+<p><br />
+</p>
+<p>Recall for vectors that we can remove elements by using <em>negative</em> indices. The same logic is true for matrices.</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="matrices.html#cb311-1" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="matrices.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return the original long vector, but without the 2nd element</span></span>
+<span id="cb313-2"><a href="matrices.html#cb313-2" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="dv">2</span>]</span></code></pre></div>
+<pre><code>##  [1]  1  3  4  5  6  7  8  9 10 11 12</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="matrices.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove the 1st row</span></span>
+<span id="cb315-2"><a href="matrices.html#cb315-2" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    2    5    8   11
+## [2,]    3    6    9   12</code></pre>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="matrices.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove the 4th column</span></span>
+<span id="cb317-2"><a href="matrices.html#cb317-2" aria-hidden="true" tabindex="-1"></a>A[,<span class="sc">-</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="matrices.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove the 1st row and the 4th column together</span></span>
+<span id="cb319-2"><a href="matrices.html#cb319-2" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    5    8
+## [2,]    3    6    9</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="matrices.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove 1st and 2nd row</span></span>
+<span id="cb321-2"><a href="matrices.html#cb321-2" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),]</span></code></pre></div>
+<pre><code>## [1]  3  6  9 12</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="matrices.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove 2nd and 4th column</span></span>
+<span id="cb323-2"><a href="matrices.html#cb323-2" aria-hidden="true" tabindex="-1"></a>A[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    7
+## [2,]    2    8
+## [3,]    3    9</code></pre>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="matrices.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove 2nd to 4th column, returns a single vector since 1d-matrix</span></span>
+<span id="cb325-2"><a href="matrices.html#cb325-2" aria-hidden="true" tabindex="-1"></a>A[,<span class="sc">-</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)]</span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<p><br />
+</p>
+</div>
+<div id="matrix-operations" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Matrix Operations<a href="matrices.html#matrix-operations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Matrices come equipped with a suite of arithmetic and algebraic operations. This include:</p>
+<ul>
+<li>Addition / Subtraction</li>
+<li>Scalar Mutliplication</li>
+<li>Hadamard Product</li>
+<li>Matrix Multiplication</li>
+<li>Inverse</li>
+<li>Transpose</li>
+<li>Determinant</li>
+<li>Kronecker Product</li>
+</ul>
+<p><br />
+</p>
+<div id="addition" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Addition<a href="matrices.html#addition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrix addition works the same way as vector addition. Entries with the same indices <span class="math inline">\((i,j)\)</span> are summed together like so:</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="matrices.html#cb327-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb327-2"><a href="matrices.html#cb327-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb327-3"><a href="matrices.html#cb327-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-4"><a href="matrices.html#cb327-4" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="matrices.html#cb329-1" aria-hidden="true" tabindex="-1"></a>B</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="matrices.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add matrices A and B</span></span>
+<span id="cb331-2"><a href="matrices.html#cb331-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">+</span> B</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    8   12   16
+## [2,]   10   14   18</code></pre>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="matrices.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subtract A from B</span></span>
+<span id="cb333-2"><a href="matrices.html#cb333-2" aria-hidden="true" tabindex="-1"></a>B <span class="sc">-</span> A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    6    6    6
+## [2,]    6    6    6</code></pre>
+<p><br />
+</p>
+<p>Notice that this addition procedure only makes sense for two matrices of the same dimensions. That is, matrices with differing dimensions cannot be added!</p>
+<p><br />
+</p>
+<p>Recall that the zero matrix, denoted <span class="math inline">\(0\)</span>, is considered a special matrix. The reason <span class="math inline">\(0\)</span> is special is because <span class="math inline">\(0\)</span> is the <strong>additive identity</strong>. That is, <span class="math inline">\(A+0 = A\)</span> for any matrix <span class="math inline">\(A\)</span>.</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="matrices.html#cb335-1" aria-hidden="true" tabindex="-1"></a>zero <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb335-2"><a href="matrices.html#cb335-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-3"><a href="matrices.html#cb335-3" aria-hidden="true" tabindex="-1"></a>zero</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    0    0    0
+## [2,]    0    0    0</code></pre>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="matrices.html#cb337-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">+</span><span class="dv">0</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="matrices.html#cb339-1" aria-hidden="true" tabindex="-1"></a>B<span class="sc">+</span><span class="dv">0</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12</code></pre>
+<p><br />
+</p>
+</div>
+<div id="scalar-multiplication" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Scalar Multiplication<a href="matrices.html#scalar-multiplication" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrices can be scaled via multiplication with some factor.</p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="matrices.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="co"># double the elements of the matrix A</span></span>
+<span id="cb341-2"><a href="matrices.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    6   10
+## [2,]    4    8   12</code></pre>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="matrices.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take 1/2 of the elements of the matrix A</span></span>
+<span id="cb343-2"><a href="matrices.html#cb343-2" aria-hidden="true" tabindex="-1"></a>A<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]  0.5  1.5  2.5
+## [2,]  1.0  2.0  3.0</code></pre>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="matrices.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take the negative of A</span></span>
+<span id="cb345-2"><a href="matrices.html#cb345-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   -1   -3   -5
+## [2,]   -2   -4   -6</code></pre>
+<p><br />
+</p>
+</div>
+<div id="hadamard-product" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Hadamard Product<a href="matrices.html#hadamard-product" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>Hadamard product</strong> between two matrices of the same dimension is just elementwise multiplication:</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="matrices.html#cb347-1" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="matrices.html#cb349-1" aria-hidden="true" tabindex="-1"></a>B</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12</code></pre>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="matrices.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hadamard Product, i.e. elementwise multiplication</span></span>
+<span id="cb351-2"><a href="matrices.html#cb351-2" aria-hidden="true" tabindex="-1"></a>A<span class="sc">*</span>B</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    7   27   55
+## [2,]   16   40   72</code></pre>
+<p><br />
+</p>
+<p>The all-ones matrix, denoted <span class="math inline">\(\mathbb{1}\)</span>, is special because <span class="math inline">\(\mathbb{1}\)</span> is the multiplicative identity of this operation.</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="matrices.html#cb353-1" aria-hidden="true" tabindex="-1"></a>ones <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb353-2"><a href="matrices.html#cb353-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb353-3"><a href="matrices.html#cb353-3" aria-hidden="true" tabindex="-1"></a>A<span class="sc">*</span>ones</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="matrices.html#cb355-1" aria-hidden="true" tabindex="-1"></a>B<span class="sc">*</span>ones</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12</code></pre>
+<p><br />
+</p>
+</div>
+<div id="matrix-multiplication" class="section level3 hasAnchor" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> Matrix Multiplication<a href="matrices.html#matrix-multiplication" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Hadamard product is the most intuitive way to multiply two matrices, but rather unfortunately, Hadarmard products are not nearly as useful of a “product” as another kind of matrix multiplication.</p>
+<p>Given an <span class="math inline">\(n\times k\)</span> matrix <span class="math inline">\(A\)</span> and a <span class="math inline">\(k\times m\)</span> matrix <span class="math inline">\(B\)</span>, the <strong>matrix product</strong> <span class="math inline">\(AB\)</span> is defined by taking the <span class="math inline">\((i,j)\)</span>-th entry to be the dot product of row <span class="math inline">\(i\)</span> of <span class="math inline">\(A\)</span> by column <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>. The written definition is rather hard to parse, so it perhaps is better illustrated by an example:</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="matrices.html#cb357-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb357-2"><a href="matrices.html#cb357-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb357-3"><a href="matrices.html#cb357-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    5
+## [2,]    1    3    1</code></pre>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="matrices.html#cb359-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb359-2"><a href="matrices.html#cb359-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb359-3"><a href="matrices.html#cb359-3" aria-hidden="true" tabindex="-1"></a>B</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   -1   -2
+## [2,]    2    1
+## [3,]    3    4</code></pre>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="matrices.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="co"># row 1 of A</span></span>
+<span id="cb361-2"><a href="matrices.html#cb361-2" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>## [1] 1 2 5</code></pre>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="matrices.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="co"># row 2 of A</span></span>
+<span id="cb363-2"><a href="matrices.html#cb363-2" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>,]</span></code></pre></div>
+<pre><code>## [1] 1 3 1</code></pre>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="matrices.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="co"># column 1 of B</span></span>
+<span id="cb365-2"><a href="matrices.html#cb365-2" aria-hidden="true" tabindex="-1"></a>B[,<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] -1  2  3</code></pre>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="matrices.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="co"># column 2 of B</span></span>
+<span id="cb367-2"><a href="matrices.html#cb367-2" aria-hidden="true" tabindex="-1"></a>B[,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] -2  1  4</code></pre>
+<p><br />
+</p>
+<p>Matrix product <span class="math inline">\(AB\)</span> is given by taken <code>A[i,]</code> dot product <code>b[,j]</code> and sticking the result into the <span class="math inline">\((i,j)\)</span>-th entry. To compute the dot product of two vectors, we use the infix operator <code>%*%</code></p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="matrices.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dot product of A[1,] and B[,1]; the (1,1) entry of the matrix product AB</span></span>
+<span id="cb369-2"><a href="matrices.html#cb369-2" aria-hidden="true" tabindex="-1"></a>entry_11 <span class="ot">&lt;-</span> A[<span class="dv">1</span>,] <span class="sc">%*%</span> B[,<span class="dv">1</span>]</span>
+<span id="cb369-3"><a href="matrices.html#cb369-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb369-4"><a href="matrices.html#cb369-4" aria-hidden="true" tabindex="-1"></a><span class="co"># repeat for all combinations of A[i,] and B[,j]</span></span>
+<span id="cb369-5"><a href="matrices.html#cb369-5" aria-hidden="true" tabindex="-1"></a>entry_12 <span class="ot">&lt;-</span> A[<span class="dv">1</span>,] <span class="sc">%*%</span> B[,<span class="dv">2</span>]</span>
+<span id="cb369-6"><a href="matrices.html#cb369-6" aria-hidden="true" tabindex="-1"></a>entry_21 <span class="ot">&lt;-</span> A[<span class="dv">2</span>,] <span class="sc">%*%</span> B[,<span class="dv">1</span>]</span>
+<span id="cb369-7"><a href="matrices.html#cb369-7" aria-hidden="true" tabindex="-1"></a>entry_22 <span class="ot">&lt;-</span> A[<span class="dv">2</span>,] <span class="sc">%*%</span> B[,<span class="dv">2</span>]</span>
+<span id="cb369-8"><a href="matrices.html#cb369-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb369-9"><a href="matrices.html#cb369-9" aria-hidden="true" tabindex="-1"></a><span class="co"># consolidate into matrix product AB</span></span>
+<span id="cb369-10"><a href="matrices.html#cb369-10" aria-hidden="true" tabindex="-1"></a>AB <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(entry_11, entry_12, entry_21,entry_22), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb369-11"><a href="matrices.html#cb369-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb369-12"><a href="matrices.html#cb369-12" aria-hidden="true" tabindex="-1"></a>AB</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   18   20
+## [2,]    8    5</code></pre>
+<p><br />
+</p>
+<p>Thankfully, this matrix product can be computed by calling the operator <code>%*%</code> directly on the matrices from the beginning:</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="matrices.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute matrix product AB</span></span>
+<span id="cb371-2"><a href="matrices.html#cb371-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> B</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   18   20
+## [2,]    8    5</code></pre>
+<p><br />
+</p>
+<p><strong>Important 1:</strong> Matrix multiplication is done by taking the rows of <span class="math inline">\(A\)</span> and dot producting them with the columns of <span class="math inline">\(B\)</span>. But dot products are only defined for vectors of the same length. This means that matrix multiplication is only possible if the <code>ncol</code> of <span class="math inline">\(A\)</span> is the same as the <code>nrow</code> of <span class="math inline">\(B\)</span>.</p>
+<p><strong>Important 2:</strong> Unlike regular multiplication or the Hadamard product, matrix multiplication is <em>not</em> commutative. This means the order in which we do the multiplication will change the final answer!</p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="matrices.html#cb373-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>, <span class="dv">3</span>,<span class="dv">5</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb373-2"><a href="matrices.html#cb373-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="sc">-</span><span class="dv">6</span>,<span class="dv">4</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb373-3"><a href="matrices.html#cb373-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb373-4"><a href="matrices.html#cb373-4" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix product AB</span></span>
+<span id="cb373-5"><a href="matrices.html#cb373-5" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> B</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   11    6
+## [2,]   13   26</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="matrices.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix product of BA</span></span>
+<span id="cb375-2"><a href="matrices.html#cb375-2" aria-hidden="true" tabindex="-1"></a>B <span class="sc">%*%</span> A</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    8  -24
+## [2,]   -1   29</code></pre>
+<p><br />
+</p>
+<p>Notice that <span class="math inline">\(AB\)</span> and <span class="math inline">\(BA\)</span> are not he same matrix! Therefore, we must always be careful of the order when multiplying matrices.</p>
+<p><br />
+</p>
+<p>Recall the <strong>identity matrix</strong> <span class="math inline">\(I\)</span> is the matrix with 1’s along the diagonal and 0’s everywhere else. The identity matrix <span class="math inline">\(I\)</span> is special because <span class="math inline">\(I\)</span> is the multiplicative identity under matrix multiplication. That is, for any matrix <span class="math inline">\(A\)</span> (of compatible dimension), we always have <span class="math inline">\(AI = A\)</span> and <span class="math inline">\(IA = A\)</span>.</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="matrices.html#cb377-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb377-2"><a href="matrices.html#cb377-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb377-3"><a href="matrices.html#cb377-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="matrices.html#cb379-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb379-2"><a href="matrices.html#cb379-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb379-3"><a href="matrices.html#cb379-3" aria-hidden="true" tabindex="-1"></a>B</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="matrices.html#cb381-1" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">3</span>)</span>
+<span id="cb381-2"><a href="matrices.html#cb381-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb381-3"><a href="matrices.html#cb381-3" aria-hidden="true" tabindex="-1"></a>I</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    0    0
+## [2,]    0    1    0
+## [3,]    0    0    1</code></pre>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="matrices.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AI = A</span></span>
+<span id="cb383-2"><a href="matrices.html#cb383-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> I</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="matrices.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="co"># IB = B</span></span>
+<span id="cb385-2"><a href="matrices.html#cb385-2" aria-hidden="true" tabindex="-1"></a>I <span class="sc">%*%</span> B</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<p><br />
+</p>
+</div>
+<div id="aside-the-magic-of-matrix-multiplication" class="section level3 hasAnchor" number="3.5.5">
+<h3><span class="header-section-number">3.5.5</span> Aside: The Magic of Matrix Multiplication<a href="matrices.html#aside-the-magic-of-matrix-multiplication" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As mentioned before, the Hadamard product is the most intuitive way to multiply matrices, but it is matrix multiplication that is most prolific and most useful. This naturally begs the question: “Why? Why is matrix multiplication so prolific and useful even though it is so unintuitive and convoluted?”</p>
+<p>The answer lies at the heart of linear algebra. Consider a matrix <span class="math inline">\(A\)</span> and “column” vector <span class="math inline">\(v\)</span> (i.e. a <span class="math inline">\(n\times 1\)</span> matrix):</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="matrices.html#cb387-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb387-2"><a href="matrices.html#cb387-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb387-3"><a href="matrices.html#cb387-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="matrices.html#cb389-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb389-2"><a href="matrices.html#cb389-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb389-3"><a href="matrices.html#cb389-3" aria-hidden="true" tabindex="-1"></a>v</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    2
+## [2,]    5
+## [3,]   -1</code></pre>
+<p><br />
+</p>
+<p>What happens if we take the matrix product <span class="math inline">\(Av\)</span>?</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="matrices.html#cb391-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> v</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]   12
+## [2,]   18</code></pre>
+<p><br />
+</p>
+<p>Notice that the result is another column vector. In this way, we can think of the matrix <span class="math inline">\(A\)</span> as a function, which maps the space of <span class="math inline">\(3\times 1\)</span> vectors to the space of <span class="math inline">\(2\times 1\)</span> vectors:</p>
+<p><span class="math display">\[A:\mathbb{R}^3\to \mathbb{R}^2\]</span></p>
+<p>This allows us do math in in higher dimensions because we can now effectively move across real-space of varying dimensions.</p>
+<p>Matrix multiplication satisfies 2 very important properties:</p>
+<p><span class="math display">\[A(v+u) = Av+Au\]</span></p>
+<p><span class="math display">\[A(\lambda v) = \lambda Av\]</span></p>
+<p>Functions which satisfy <span class="math inline">\(f(v+u)=f(v)+f(u)\)</span> and <span class="math inline">\(f(\lambda v)=\lambda f(v)\)</span> are called <strong>linear transformations</strong>. The point is that matrix multiplication by <span class="math inline">\(A\)</span> defines a linear transformation from <span class="math inline">\(\mathbb{R}^n\to \mathbb{R}^m\)</span>. This is why matrix multiplication is special: the operation of matrix-vector multiplication is the same as performing a linear transformation on vectors. More importantly, the matrix product of two matrices <span class="math inline">\(AB\)</span> is the same as the composition of two linear functions. In this way, matrix multiplication is really the <em>algebra of transformations</em>.</p>
+<p>But the real magic happens when we consider the converse idea. Matrices define linear transformations, but it turns out that <em>all linear transformations come from matrices</em>. To understand why this must be true, consider the following example</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="matrices.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="co"># consider the standard basis vectors, i.e. the x-, y- and z-axes</span></span>
+<span id="cb393-2"><a href="matrices.html#cb393-2" aria-hidden="true" tabindex="-1"></a>e_1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb393-3"><a href="matrices.html#cb393-3" aria-hidden="true" tabindex="-1"></a>e_2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb393-4"><a href="matrices.html#cb393-4" aria-hidden="true" tabindex="-1"></a>e_3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span>
+<span id="cb393-5"><a href="matrices.html#cb393-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb393-6"><a href="matrices.html#cb393-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply each coordinate axis with A</span></span>
+<span id="cb393-7"><a href="matrices.html#cb393-7" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="matrices.html#cb395-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> e_1</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    1
+## [2,]    2</code></pre>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="matrices.html#cb397-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> e_2</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    3
+## [2,]    4</code></pre>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="matrices.html#cb399-1" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> e_3</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]    5
+## [2,]    6</code></pre>
+<p>Notice that the mapping <span class="math inline">\(A:\mathbb{R}^3\to \mathbb{R}^2\)</span> takes each of the x-, y- and z-axis vectors precisely to the 1st, 2nd and 3rd <strong>columns of A</strong>.</p>
+<p>In particular, given any linear transformation <span class="math inline">\(T:\mathbb{R}^n\to\mathbb{R}^m\)</span>, the matrix given by</p>
+<p><span class="math display">\[A = \begin{bmatrix} T(e_1) &amp; T(e_2) &amp; T(e_3) \end{bmatrix}\]</span>
+Will satisify <span class="math inline">\(Av = T(v)\)</span> for all vectors <span class="math inline">\(v\)</span>. Here, <span class="math inline">\(e_i\)</span> denotes the <span class="math inline">\(i\)</span>-th standard basis vector (i.e. the <span class="math inline">\(i\)</span>-th coordinate axis).</p>
+<p><strong>Bottom-line</strong>: Matrix multiplication allows us to completely model the algebra of linear transformations.</p>
+<p><br />
+</p>
+</div>
+<div id="the-determinant" class="section level3 hasAnchor" number="3.5.6">
+<h3><span class="header-section-number">3.5.6</span> The Determinant<a href="matrices.html#the-determinant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Given a <span class="math inline">\(2\times 2\)</span> matrix <span class="math inline">\(A\)</span></p>
+<p><span class="math display">\[A = \begin{pmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{pmatrix} \]</span>
+the <strong>determinant</strong> of <span class="math inline">\(A\)</span> is the numerical value given by:</p>
+<p><span class="math display">\[ det(A) = a_{11}a_{22}-a_{12}a_{21}\]</span></p>
+<p>For a <span class="math inline">\(3\times 3\)</span> matrix <span class="math inline">\(A\)</span>, the determinant of <span class="math inline">\(A\)</span> is the numerical value given by</p>
+<p><span class="math display">\[det(A) = a_{11}A_{11} - a_{12}A_{12} + a_{12}A_{13}\]</span></p>
+<p>where <span class="math inline">\(A_{ij}\)</span> is the submatrix of <span class="math inline">\(A\)</span>, with row <span class="math inline">\(i\)</span> and column <span class="math inline">\(j\)</span> removed. For example, we can compute the deterimant of a <span class="math inline">\(3\times 3\)</span> matrix in code:</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="matrices.html#cb401-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="sc">-</span><span class="dv">4</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb401-2"><a href="matrices.html#cb401-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-3"><a href="matrices.html#cb401-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    1    6
+## [2,]    2   -1    7
+## [3,]    3    5   -4</code></pre>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="matrices.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the submatrices we need are</span></span>
+<span id="cb403-2"><a href="matrices.html#cb403-2" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   -1    7
+## [2,]    5   -4</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="matrices.html#cb405-1" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">2</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    2    7
+## [2,]    3   -4</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="matrices.html#cb407-1" aria-hidden="true" tabindex="-1"></a>A[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    2   -1
+## [2,]    3    5</code></pre>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="matrices.html#cb409-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write a function that computes 2x2 determinant</span></span>
+<span id="cb409-2"><a href="matrices.html#cb409-2" aria-hidden="true" tabindex="-1"></a>compute_det <span class="ot">&lt;-</span> <span class="cf">function</span>(minor){</span>
+<span id="cb409-3"><a href="matrices.html#cb409-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(minor[<span class="dv">1</span>,<span class="dv">1</span>]<span class="sc">*</span>minor[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">-</span>minor[<span class="dv">1</span>,<span class="dv">2</span>]<span class="sc">*</span>minor[<span class="dv">2</span>,<span class="dv">1</span>])</span>
+<span id="cb409-4"><a href="matrices.html#cb409-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb409-5"><a href="matrices.html#cb409-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb409-6"><a href="matrices.html#cb409-6" aria-hidden="true" tabindex="-1"></a><span class="co"># test function</span></span>
+<span id="cb409-7"><a href="matrices.html#cb409-7" aria-hidden="true" tabindex="-1"></a><span class="fu">compute_det</span>(A[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] -31</code></pre>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="matrices.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loop through each minor and compute  3x3 determinant</span></span>
+<span id="cb411-2"><a href="matrices.html#cb411-2" aria-hidden="true" tabindex="-1"></a>my_determinant <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb411-3"><a href="matrices.html#cb411-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb411-4"><a href="matrices.html#cb411-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb411-5"><a href="matrices.html#cb411-5" aria-hidden="true" tabindex="-1"></a>  my_determinant <span class="ot">&lt;-</span> my_determinant <span class="sc">+</span> ((<span class="sc">-</span><span class="dv">1</span>)<span class="sc">^</span>(i<span class="sc">+</span><span class="dv">1</span>))<span class="sc">*</span>A[<span class="dv">1</span>,i]<span class="sc">*</span><span class="fu">compute_det</span>(A[<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span>i])</span>
+<span id="cb411-6"><a href="matrices.html#cb411-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb411-7"><a href="matrices.html#cb411-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb411-8"><a href="matrices.html#cb411-8" aria-hidden="true" tabindex="-1"></a>my_determinant</span></code></pre></div>
+<pre><code>## [1] 76</code></pre>
+<p><br />
+</p>
+<p>In general, for an <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(A\)</span>, the <strong>determinant</strong> of <span class="math inline">\(A\)</span> is defined recursively by the formula:</p>
+<p><span class="math display">\[det(A) = \sum_{i=1}^n (-1)^{i+1}a_{1i}A_{1i} = a_{11}A_{11}+ \ldots+ (-1)^{n+1}a_{1n}A_{1n}\]</span>
+Likely, R comes with a built-in <code>det()</code> function to compute determinants of square matrices.</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="matrices.html#cb413-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="sc">-</span><span class="dv">4</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb413-2"><a href="matrices.html#cb413-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb413-3"><a href="matrices.html#cb413-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    1    6
+## [2,]    2   -1    7
+## [3,]    3    5   -4</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="matrices.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute determinant of A</span></span>
+<span id="cb415-2"><a href="matrices.html#cb415-2" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(A)</span></code></pre></div>
+<pre><code>## [1] 76</code></pre>
+<p><br />
+</p>
+<p><strong>Aside:</strong> In the previous aside, we mentioned that matrices are actually linear transformations in disguise. The reason determinants are important is because determinants measure the “distortion in volume” the transformation produces. In the <span class="math inline">\(2\times 2\)</span> case, the determinant <span class="math inline">\(det(A)\)</span> is quite literally the area of the image of the unit square under the transformation of <span class="math inline">\(A\)</span>.</p>
+<p><br />
+</p>
+</div>
+<div id="inverses" class="section level3 hasAnchor" number="3.5.7">
+<h3><span class="header-section-number">3.5.7</span> Inverses<a href="matrices.html#inverses" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(A\)</span> be a square matrix. The <strong>inverse</strong> of <span class="math inline">\(A\)</span> is square matrix <span class="math inline">\(A^{-1}\)</span> such that</p>
+<p><span class="math display">\[AA^{-1} = I = A^{-1}A\]</span></p>
+<p>In other words, <span class="math inline">\(A^{-1}\)</span> “cancels” with <span class="math inline">\(A\)</span> and returns the identity. Not all square matrices are invertible and the process of determining which matrices are (and are not) invertible is one of the major topics in linear algebra. Thankfully in R, we have a pre-built function that computes an inverse matrix (if it exists).</p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="matrices.html#cb417-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">7</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb417-2"><a href="matrices.html#cb417-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb417-3"><a href="matrices.html#cb417-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    1   -1
+## [2,]    2    4    1
+## [3,]    3    5    7</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="matrices.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute inverse of matrix A</span></span>
+<span id="cb419-2"><a href="matrices.html#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(A)</span></code></pre></div>
+<pre><code>##            [,1]       [,2]       [,3]
+## [1,]  1.6428571 -0.8571429  0.3571429
+## [2,] -0.7857143  0.7142857 -0.2142857
+## [3,] -0.1428571 -0.1428571  0.1428571</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="matrices.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="co"># verify inverse property</span></span>
+<span id="cb421-2"><a href="matrices.html#cb421-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> <span class="fu">solve</span>(A)</span></code></pre></div>
+<pre><code>##              [,1]          [,2]          [,3]
+## [1,] 1.000000e+00 -1.942890e-16 -2.220446e-16
+## [2,] 7.494005e-16  1.000000e+00 -2.775558e-17
+## [3,] 4.440892e-16 -2.220446e-16  1.000000e+00</code></pre>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="matrices.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(A) <span class="sc">%*%</span> A</span></code></pre></div>
+<pre><code>##              [,1]          [,2]          [,3]
+## [1,] 1.000000e+00 -2.442491e-15 -3.108624e-15
+## [2,] 6.661338e-16  1.000000e+00  1.332268e-15
+## [3,] 0.000000e+00  2.220446e-16  1.000000e+00</code></pre>
+<p><br />
+</p>
+<p>Notice that we don’t recover the identity matrix <span class="math inline">\(I\)</span> exactly because of rounding errors, but we do get pretty close to <span class="math inline">\(I\)</span> up to 16 decimal places (which is pretty close!)</p>
+<p>As mentioned before, not all matrices are invertible.</p>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="matrices.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="co"># construct a non-invertible matrix A</span></span>
+<span id="cb425-2"><a href="matrices.html#cb425-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb425-3"><a href="matrices.html#cb425-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb425-4"><a href="matrices.html#cb425-4" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="matrices.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="co"># attemtp to invert A anyways</span></span>
+<span id="cb427-2"><a href="matrices.html#cb427-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(A)</span></code></pre></div>
+<pre><code>## Error in solve.default(A): Lapack routine dgesv: system is exactly singular: U[3,3] = 0</code></pre>
+<p><br />
+</p>
+<p>Notice that the command <code>solve(A)</code> throws an error when we try to execute it. This is because the matrix <span class="math inline">\(A\)</span> we defined is <strong>singular</strong> which is a synonym for non-invertible.</p>
+<p>Anyways, inverses allow us to solve matrix equations by canceling a matrix term from both sides of an equation. For example, consider the following equation</p>
+<p><span class="math display">\[Av = b\]</span></p>
+<p>where matrix <span class="math inline">\(A\)</span> and vector <span class="math inline">\(b\)</span> are known quantities. Our job is to solve for a vector <span class="math inline">\(v\)</span> which satisfies the matrix equation. If <span class="math inline">\(A\)</span> happens to be an invertible matrix, then the solution is obtained very painlessly:</p>
+<p><span class="math display">\[\begin{align*}
+Av &amp;= b\\
+A^{-1}Av &amp;= A^{-1}b \\
+Iv &amp;= A^{-1}b \\
+v &amp; = A^{-1}b
+\end{align*}\]</span></p>
+<p>Since both <span class="math inline">\(A\)</span> and <span class="math inline">\(b\)</span> are known, <span class="math inline">\(A^{-1}b\)</span> can be computed and we have found a solution for <span class="math inline">\(v\)</span>. This process of solving a matrix equation with the inverse <span class="math inline">\(A^{-1}\)</span> is the reason the <code>solve()</code> function has the name it does.</p>
+<p><strong>Fact:</strong> We mentioned that not all matrices have inverses and determining which matrices are invertible is a central topic of linear algebra. One method for detecting invertibility is to use the determinant. Specifically: a square matrix <span class="math inline">\(A\)</span> is invertible if and only if <span class="math inline">\(det(A)\neq 0\)</span>. This gives us a very clean and effective way of deciding wheter a matrix <span class="math inline">\(A\)</span> is invertible or singular. For example:</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="matrices.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="co"># invertible matrix; non-zero determinant</span></span>
+<span id="cb429-2"><a href="matrices.html#cb429-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>), <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb429-3"><a href="matrices.html#cb429-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb429-4"><a href="matrices.html#cb429-4" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(A)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="matrices.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="co"># singular matrix; zero determinant</span></span>
+<span id="cb431-2"><a href="matrices.html#cb431-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb431-3"><a href="matrices.html#cb431-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-4"><a href="matrices.html#cb431-4" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(B)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p><br />
+</p>
+</div>
+<div id="transpose" class="section level3 hasAnchor" number="3.5.8">
+<h3><span class="header-section-number">3.5.8</span> Transpose<a href="matrices.html#transpose" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Given a matrix <span class="math inline">\(A\)</span>, the <strong>transpose</strong> of <span class="math inline">\(A\)</span> is the matrix <span class="math inline">\(A^T\)</span> whose <span class="math inline">\((i,j)\)</span>-th entry is precisely the <span class="math inline">\((j,i)\)</span>-th entry of A. This is illustrated in the following example:</p>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="matrices.html#cb433-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb433-2"><a href="matrices.html#cb433-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb433-3"><a href="matrices.html#cb433-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="matrices.html#cb435-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take the transpose of A</span></span>
+<span id="cb435-2"><a href="matrices.html#cb435-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(A)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4
+## [3,]    5    6</code></pre>
+<p><br />
+</p>
+<p>Notice that <span class="math inline">\((A^T)^T=A\)</span>, i.e. flipping a matrix <span class="math inline">\(A\)</span> twice just returns the original matrix.</p>
+<p><strong>Fact:</strong> for any matrix <span class="math inline">\(A\)</span>, the matrix product <span class="math inline">\(AA^T\)</span> is a square matrix. More importantly, we have <span class="math inline">\(AA^T\)</span> is <strong>symmetric</strong> and <strong>positive semi-definite</strong>. In particular, this implies that <span class="math inline">\(AA^T\)</span> will always have real non-negative eigenvalues (and consequently also have real non-negative singular values as singular values are square-roots of the eigenvalues).</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="matrices.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix product of A and t(A)</span></span>
+<span id="cb437-2"><a href="matrices.html#cb437-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> <span class="fu">t</span>(A)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   35   44
+## [2,]   44   56</code></pre>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="matrices.html#cb439-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix product of t(A) and A</span></span>
+<span id="cb439-2"><a href="matrices.html#cb439-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(A) <span class="sc">%*%</span> A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    5   11   17
+## [2,]   11   25   39
+## [3,]   17   39   61</code></pre>
+<p><br />
+</p>
+</div>
+<div id="kronecker-product" class="section level3 hasAnchor" number="3.5.9">
+<h3><span class="header-section-number">3.5.9</span> Kronecker Product<a href="matrices.html#kronecker-product" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One final operation is the <strong>Kronecker product</strong>. The Kronecker product between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> takes the matrix <span class="math inline">\(B\)</span> and multiplies it against each individual entry of <span class="math inline">\(A\)</span>.</p>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="matrices.html#cb441-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb441-2"><a href="matrices.html#cb441-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb441-3"><a href="matrices.html#cb441-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="matrices.html#cb443-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb443-2"><a href="matrices.html#cb443-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb443-3"><a href="matrices.html#cb443-3" aria-hidden="true" tabindex="-1"></a>B</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    1
+## [2,]    0    1</code></pre>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="matrices.html#cb445-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the Kronecker product of A by B</span></span>
+<span id="cb445-2"><a href="matrices.html#cb445-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%x%</span> B</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    1    1    2    2    3    3
+## [2,]    0    1    0    2    0    3
+## [3,]    4    4    5    5    6    6
+## [4,]    0    4    0    5    0    6</code></pre>
+<p><br />
+</p>
+<p><br />
+</p>
+<hr />
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basic-data-structures.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-frames.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/rmd_src/03_matrices.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
