@@ -94,3 +94,13 @@ tibbles
 data-import
 modeling
 linear-regression-models
+statistical-decision-theory
+parametric-models
+modeling-the-error-epsilon
+modeling-fx
+statistical-model-of-randomness
+a-concrete-example
+building-the-model
+k-nearest-neighbors
+decision-trees
+model-based-approach

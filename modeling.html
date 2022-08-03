@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Modeling | _main.knit</title>
-  <meta name="description" content="" />
+  <title>Chapter 9 Modeling | Cooking in R</title>
+  <meta name="description" content="Chapter 9 Modeling | Cooking in R" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Modeling | _main.knit" />
+  <meta property="og:title" content="Chapter 9 Modeling | Cooking in R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Modeling | _main.knit" />
+  <meta name="twitter:title" content="Chapter 9 Modeling | Cooking in R" />
   
   
   
@@ -52,70 +52,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -258,7 +194,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#tibbles"><i class="fa fa-check"></i><b>8.1</b> Tibbles</a></li>
 <li class="chapter" data-level="8.2" data-path="data-import-and-storage.html"><a href="data-import-and-storage.html#data-import"><i class="fa fa-check"></i><b>8.2</b> Data import</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>9</b> Modeling</a></li>
+<li class="chapter" data-level="9" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>9</b> Modeling</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="modeling.html"><a href="modeling.html#a-concrete-example"><i class="fa fa-check"></i><b>9.1</b> A concrete example</a></li>
+<li class="chapter" data-level="9.2" data-path="modeling.html"><a href="modeling.html#statistical-decision-theory"><i class="fa fa-check"></i><b>9.2</b> Statistical decision theory</a></li>
+<li class="chapter" data-level="9.3" data-path="modeling.html"><a href="modeling.html#building-the-model"><i class="fa fa-check"></i><b>9.3</b> Building the model</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="modeling.html"><a href="modeling.html#k-nearest-neighbors"><i class="fa fa-check"></i><b>9.3.1</b> <span class="math inline">\(k\)</span>-nearest neighbors</a></li>
+<li class="chapter" data-level="9.3.2" data-path="modeling.html"><a href="modeling.html#decision-trees"><i class="fa fa-check"></i><b>9.3.2</b> Decision trees</a></li>
+<li class="chapter" data-level="9.3.3" data-path="modeling.html"><a href="modeling.html#model-based-approach"><i class="fa fa-check"></i><b>9.3.3</b> Model-based approach</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="10" data-path="linear-regression-models.html"><a href="linear-regression-models.html"><i class="fa fa-check"></i><b>10</b> Linear Regression Models</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -272,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cooking in R</a>
           </h1>
         </div>
 
@@ -282,17 +228,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="modeling" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Modeling<a href="modeling.html#modeling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Data usually comes with multiple variables and analyzing the covariation between these variables helps us understand the data. Model building is one method for analyzing this covariation. The model building process can be quite open-ended and freeform with an infinite number of design choices to be explored. In order to study all the different ways to build a model, it might be useful to formalize a basic framework. A formal framework allows us to study model design choices in a structured and systematic way.</p>
-<p>Let us begin by formalizing what we want to study. The covariation between variables <span class="math inline">\(X_1,\ldots, X_k\)</span> and <span class="math inline">\(Y\)</span> is represented by the <strong>joint probability density function</strong> <span class="math inline">\(f:\mathbb{R}^{k+1}\to \mathbb{R}\)</span>. Heuristically, <span class="math inline">\(f(X_1,\ldots,X_n,Y)\)</span> gives the probability of observing some given combination of <span class="math inline">\(X_1,\ldots,X_k\)</span> and <span class="math inline">\(Y\)</span> values. A <strong>model</strong> is a function <span class="math inline">\(\hat{f}:\mathbb{R}^{k+1}\to \mathbb{R}\)</span> which <em>approximates</em> the joint density <span class="math inline">\(f\)</span>.</p>
-<p>Often times, the scenario we want to model has <span class="math inline">\(Y\)</span> being dependent on the value of <span class="math inline">\(X_1,\ldots,X_k\)</span>. In this case, what we really care about are the <strong>conditional probability distributions</strong> given by:</p>
-<p><span class="math display">\[f(Y|X_1=x_1,\ldots,X_k=x_k) = f(x_1,\ldots,x_k, Y)\]</span>
-The conditional distribution is the distribution of the random variable <span class="math inline">\(Y\)</span> at the given values <span class="math inline">\(X_1=x_1,\ldots,X_k=x_k\)</span>. The idea is that <span class="math inline">\(Y\)</span> has some inherent randomness; even if we knew that <span class="math inline">\(X_1=x_1,\ldots,X_k=x_k\)</span>, the value of <span class="math inline">\(Y\)</span> can still fluctuate out of sheer random noise. For example, we can instinctively tell that a person’s weight <span class="math inline">\(Y\)</span> should be dependent on that person’s height <span class="math inline">\(X\)</span>: the taller you grow, the more you weigh. Nonetheless, even two people with the same height can have different weights and this is what the conditional distribution reflects.</p>
-<p>When <span class="math inline">\(Y\)</span> is dependent on <span class="math inline">\(X\)</span>, we can model the joint density function <span class="math inline">\(f\)</span> by modeling the individual conditional distributions <span class="math inline">\(f(Y|X_1,\ldots,X_n)\)</span>. How we build these models will depend on the use case. There are 2 main use cases for models:</p>
-<ol style="list-style-type: decimal">
-<li><p>Inference: the model is used to explain a relationship between two variables. In this case, we are interested in the model building process itself and how components of the model correspond to real-world phenomena. The main focus in this situation is to evaluate the model building process and estimate how close our model <span class="math inline">\(\hat{f}\)</span> actually is to the ground truth <span class="math inline">\(f\)</span>.</p></li>
-<li><p>Prediction: the model is used to generate outputs. In this case, we are interested in the outputs of the model and how those outputs look. The main focus for this situation is to get <span class="math inline">\(\hat{f}(X) \approx Y\)</span> as close as possible.</p></li>
-</ol>
+<p>Data usually comes with multiple variables and analyzing the covariation between these variables helps us understand the data. Model building is one method for analyzing this covariation. The model building process can be quite open-ended and freeform with an infinite number of design choices to be explored. We should formalize a basic framework to systematically study the model buidling process.</p>
+<p>We start with an example of a situation highlighting the core elements of model building, then generalize this example to a more formal mathematical setting.</p>
+<p><br />
+</p>
+<div id="a-concrete-example" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> A concrete example<a href="modeling.html#a-concrete-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As a concrete example, let’s suppose we wanted to study the relationship between a company’s marketing spend and their revenue over a given month. We can represent this scenario by letting <span class="math inline">\(X=(X_1,\ldots,X_k)\)</span> represent the amount of marketing spend across different marketing channels by a company. So we might have <span class="math inline">\(X_1\)</span> is TV ad spend, <span class="math inline">\(X_2\)</span> is social media spend, <span class="math inline">\(X_3\)</span> paid search spend, etc. We can let <span class="math inline">\(Y\)</span> be the revenue earned by that company.</p>
+<p>It seems reasonable to believe that the more money a company spends on marketing, the more revenue they earn from sales. We want determine the exact nature of this relationship, so we can conceptualize revenue as a function of marketing spend: <span class="math inline">\(Y=f(X)\)</span>. The issue is that revenue figures are inherently random: some people will choose to buy (or not buy) a product on a whim. So it is unreasonable to expect that marketing spend <span class="math inline">\(X\)</span> can fully predict the exact value of revenue <span class="math inline">\(Y\)</span>. Just ask ourselves: if two companies have the same exact marketing spend values <span class="math inline">\(X=x\)</span>, can we guarantee they will always have the same revenue figures? The answer is probably “no!”</p>
+<p>So if we can’t fully predict <span class="math inline">\(Y\)</span>, is there a related quantity we can hope to predict? It seems more reasonable to try and predict the expected value of <span class="math inline">\(Y\)</span> at given levels of marketing spend <span class="math inline">\(X=x\)</span>, which we call the <strong>conditional mean</strong> <span class="math inline">\(E(Y|X=x)\)</span>. Another quantity we can try to predict is the <em>conditional median</em> <span class="math inline">\(\text{median}(Y|X=x)\)</span>. So we can attempt to craft a function <span class="math inline">\(f\)</span> where <span class="math inline">\(f(x)=E(Y|X=x)\)</span> for every value of <span class="math inline">\(x\)</span>. This would allow us to predict a “best guess” estimate of revenue <span class="math inline">\(Y\)</span> at each possible spend level <span class="math inline">\(X=x\)</span>.</p>
+<p>We want to explicity determine this function <span class="math inline">\(f\)</span> but this is not possible. In order to determine <span class="math inline">\(f\)</span> completely, we would need the <span class="math inline">\((X,Y)\)</span> data for every company that ever existed and every company that ever will exist! Let’s call this mythological data set containing every company the <em>population</em>. Since we can’t obtain the population data set, we can’t compute <span class="math inline">\(f\)</span> directly. Instead, we try to approximate it using an estimate <span class="math inline">\(\hat{f}\)</span>.</p>
+<p>To construct the estimate <span class="math inline">\(\hat{f}\)</span>, what we can do is take a <strong>sample</strong> of data points <span class="math inline">\(\{(X^{(i)},Y^{(i)})\}_{i=1}^n\)</span> with each <span class="math inline">\((X^{(i)}, Y^{(i)})\)</span> representing a marketing spend value and a revenue figure. In our example, this might the marketing spend and revenue values from the same company each month over a period of 10 years. What we want to do is use the sample data as a proxy for the population data. How we build this is the main topic of discussion from this chapter onward.</p>
+<p><br />
+</p>
+</div>
+<div id="statistical-decision-theory" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Statistical decision theory<a href="modeling.html#statistical-decision-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We take the previous example and formalize it. Let <span class="math inline">\(X=(X_1,\ldots,X_k)\)</span> be a vector of <span class="math inline">\(k\)</span> variables and <span class="math inline">\(Y\)</span> a random variable which “depends” on <span class="math inline">\(X\)</span>. We want to study the exact nature of <span class="math inline">\(Y\)</span>’s dependency on <span class="math inline">\(X\)</span>. One approach is build a function <span class="math inline">\(f\)</span> which can construct <span class="math inline">\(Y\)</span> out of the data given by <span class="math inline">\(X\)</span>. In other words, we seek a function <span class="math inline">\(f\)</span> such that <span class="math inline">\(Y=f(X)\)</span>.</p>
+<p>Unfortunately, since <span class="math inline">\(Y\)</span> is random, a function like this doesn’t exist. So we adjust our requirements and instead ask for an <span class="math inline">\(f\)</span> which predicts <span class="math inline">\(Y\)</span> as best as possible.</p>
+<p>What do we mean by “best possible” prediction? Well there are multiple valid answers. One idea is to measure <span class="math inline">\(f\)</span>’s predictive power by measuring <span class="math inline">\(f\)</span>’s prediction error. A <strong>loss</strong> function <span class="math inline">\(L\)</span> is a functional <span class="math inline">\(L:\text{Maps}(\mathbb{R}^n,\mathbb{R})\to \mathbb{R}\)</span> where <span class="math inline">\(L(f)\)</span> represents the prediction error of <span class="math inline">\(f\)</span>. One such loss function is he <strong>expected squared error</strong> (ESE) given by:
+<span class="math display">\[
+\begin{align*}
+ESE(f) &amp;= E(Y-f(X))^2 \\
+&amp;=\int(y-f(x))^2Pr(dx,dy) \\
+&amp;=E_XE_{Y|X}\left([Y-f(X)]^2|X\right)
+\end{align*}
+\]</span>
+This quantity <span class="math inline">\(ESE\)</span> measures the average squared error made by <span class="math inline">\(f\)</span> when predicting the values of <span class="math inline">\(Y\)</span>. Since we want <span class="math inline">\(f(X)\)</span> to be the “best” possible prediction of <span class="math inline">\(Y\)</span>, <span class="math inline">\(f(X)\)</span> should minimize the <span class="math inline">\(ESE\)</span> quantity:</p>
+<p><span class="math display">\[
+f(x) = \min_{c} E_XE_{Y|X}\left([Y-c]^2|X=x\right)
+\]</span>
+Think about what this equation is saying: for a fixed value <span class="math inline">\(X=x\)</span>, the quantity <span class="math inline">\(f(x)\)</span> should minimize the expected squared error <span class="math inline">\(E(Y-f(x))^2\)</span> in <span class="math inline">\(Y\)</span>. We actually know exactly what quantity <span class="math inline">\(f(x)\)</span> is, it’s just the (conditional) mean!</p>
+<p><span class="math display">\[
+f(X) = E(Y|X=x)
+\]</span>
+To summarize: <span class="math inline">\(f(x)\)</span> should best predict <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>. If we use <span class="math inline">\(ESE\)</span> as our standard for predictive power, then conditional mean <span class="math inline">\(f(X) = E(Y|X=x)\)</span> is the quantity that best predicts <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>.</p>
+<p><strong>Aside:</strong> This actually makes intuitive sense. In the absence of any information, the mean is always the best predictor in that it minimizes squared error. If we have <span class="math inline">\(Y\)</span> is dependent on <span class="math inline">\(X\)</span>, then once we control for <span class="math inline">\(X=x\)</span>, our best prediction for <span class="math inline">\(Y\)</span> should be the mean again <span class="math inline">\(E(Y|X=x)\)</span>.</p>
+<p>Of course, <span class="math inline">\(ESE\)</span> is just one possible measure of prediction error. Another possible measure of prediction error is <strong>expected absolute error</strong> (EAE):</p>
+<p><span class="math display">\[
+EAE = E\big(\,|Y-f(X)| \,\big)
+\]</span>
+The <span class="math inline">\(f\)</span> which minimizes this quantity is the conditional median:</p>
+<p><span class="math display">\[
+f(X) = \text{median}(Y|X=x)
+\]</span></p>
+<p>All-in-all: we want to study the dependency of <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> by building a function <span class="math inline">\(f\)</span> which best predicts <span class="math inline">\(Y\)</span>. However, there are many different ways to quantify what “best” actually means and the quantity <span class="math inline">\(f(X)\)</span> can represent different statistical parameters.</p>
+<p>In practice, the squared error ESE is usually preferred because of analytical properties like differentiability. That being said, the EAE is more robust to outliers.</p>
+<p><br />
+</p>
+</div>
+<div id="building-the-model" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Building the model<a href="modeling.html#building-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The function <span class="math inline">\(f(x)=E(Y|X=x)\)</span> offers the best predictions (in the sense of squared loss). We desire to explicitly know <span class="math inline">\(f\)</span>, but this requires knowing the entire distribution <span class="math inline">\(Pr(X,Y)\)</span> which is usually impossible to attain. The next best alternative is find an approximation <span class="math inline">\(\hat{f}\)</span> for the ground truth <span class="math inline">\(f\)</span>.</p>
+<p>The idea is to sample a set of data points <span class="math inline">\(\{(X^{(i)},Y^{(i)})\}_{i=1}^n\)</span> from the distribution <span class="math inline">\(Pr(X,Y)\)</span> and use the sample as a <em>proxy</em> for the distribution. That is, we wish to estimate <span class="math inline">\(f(x) = E(Y|X=x)\)</span> from the sample. In a perfect world, we would have many data points <span class="math inline">\((x,Y)\)</span> for each fixed value of <span class="math inline">\(X=x\)</span> and we could average the <span class="math inline">\(Y\)</span> values across fixed <span class="math inline">\(X=x\)</span>. However, this is rarely the case and downright impossible for continuous <span class="math inline">\(X\)</span>.</p>
+<div id="k-nearest-neighbors" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> <span class="math inline">\(k\)</span>-nearest neighbors<a href="modeling.html#k-nearest-neighbors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One approach: if we don’t have enough data points of a fixed <span class="math inline">\(x\)</span> value, why don’t we use data points with nearby <span class="math inline">\(x\)</span> values? For a given <span class="math inline">\(x\)</span> value, let <span class="math inline">\(N_k(x) = \{(X^{(i_1)}, Y^{(i_1)}),\ldots, (X^{(i_k)},Y^{(i_k)})\}\)</span> be the <span class="math inline">\(k\)</span> data points with <span class="math inline">\(X\)</span> values closest to <span class="math inline">\(x\)</span>. We call <span class="math inline">\(N_k(x)\)</span> the <strong><span class="math inline">\(k\)</span>-nearest neighbors</strong> of <span class="math inline">\(x\)</span>. Then we make the approximation:</p>
+<p><span class="math display">\[
+\begin{align*}
+f(X) &amp;= E(Y|X=x) \\
+&amp; \approx E\left[B_k(x)\right] \\
+&amp;= \frac{1}{k}\sum_{j=1}^k Y^{(i_j)}
+\end{align*}
+\]</span>
+Explicitly, the approximation we make is <span class="math inline">\(\hat{f}=E[B_k(x)]\)</span> and this model for <span class="math inline">\(f\)</span> is called the <span class="math inline">\(k\)</span>-nearest neighbors model.</p>
+<p><br />
+</p>
+</div>
+<div id="decision-trees" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Decision trees<a href="modeling.html#decision-trees" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <span class="math inline">\(k\)</span>-nearest neighbors approach motivates another approach to solving the problem. Since we want to approximate <span class="math inline">\(f(X) = E(Y|X=x)\)</span>, we can try to group similar data points with similar <span class="math inline">\(X=x\)</span> values together and take the group average. <span class="math inline">\(k\)</span>-nearest neighbors did this by defining “similar” to mean closest data points in Euclidean distance. What if we had a different method for defining “similar”?</p>
+<p>Another approach is to identify clusters of data points together making splits along the <span class="math inline">\(X_1,\ldots, X_m\)</span> dimensions. In other words, we can draw rectangles in the <span class="math inline">\(X_1,\ldots,X_m\)</span> to group together clusters of data points. The optimal splits are decided upon by choosing the ones with greatest reduction to the variance in the <span class="math inline">\(Y^{(i)}\)</span>.</p>
+<p>After the clusters are computed, we average the <span class="math inline">\(Y^{(i)}\)</span> values in each cluster to get the estimate for <span class="math inline">\(E(Y|X=x)\)</span> we desire.</p>
+<p><br />
+</p>
+</div>
+<div id="model-based-approach" class="section level3 hasAnchor" number="9.3.3">
+<h3><span class="header-section-number">9.3.3</span> Model-based approach<a href="modeling.html#model-based-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Another to approximating <span class="math inline">\(f(x)\)</span> is to find a <span class="math inline">\(\hat{f}\)</span> which minimizes the prediction error over the sample. Recall that prediction error over the population is the expected squared error:</p>
+<p><span class="math display">\[ESE(f) = E(Y-f(x))^2\]</span></p>
+<p>The sample analogue of ESE is the <strong>mean squared error</strong> (MSE) given by:</p>
+<p><span class="math display">\[
+\begin{align*}
+MSE(f) &amp;= E(Y^{(i)}-f(X^{(i)}))^2 \\
+&amp;= \frac{1}{n}\sum_{i=1}^n\left(Y^{(i)}-f(X^{(i)})\right)^2
+\end{align*}
+\]</span>
+Since <span class="math inline">\(f\)</span> minimizes the ESE over the population, a good approximation for <span class="math inline">\(f\)</span> might be a function <span class="math inline">\(\hat{f}\)</span> which minimizes the MSE over the sample.</p>
+<p>There is an issue with this approach: since we only have finitely many sample points, there are <em>infinitely many</em> functions which minimize MSE. Think about it: there exists infinitely many functions which cross through all the sample points, i.e. <span class="math inline">\(\hat{f}(X^{(i)})=Y^{(i)}\)</span> for all <span class="math inline">\(i\)</span>. Therefore, there exists infinitely many <span class="math inline">\(\hat{f}\)</span> for which <span class="math inline">\(MSE=0\)</span>.</p>
+<p>In order to obtain a unique solution for <span class="math inline">\(\hat{f}\)</span>, we must impose a condition on the types of <span class="math inline">\(\hat{f}\)</span> we wish to permit. For example:</p>
+<ul>
+<li>Linear models: we assume <span class="math inline">\(\hat{f}\)</span> is linear</li>
+</ul>
+<p><span class="math display">\[\hat{f}(X) = X^T\beta = \beta_0+\beta_1X_1+\ldots+\beta_mX_m\]</span></p>
+<ul>
+<li><p>Polynomial models: we assume <span class="math inline">\(\hat{f}\)</span> is a polynomial in <span class="math inline">\(X_1,\ldots,X_n\)</span></p></li>
+<li><p>Generalized linear models: we assume <span class="math inline">\(\hat{f}\)</span> is linear up to a link function</p></li>
+</ul>
+<p><span class="math display">\[\hat{f}(X) = g\left(X^T\beta\right)\]</span>
+* Generalized additive models: we assume <span class="math inline">\(\hat{f}\)</span> is a linear combination of smooth functions</p>
+<p><span class="math display">\[\hat{f}(X) = g\left(\beta_0+f_1(X_1)+\ldots+f_m(X_m)\right)\]</span>
+Assuming <span class="math inline">\(\hat{f}\)</span> must be of a specific form is called a <strong>model-based approach</strong> because we are modeling our <span class="math inline">\(\hat{f}\)</span> after a specific function class.</p>
+<p><br />
+</p>
 
+</div>
+</div>
 </div>
             </section>
 
