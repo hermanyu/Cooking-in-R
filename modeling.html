@@ -305,7 +305,7 @@ Explicitly, the approximation we make is <span class="math inline">\(\hat{f}=E[N
 </div>
 <div id="model-based-approach" class="section level3 hasAnchor" number="9.3.3">
 <h3><span class="header-section-number">9.3.3</span> Model-based approach<a href="modeling.html#model-based-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Another to approximating <span class="math inline">\(f(x)\)</span> is to find a <span class="math inline">\(\hat{f}\)</span> which minimizes the prediction error over the sample. Recall that prediction error over the population is the expected squared error:</p>
+<p>Another way to approximate <span class="math inline">\(f(x)\)</span> is to find a <span class="math inline">\(\hat{f}\)</span> which minimizes the prediction error over the sample. Recall that prediction error over the population is the expected squared error:</p>
 <p><span class="math display">\[ESE(f) = E(Y-f(x))^2\]</span></p>
 <p>The sample analogue of ESE is the <strong>mean squared error</strong> (MSE) given by:</p>
 <p><span class="math display">\[
@@ -318,15 +318,17 @@ Since <span class="math inline">\(f\)</span> minimizes the ESE over the populati
 <p>There is an issue with this approach: since we only have finitely many sample points, there are <em>infinitely many</em> functions which minimize MSE. Think about it: there exists infinitely many functions which cross through all the sample points, i.e. <span class="math inline">\(\hat{f}(X^{(i)})=Y^{(i)}\)</span> for all <span class="math inline">\(i\)</span>. Therefore, there exists infinitely many <span class="math inline">\(\hat{f}\)</span> for which <span class="math inline">\(MSE=0\)</span>.</p>
 <p>In order to obtain a unique solution for <span class="math inline">\(\hat{f}\)</span>, we must impose a condition on the types of <span class="math inline">\(\hat{f}\)</span> we wish to permit. For example:</p>
 <ul>
-<li>Linear models: we assume <span class="math inline">\(\hat{f}\)</span> is linear</li>
+<li><strong>Linear models</strong>: we assume <span class="math inline">\(\hat{f}\)</span> is linear</li>
 </ul>
 <p><span class="math display">\[\hat{f}(X) = X^T\beta = \beta_0+\beta_1X_1+\ldots+\beta_mX_m\]</span></p>
 <ul>
-<li><p>Polynomial models: we assume <span class="math inline">\(\hat{f}\)</span> is a polynomial in <span class="math inline">\(X_1,\ldots,X_n\)</span></p></li>
-<li><p>Generalized linear models: we assume <span class="math inline">\(\hat{f}\)</span> is linear up to a link function</p></li>
+<li><p><strong>Polynomial models</strong>: we assume <span class="math inline">\(\hat{f}\)</span> is a polynomial in <span class="math inline">\(X_1,\ldots,X_n\)</span></p></li>
+<li><p><strong>Generalized linear models</strong>: we assume <span class="math inline">\(\hat{f}\)</span> is linear up to a link function</p></li>
 </ul>
-<p><span class="math display">\[\hat{f}(X) = g\left(X^T\beta\right)\]</span>
-* Generalized additive models: we assume <span class="math inline">\(\hat{f}\)</span> is a linear combination of smooth functions</p>
+<p><span class="math display">\[\hat{f}(X) = g\left(X^T\beta\right)\]</span></p>
+<ul>
+<li><strong>Generalized additive models</strong>: we assume <span class="math inline">\(\hat{f}\)</span> is a linear combination of smooth functions up to a link function</li>
+</ul>
 <p><span class="math display">\[\hat{f}(X) = g\left(\beta_0+f_1(X_1)+\ldots+f_m(X_m)\right)\]</span>
 Assuming <span class="math inline">\(\hat{f}\)</span> must be of a specific form is called a <strong>model-based approach</strong> because we are modeling our <span class="math inline">\(\hat{f}\)</span> after a specific function class.</p>
 <p><br />
