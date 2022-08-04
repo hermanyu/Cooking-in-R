@@ -204,6 +204,9 @@
 <li class="chapter" data-level="9.3.2" data-path="modeling.html"><a href="modeling.html#decision-trees"><i class="fa fa-check"></i><b>9.3.2</b> Decision trees</a></li>
 <li class="chapter" data-level="9.3.3" data-path="modeling.html"><a href="modeling.html#model-based-approach"><i class="fa fa-check"></i><b>9.3.3</b> Model-based approach</a></li>
 </ul></li>
+<li class="chapter" data-level="9.4" data-path="modeling.html"><a href="modeling.html#minimizing-loss-functions"><i class="fa fa-check"></i><b>9.4</b> Minimizing loss functions</a></li>
+<li class="chapter" data-level="9.5" data-path="modeling.html"><a href="modeling.html#maximizing-likelihood-estimates"><i class="fa fa-check"></i><b>9.5</b> Maximizing likelihood estimates</a></li>
+<li class="chapter" data-level="9.6" data-path="modeling.html"><a href="modeling.html#the-additive-error-model-and-the-bias-variance-tradeoff"><i class="fa fa-check"></i><b>9.6</b> The additive error model and the bias-variance tradeoff</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="linear-regression-models.html"><a href="linear-regression-models.html"><i class="fa fa-check"></i><b>10</b> Linear Regression Models</a></li>
 <li class="divider"></li>
@@ -246,29 +249,24 @@
 <h2><span class="header-section-number">9.2</span> Statistical decision theory<a href="modeling.html#statistical-decision-theory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We take the previous example and formalize it. Let <span class="math inline">\(X=(X_1,\ldots,X_k)\)</span> be a vector of <span class="math inline">\(k\)</span> variables and <span class="math inline">\(Y\)</span> a random variable which “depends” on <span class="math inline">\(X\)</span>. We want to study the exact nature of <span class="math inline">\(Y\)</span>’s dependency on <span class="math inline">\(X\)</span>. One approach is build a function <span class="math inline">\(f\)</span> which can construct <span class="math inline">\(Y\)</span> out of the data given by <span class="math inline">\(X\)</span>. In other words, we seek a function <span class="math inline">\(f\)</span> such that <span class="math inline">\(Y=f(X)\)</span>.</p>
 <p>Unfortunately, since <span class="math inline">\(Y\)</span> is random, a function like this doesn’t exist. So we adjust our requirements and instead ask for an <span class="math inline">\(f\)</span> which predicts <span class="math inline">\(Y\)</span> as best as possible.</p>
-<p>What do we mean by “best possible” prediction? Well there are multiple valid answers. One idea is to measure <span class="math inline">\(f\)</span>’s predictive power by measuring <span class="math inline">\(f\)</span>’s prediction error. A <strong>loss</strong> function <span class="math inline">\(L\)</span> is a functional <span class="math inline">\(L:\text{Maps}(\mathbb{R}^n,\mathbb{R})\to \mathbb{R}\)</span> where <span class="math inline">\(L(f)\)</span> represents the prediction error of <span class="math inline">\(f\)</span>. One such loss function is he <strong>expected squared error</strong> (ESE) given by:
-<span class="math display">\[
+<p>What do we mean by “best possible” prediction? Well there are multiple valid answers. One idea is to measure <span class="math inline">\(f\)</span>’s predictive power by measuring <span class="math inline">\(f\)</span>’s prediction error. A <strong>loss</strong> function <span class="math inline">\(L\)</span> is a functional <span class="math inline">\(L:\text{Maps}(\mathbb{R}^n,\mathbb{R})\to \mathbb{R}\)</span> where <span class="math inline">\(L(f)\)</span> represents the prediction error of <span class="math inline">\(f\)</span>. One such loss function is he <strong>expected squared error</strong> (ESE) given by: <span class="math display">\[
 \begin{align*}
 ESE(f) &amp;= E(Y-f(X))^2 \\
 &amp;=\int(y-f(x))^2Pr(dx,dy) \\
 &amp;=E_XE_{Y|X}\left([Y-f(X)]^2|X\right)
 \end{align*}
-\]</span>
-This quantity <span class="math inline">\(ESE\)</span> measures the average squared error made by <span class="math inline">\(f\)</span> when predicting the values of <span class="math inline">\(Y\)</span>. Since we want <span class="math inline">\(f(X)\)</span> to be the “best” possible prediction of <span class="math inline">\(Y\)</span>, <span class="math inline">\(f(X)\)</span> should minimize the <span class="math inline">\(ESE\)</span> quantity:</p>
+\]</span> This quantity <span class="math inline">\(ESE\)</span> measures the average squared error made by <span class="math inline">\(f\)</span> when predicting the values of <span class="math inline">\(Y\)</span>. Since we want <span class="math inline">\(f(X)\)</span> to be the “best” possible prediction of <span class="math inline">\(Y\)</span>, <span class="math inline">\(f(X)\)</span> should minimize the <span class="math inline">\(ESE\)</span> quantity:</p>
 <p><span class="math display">\[
 f(x) = \min_{c} E_XE_{Y|X}\left([Y-c]^2|X=x\right)
-\]</span>
-Think about what this equation is saying: for a fixed value <span class="math inline">\(X=x\)</span>, the quantity <span class="math inline">\(f(x)\)</span> should minimize the expected squared error <span class="math inline">\(E(Y-f(x))^2\)</span> in <span class="math inline">\(Y\)</span>. We actually know exactly what quantity <span class="math inline">\(f(x)\)</span> is, it’s just the (conditional) mean!</p>
+\]</span> Think about what this equation is saying: for a fixed value <span class="math inline">\(X=x\)</span>, the quantity <span class="math inline">\(f(x)\)</span> should minimize the expected squared error <span class="math inline">\(E(Y-f(x))^2\)</span> in <span class="math inline">\(Y\)</span>. We actually know exactly what quantity <span class="math inline">\(f(x)\)</span> is, it’s just the (conditional) mean!</p>
 <p><span class="math display">\[
 f(X) = E(Y|X=x)
-\]</span>
-To summarize: <span class="math inline">\(f(x)\)</span> should best predict <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>. If we use <span class="math inline">\(ESE\)</span> as our standard for predictive power, then conditional mean <span class="math inline">\(f(X) = E(Y|X=x)\)</span> is the quantity that best predicts <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>.</p>
+\]</span> To summarize: <span class="math inline">\(f(x)\)</span> should best predict <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>. If we use <span class="math inline">\(ESE\)</span> as our standard for predictive power, then conditional mean <span class="math inline">\(f(X) = E(Y|X=x)\)</span> is the quantity that best predicts <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span>.</p>
 <p><strong>Aside:</strong> This actually makes intuitive sense. In the absence of any information, the mean is always the best predictor in that it minimizes squared error. If we have <span class="math inline">\(Y\)</span> is dependent on <span class="math inline">\(X\)</span>, then once we control for <span class="math inline">\(X=x\)</span>, our best prediction for <span class="math inline">\(Y\)</span> should be the mean again <span class="math inline">\(E(Y|X=x)\)</span>.</p>
 <p>Of course, <span class="math inline">\(ESE\)</span> is just one possible measure of prediction error. Another possible measure of prediction error is <strong>expected absolute error</strong> (EAE):</p>
 <p><span class="math display">\[
 EAE = E\big(\,|Y-f(X)| \,\big)
-\]</span>
-The <span class="math inline">\(f\)</span> which minimizes this quantity is the conditional median:</p>
+\]</span> The <span class="math inline">\(f\)</span> which minimizes this quantity is the conditional median:</p>
 <p><span class="math display">\[
 f(X) = \text{median}(Y|X=x)
 \]</span></p>
@@ -283,15 +281,14 @@ f(X) = \text{median}(Y|X=x)
 <p>The idea is to sample a set of data points <span class="math inline">\(\{(X^{(i)},Y^{(i)})\}_{i=1}^n\)</span> from the distribution <span class="math inline">\(Pr(X,Y)\)</span> and use the sample as a <em>proxy</em> for the distribution. That is, we wish to estimate <span class="math inline">\(f(x) = E(Y|X=x)\)</span> from the sample. In a perfect world, we would have many data points <span class="math inline">\((x,Y)\)</span> for each fixed value of <span class="math inline">\(X=x\)</span> and we could average the <span class="math inline">\(Y\)</span> values across fixed <span class="math inline">\(X=x\)</span>. However, this is rarely the case and downright impossible for continuous <span class="math inline">\(X\)</span>.</p>
 <div id="k-nearest-neighbors" class="section level3 hasAnchor" number="9.3.1">
 <h3><span class="header-section-number">9.3.1</span> <span class="math inline">\(k\)</span>-nearest neighbors<a href="modeling.html#k-nearest-neighbors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>One approach: if we don’t have enough data points of a fixed <span class="math inline">\(x\)</span> value, why don’t we use data points with nearby <span class="math inline">\(x\)</span> values? For a given <span class="math inline">\(x\)</span> value, let <span class="math inline">\(N_k(x) = \{(X^{(i_1)}, Y^{(i_1)}),\ldots, (X^{(i_k)},Y^{(i_k)})\}\)</span> be the <span class="math inline">\(k\)</span> data points with <span class="math inline">\(X\)</span> values closest to <span class="math inline">\(x\)</span>. We call <span class="math inline">\(N_k(x)\)</span> the <strong><span class="math inline">\(k\)</span>-nearest neighbors</strong> of <span class="math inline">\(x\)</span>. Then we make the approximation:</p>
+<p>One approach: if we don’t have enough data points of a fixed <span class="math inline">\(x\)</span> value, why don’t we use data points with nearby <span class="math inline">\(x\)</span> values? For a given <span class="math inline">\(x\)</span> value, let <span class="math inline">\(N_k(x) = \{(X^{(i_1)}, Y^{(i_1)}),\ldots, (X^{(i_k)},Y^{(i_k)})\}\)</span> be the <span class="math inline">\(k\)</span> data points with <span class="math inline">\(X\)</span> values closest to <span class="math inline">\(x\)</span>. We call <span class="math inline">\(N_k(x)\)</span> the <span class="math inline">\(k\)</span>-nearest neighbors of <span class="math inline">\(x\)</span>. Then we make the approximation:</p>
 <p><span class="math display">\[
 \begin{align*}
 f(X) &amp;= E(Y|X=x) \\
 &amp; \approx E\left[N_k(x)\right] \\
 &amp;= \frac{1}{k}\sum_{j=1}^k Y^{(i_j)}
 \end{align*}
-\]</span>
-Explicitly, the approximation we make is <span class="math inline">\(\hat{f}=E[N_k(x)]\)</span> and this model for <span class="math inline">\(f\)</span> is called the <span class="math inline">\(k\)</span>-nearest neighbors model.</p>
+\]</span> Explicitly, the approximation we make is <span class="math inline">\(\hat{f}=E[N_k(x)]\)</span> and this model for <span class="math inline">\(f\)</span> is called the <span class="math inline">\(k\)</span>-nearest neighbors model.</p>
 <p><br />
 </p>
 </div>
@@ -313,28 +310,129 @@ Explicitly, the approximation we make is <span class="math inline">\(\hat{f}=E[N
 MSE(f) &amp;= E(Y^{(i)}-f(X^{(i)}))^2 \\
 &amp;= \frac{1}{n}\sum_{i=1}^n\left(Y^{(i)}-f(X^{(i)})\right)^2
 \end{align*}
-\]</span>
-Since <span class="math inline">\(f\)</span> minimizes the ESE over the population, a good approximation for <span class="math inline">\(f\)</span> might be a function <span class="math inline">\(\hat{f}\)</span> which minimizes the MSE over the sample.</p>
+\]</span> Since <span class="math inline">\(f\)</span> minimizes the ESE over the population, a good approximation for <span class="math inline">\(f\)</span> might be a function <span class="math inline">\(\hat{f}\)</span> which minimizes the MSE over the sample.</p>
 <p>There is an issue with this approach: since we only have finitely many sample points, there are <em>infinitely many</em> functions which minimize MSE. Think about it: there exists infinitely many functions which cross through all the sample points, i.e. <span class="math inline">\(\hat{f}(X^{(i)})=Y^{(i)}\)</span> for all <span class="math inline">\(i\)</span>. Therefore, there exists infinitely many <span class="math inline">\(\hat{f}\)</span> for which <span class="math inline">\(MSE=0\)</span>.</p>
-<p>In order to obtain a unique solution for <span class="math inline">\(\hat{f}\)</span>, we must impose a condition on the types of <span class="math inline">\(\hat{f}\)</span> we wish to permit. For example:</p>
+<p>In order to obtain a unique solution for <span class="math inline">\(\hat{f}\)</span>, we must impose a condition on the form of <span class="math inline">\(f\)</span> and <span class="math inline">\(\hat{f}\)</span>. For example:</p>
 <ul>
-<li><strong>Linear models</strong>: we assume <span class="math inline">\(\hat{f}\)</span> is linear</li>
+<li><strong>Linear models</strong>: we assume <span class="math inline">\(f\)</span> is linear</li>
 </ul>
-<p><span class="math display">\[\hat{f}(X) = X^T\beta = \beta_0+\beta_1X_1+\ldots+\beta_mX_m\]</span></p>
+<p><span class="math display">\[f(X) = X^T\theta = \theta_0+\theta_1X_1+\ldots+\theta_mX_m\]</span></p>
 <ul>
-<li><p><strong>Polynomial models</strong>: we assume <span class="math inline">\(\hat{f}\)</span> is a polynomial in <span class="math inline">\(X_1,\ldots,X_n\)</span></p></li>
-<li><p><strong>Generalized linear models</strong>: we assume <span class="math inline">\(\hat{f}\)</span> is linear up to a link function</p></li>
+<li><p><strong>Polynomial models</strong>: we assume <span class="math inline">\(f\)</span> is a polynomial in <span class="math inline">\(X_1,\ldots,X_n\)</span></p></li>
+<li><p><strong>Generalized linear models</strong>: we assume <span class="math inline">\(f\)</span> is linear up to a link function</p></li>
 </ul>
-<p><span class="math display">\[\hat{f}(X) = g\left(X^T\beta\right)\]</span></p>
+<p><span class="math display">\[f(X) = g\left(X^T\beta\right)\]</span></p>
 <ul>
-<li><strong>Generalized additive models</strong>: we assume <span class="math inline">\(\hat{f}\)</span> is a linear combination of smooth functions up to a link function</li>
+<li><strong>Generalized additive models</strong>: we assume <span class="math inline">\(f\)</span> is a linear combination of smooth functions up to a link function</li>
 </ul>
-<p><span class="math display">\[\hat{f}(X) = g\left(\beta_0+f_1(X_1)+\ldots+f_m(X_m)\right)\]</span>
-Assuming <span class="math inline">\(\hat{f}\)</span> must be of a specific form is called a <strong>model-based approach</strong> because we are modeling our <span class="math inline">\(\hat{f}\)</span> after a specific function class.</p>
+<p><span class="math display">\[f(X) = g\left(\theta_0+f_1(X_1)+\ldots+f_m(X_m)\right)\]</span> Assuming <span class="math inline">\(f\)</span> must be of a specific form is called a <strong>model-based approach</strong> because we are modeling our <span class="math inline">\(f\)</span> after a specific function class.</p>
+<p><br />
+</p>
+<p>Once we decide on a specific parametric form for <span class="math inline">\(f_{\theta}\)</span>, we can set about finding an estimate <span class="math inline">\(\hat{f}\)</span> by approximating the parameters <span class="math inline">\(\theta\)</span>. Again, we want our estimate <span class="math inline">\(\hat{f}\)</span> to minimize <span class="math inline">\(MSE\)</span> and this criterion is how we get estimates for the <span class="math inline">\(\theta\)</span> values.</p>
+<p><br />
+</p>
+</div>
+</div>
+<div id="minimizing-loss-functions" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Minimizing loss functions<a href="modeling.html#minimizing-loss-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let <span class="math inline">\(\hat{f}(x) = \hat{f}_{\theta}(x)\)</span> be a function parameterized by a set of values <span class="math inline">\(\theta = (\theta_1,\ldots,\theta_m)\)</span>. For example if <span class="math inline">\(\hat{f}(X) = X^T\beta\)</span> is linear, then <span class="math inline">\(\theta=\beta\)</span>. The objective is to find a specific <span class="math inline">\(\theta\)</span> such that the quantity:</p>
+<p><span class="math display">\[MSE(\theta) = \frac{1}{n}\sum_{i=1}^n\left(Y^{(i)}-\hat{f}_{\theta}(X^{(i)})\right)^2\]</span></p>
+<p>is minimized. Notice that we are treating <span class="math inline">\(MSE\)</span> as a function of <span class="math inline">\(\theta\)</span>. There are 2 ways we can attempt to minimize the <span class="math inline">\(MSE\)</span> quantity:</p>
+<ol style="list-style-type: decimal">
+<li>Analytic solution: do some calculus and clever linear algebra to solve for <span class="math inline">\(\theta\)</span> exactly.</li>
+<li>Gradient descent: do an iterative computation that inches closer and closer to a solution.</li>
+</ol>
+<p>The first approach is generally only possible if <span class="math inline">\(\hat{f}_{\theta}\)</span> has a relatively simple form, e.g. a linear model. The second approach can always be applied, but can fail to converge to an optimal solution if <span class="math inline">\(MSE(\hat{f}_{\theta})\)</span> isn’t a convex function.</p>
+<p>The concept of gradient descent actually follows a very simple calculus principle: the gradient points in the direction of steepest increase. Therefore, if we want to minimize a loss function <span class="math inline">\(L(\theta)\)</span>, we can start with a random guess <span class="math inline">\(\theta\)</span> and update our guess by moving in the opposite direction of the gradient:</p>
+<p><span class="math display">\[\theta := \theta - \frac{dL}{d\theta}\]</span></p>
+<p>After repeating this procedure, the hope is that we eventually arrive at a <span class="math inline">\(\theta\)</span> with an acceptably low loss value. As mentioned above, the main theoretical challenge for gradient descent is when the loss function <span class="math inline">\(L\)</span> is not convex, i.e. when <span class="math inline">\(L\)</span> has multiple local minimums.</p>
+<p>There is also a number of computational challenges. Firstly, when the function <span class="math inline">\(f_{\theta}\)</span> is sufficiently complicated, the gradient <span class="math inline">\(\frac{dL}{d\theta}\)</span> can be extremely hard to compute. In these situations, it is often necessary to find a clever algorithm to compute the gradient. For example, neural networks have extremely complicated <span class="math inline">\(f_{\theta}\)</span> and the clever algorithm used to compute the gradient <span class="math inline">\(\frac{dL}{d\theta}\)</span> is called <strong>back propagation</strong>.</p>
+<p>Secondly, gradient descent can become unstable if the step size along the gradient direction is too large. The naive solution to this problem is to take tiny steps during the descent, but this can lead to a very slow run time. A more sophisticated solution is to perform a <strong>line search</strong> for the optimal step size at each descent step.</p>
+<p>Thirdly, gradient descent be quite inefficient even with an optimal step size. This is because the gradient can zigzag back-and-forth as it winds its way down to the minimum. For this reason, the gradient descent algorithm is often adjusted to provide a more “direct” approach towards the minimum. One such adjustment is <strong>conjugate gradient descent</strong> in which orthonormal basis vectors are used to adjust the gradient direction. Another approach is the <strong>Newton - Raphson method</strong> which attempts to solve the equation <span class="math inline">\(\frac{dL}{d\theta} = 0\)</span> via an iterative procedure</p>
+<p><span class="math display">\[\theta:=\theta-\frac{L&#39;(\theta)}{L&#39;&#39;(\theta)}\]</span></p>
+<p>(This is the same algorithm in Calculus 1 where students are asked to find the roots of a function <span class="math inline">\(f(x)\)</span> using tangent line approximations.)</p>
+<p><br />
+</p>
+</div>
+<div id="maximizing-likelihood-estimates" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Maximizing likelihood estimates<a href="modeling.html#maximizing-likelihood-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Minimizing lost functions isn’t the only game in town; we can also do <strong>maximum likelihood estimates</strong>. We have <span class="math inline">\(f(x) = E(Y|X=x)\)</span> is the “best possible prediction” for <span class="math inline">\(Y\)</span> using the information given by <span class="math inline">\(X=x\)</span>. Instead of trying to estimate the conditional mean <span class="math inline">\(E(Y|X=x)\)</span> directly, we instead do something more ambitious and try to estimate the entire conditional distribution <span class="math inline">\(Pr(Y|X=x)\)</span>.</p>
+<p>Previously, we assumed that <span class="math inline">\(E(Y|X=x) = f_{\theta}(x)\)</span> had some specific model form, e.g. <span class="math inline">\(f_{\theta}=X^T\theta\)</span>. Now, we assume instead that the conditional distribution <span class="math inline">\(Pr(Y|X=x, \theta)\)</span> has a specific form, e.g. <span class="math inline">\(Pr(Y|X=x) \sim N(x^T\theta, \sigma^2)\)</span>. Finding a good approximation for <span class="math inline">\(Pr(Y|X=x)\)</span> now reduces to finding a good estimate for <span class="math inline">\(\theta\)</span>.</p>
+<p>For any given value <span class="math inline">\(\hat{\theta}\)</span>, define the <strong>likelihood</strong> of <span class="math inline">\(\hat{\theta}\)</span> given <span class="math inline">\((X,Y)\)</span> as the quantity:</p>
+<p><span class="math display">\[l(\hat{\theta} | X,Y) = Pr(Y|X,\hat{\theta})\]</span> In other words, the likelihood of <span class="math inline">\(\hat{\theta}\)</span> is the probability of observing the values <span class="math inline">\((X,Y)\)</span> if <span class="math inline">\(\hat{\theta}\)</span> was the actual parameter of the distribution <span class="math inline">\(Pr(Y|X)\)</span>.</p>
+<p>The <strong>principle of maximum likelihood</strong> espouses that the <span class="math inline">\(\hat{\theta}\)</span> which best estimates <span class="math inline">\(\theta\)</span> is the one with the greatest likelihood. Specifically:</p>
+<p><span class="math display">\[
+\begin{align*}
+\hat{\theta} &amp;:= \max_{\hat{\theta}} \,\, l(\hat{\theta}|X^{(1)},\ldots,X^{(n)},Y^{(1)},\ldots,Y^{(n)}) \\
+&amp;= \max_{\hat{\theta}} \,\,Pr(Y^{(1)},\ldots,Y^{(n)}|X^{(1)},\ldots,X^{(n)},\hat{\theta})\\
+&amp;= \max_{\hat{\theta}} \,\,\prod_{i=1}^n Pr(Y^{(i)}|X^{(i)},\hat{\theta})
+\end{align*}
+\]</span></p>
+<p>In other words, <span class="math inline">\(\hat{\theta}\)</span> should be the parameter(s) for which the observed sample is most probable. Note that the we are able to split the probability into a product because we assume the each data point is drawn independently during the sampling process.</p>
+<p>We can convert the product into a sum by feeding the likelihood <span class="math inline">\(l(\hat{\theta})\)</span> into the <span class="math inline">\(\log\)</span> function. If we do this, we get:</p>
+<p><span class="math display">\[
+\begin{align*}
+\log(l(\hat{\theta})) &amp;= \log\left(\prod_{i=1}^n Pr(Y^{(i)}|X^{(i)},\hat{\theta})\right) \\
+&amp;= \sum_{i=1}^n\log\left(Pr(Y^{(i)}|X^{(i)},\hat{\theta})\right)
+\end{align*}
+\]</span></p>
+<p>Since <span class="math inline">\(\log()\)</span> is a monotonic function, the maximums for both <span class="math inline">\(l(\hat{\theta})\)</span> and <span class="math inline">\(\log(l(\hat{\theta}))\)</span> <em>are the same</em>. For this reason, we almost always exclusively use the <strong>log likelihood</strong> which is a summation rather than a product.</p>
+<p>For example, if we assume that <span class="math inline">\(Pr(Y|X)\)</span> was a normal distribution of the form:</p>
+<p><span class="math display">\[Pr(Y|X,\theta)\sim N\left(X^T\theta\,\,, \,\,1\right)\]</span> Then the likelihood function is given by:</p>
+<p><span class="math display">\[
+\begin{align*}
+l(\hat{\theta}) &amp;= \prod_{i=1}^n Pr(Y^{(i)}|X^{(i)},\hat{\theta})\\
+&amp;= \prod_{i=1}^n\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(Y^{(i)}-X^{(i)}\cdot\hat{\theta})^2}
+\end{align*}
+\]</span></p>
+<p>The best estimate <span class="math inline">\(\hat{\theta}\)</span> is the one which maximizes this quantity. As before, we can switch to the log likelihood since the maximums will be the same for both <span class="math inline">\(\l(\hat{\theta})\)</span> and <span class="math inline">\(\log(l(\hat{\theta}))\)</span>:</p>
+<p><span class="math display">\[\log(l(\hat{\theta})) = -\frac{n\log(2\pi)}{2} + \sum_{i=1}^n-\frac{1}{2}\left(Y^{(i)} - X^{(i)}\cdot\hat{\theta}\right)^2\]</span></p>
+<p>First term <span class="math inline">\(-\frac{n\log(2\pi)}{2}\)</span> is a constant and <span class="math inline">\(-\frac{1}{2}\)</span> is a constant factor. Thus maximizing the log likelihood can be done simply by maximizing the quantity:</p>
+<p><span class="math display">\[\max_{\hat{\theta}} \,\,\sum_{i=1}^n-\left(Y^{(i)} - X^{(i)}\cdot\hat{\theta}\right)^2\]</span></p>
+<p>If this quantity looks familiar, that is no coincidence; it is precisely the negative of the summation quantity in MSE for <span class="math inline">\(f_{\theta}(X)=X\cdot \theta\)</span> linear!</p>
+<p><span class="math display">\[MSE = \frac{1}{n}\sum_{i=1}^n \left(Y^{(i)} - X^{(i)}\cdot\hat{\theta}\right)^2\]</span></p>
+<p>In particular: maximizing the log likelihood for <span class="math inline">\(Pr(Y|X=x)\)</span> normal <em>is equivalent</em> to minimizing MSE for <span class="math inline">\(f_{\hat{\theta}}\)</span> linear.</p>
+<p><br />
+</p>
+</div>
+<div id="the-additive-error-model-and-the-bias-variance-tradeoff" class="section level2 hasAnchor" number="9.6">
+<h2><span class="header-section-number">9.6</span> The additive error model and the bias-variance tradeoff<a href="modeling.html#the-additive-error-model-and-the-bias-variance-tradeoff" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><br />
+</p>
+<p>We can conceptualizing <span class="math inline">\(Y\)</span> as being made of two pieces of data:</p>
+<p><span class="math display">\[Y = f(X) + \epsilon\]</span></p>
+<p>where <span class="math inline">\(\epsilon\)</span> is a random variable. Heuristically, <span class="math inline">\(f(X)\)</span> is the best possible estimate for <span class="math inline">\(Y\)</span> using <span class="math inline">\(X\)</span>, while <span class="math inline">\(\epsilon\)</span> is the inherent randomness of <span class="math inline">\(Y\)</span> which cannot be predicted away.</p>
+<p>Since we have <span class="math inline">\(f(x) = E(Y|X=x)\)</span>, we must also have:</p>
+<p><span class="math display">\[
+\begin{align*}
+E(Y|X=x) &amp;= E(f(X)+\epsilon|X=x)\\
+&amp;= E(f(X)|X=x) + E(\epsilon|X=x)\\
+&amp;= E(E(Y|X=x)) + E(\epsilon|X=x)\\
+&amp;= E(Y|X=x) + E(\epsilon|X=x)\\
+0 &amp;=E(\epsilon|X=x)
+\end{align*}
+\]</span> In other words, the conditional mean of <span class="math inline">\(\epsilon\)</span> is always 0. Again, this represents the idea that <span class="math inline">\(\epsilon\)</span> is the randomness which cannot be predicted away; the information given by <span class="math inline">\(X=x\)</span> gives us no information about <span class="math inline">\(Y\)</span> beyond what is already given by <span class="math inline">\(f(X)\)</span>.</p>
+<p>This conceptualization <span class="math inline">\(Y=f(X)+\epsilon\)</span> is called the <strong>additive error model</strong>. The additive error model gives us a framework to study the prediction errors in our models. The prediction error of a model <span class="math inline">\(\hat{f}\)</span> is measured by the expected squared error (ESE):</p>
+<p><span class="math display">\[ESE = E\left[(Y-\hat{f})^2\right]\]</span></p>
+<p>Let’s take a moment to appreciate this quantity; the ESE measures how how far-off the model <span class="math inline">\(\hat{f}\)</span> will be when trying to predict a general value <span class="math inline">\(Y\)</span>. Since <span class="math inline">\(Y = f(X) + \epsilon\)</span>, we have:</p>
+<p><span class="math display">\[
+\begin{align*}
+ESE &amp;= E\left[(Y-\hat{f}(X))^2\right] \\
+&amp;= E\left[(f(X)+\epsilon -\hat{f}(X))^2\right]\\
+&amp;= ... \\
+&amp;= \left(f(X)-E[\hat{f}]\right)^2 + Var[\hat{f}(X)] + Var[\epsilon]
+\end{align}
+\]</span></p>
+<p>The quantity <span class="math inline">\(\left(f(X)-E[\hat{f}(X)]\right)\)</span> is called the <strong>bias</strong> of <span class="math inline">\(\hat{f}\)</span> and measures how far the model function <span class="math inline">\(\hat{f}\)</span> differs from the ground truth function <span class="math inline">\(f\)</span>. The quantity <span class="math inline">\(Var[\hat{f}(X)]\)</span> is the <strong>variance</strong> of <span class="math inline">\(\hat{f}\)</span> and measures how wildly <span class="math inline">\(\hat{f}\)</span> tends to oscillate. The final term <span class="math inline">\(Var[\epsilon]\)</span> is the variance of <span class="math inline">\(\epsilon\)</span> and just measures the inherent randomness in <span class="math inline">\(Y\)</span> which cannot be predicted away. Altogether, the equalities above say:</p>
+<p><span class="math display">\[ESE = \text{Bias}^2 + \text{Variance} + Var(\epsilon)\]</span>
+If we want to make the best possible predictions, we want to minimize <span class="math inline">\(ESE\)</span>. Now the random noise cannot be eliminated <span class="math inline">\(Var(\epsilon)\)</span> cannot be eliminated, but it is possible to lower both the bias and the variance by finding a model <span class="math inline">\(\hat{f}\approx f\)</span>. But since we don’t know what the true value of <span class="math inline">\(Var(\epsilon)\)</span> is, we don’t actually know if bias or variance are already low. Therein lies the rub: we always want to lower bias and variance but it isn’t always clear if this is possible.</p>
+<p>Furthermore, lowering bias will generally come at the cost of increased variance and vice versa. This phenomena is called the <strong>bias-variance tradeoff</strong> and is something we should always be mindful of when building and tuning models.</p>
+<p><br />
+</p>
+<hr />
 <p><br />
 </p>
 
-</div>
 </div>
 </div>
             </section>
