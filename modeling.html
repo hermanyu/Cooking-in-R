@@ -421,7 +421,7 @@ ESE &amp;= E\left[(Y-\hat{f}(X))^2\right] \\
 &amp;= E\left[(f(X)+\epsilon -\hat{f}(X))^2\right]\\
 &amp;= ... \\
 &amp;= \left(f(X)-E[\hat{f}]\right)^2 + Var[\hat{f}(X)] + Var[\epsilon]
-\end{align}
+\end{align*}
 \]</span></p>
 <p>The quantity <span class="math inline">\(\left(f(X)-E[\hat{f}(X)]\right)\)</span> is called the <strong>bias</strong> of <span class="math inline">\(\hat{f}\)</span> and measures how far the model function <span class="math inline">\(\hat{f}\)</span> differs from the ground truth function <span class="math inline">\(f\)</span>. The quantity <span class="math inline">\(Var[\hat{f}(X)]\)</span> is the <strong>variance</strong> of <span class="math inline">\(\hat{f}\)</span> and measures how wildly <span class="math inline">\(\hat{f}\)</span> tends to oscillate. The final term <span class="math inline">\(Var[\epsilon]\)</span> is the variance of <span class="math inline">\(\epsilon\)</span> and just measures the inherent randomness in <span class="math inline">\(Y\)</span> which cannot be predicted away. Altogether, the equalities above say:</p>
 <p><span class="math display">\[ESE = \text{Bias}^2 + \text{Variance} + Var(\epsilon)\]</span>
