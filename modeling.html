@@ -205,7 +205,7 @@
 <li class="chapter" data-level="9.3.3" data-path="modeling.html"><a href="modeling.html#model-based-approach"><i class="fa fa-check"></i><b>9.3.3</b> Model-based approach</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="modeling.html"><a href="modeling.html#minimizing-loss-functions"><i class="fa fa-check"></i><b>9.4</b> Minimizing loss functions</a></li>
-<li class="chapter" data-level="9.5" data-path="modeling.html"><a href="modeling.html#maximizing-likelihood-estimates"><i class="fa fa-check"></i><b>9.5</b> Maximizing likelihood estimates</a></li>
+<li class="chapter" data-level="9.5" data-path="modeling.html"><a href="modeling.html#maximizing-likelihood"><i class="fa fa-check"></i><b>9.5</b> Maximizing likelihood</a></li>
 <li class="chapter" data-level="9.6" data-path="modeling.html"><a href="modeling.html#the-additive-error-model-and-the-bias-variance-tradeoff"><i class="fa fa-check"></i><b>9.6</b> The additive error model and the bias-variance tradeoff</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="linear-regression-models.html"><a href="linear-regression-models.html"><i class="fa fa-check"></i><b>10</b> Linear Regression Models</a></li>
@@ -354,8 +354,8 @@ MSE(f) &amp;= E(Y^{(i)}-f(X^{(i)}))^2 \\
 <p><br />
 </p>
 </div>
-<div id="maximizing-likelihood-estimates" class="section level2 hasAnchor" number="9.5">
-<h2><span class="header-section-number">9.5</span> Maximizing likelihood estimates<a href="modeling.html#maximizing-likelihood-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="maximizing-likelihood" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Maximizing likelihood<a href="modeling.html#maximizing-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Minimizing lost functions isn’t the only game in town; we can also do <strong>maximum likelihood estimates</strong>. We have <span class="math inline">\(f(x) = E(Y|X=x)\)</span> is the “best possible prediction” for <span class="math inline">\(Y\)</span> using the information given by <span class="math inline">\(X=x\)</span>. Instead of trying to estimate the conditional mean <span class="math inline">\(E(Y|X=x)\)</span> directly, we instead do something more ambitious and try to estimate the entire conditional distribution <span class="math inline">\(Pr(Y|X=x)\)</span>.</p>
 <p>Previously, we assumed that <span class="math inline">\(E(Y|X=x) = f_{\theta}(x)\)</span> had some specific model form, e.g. <span class="math inline">\(f_{\theta}=X^T\theta\)</span>. Now, we assume instead that the conditional distribution <span class="math inline">\(Pr(Y|X=x, \theta)\)</span> has a specific form, e.g. <span class="math inline">\(Pr(Y|X=x) \sim N(x^T\theta, \sigma^2)\)</span>. Finding a good approximation for <span class="math inline">\(Pr(Y|X=x)\)</span> now reduces to finding a good estimate for <span class="math inline">\(\theta\)</span>.</p>
 <p>For any given value <span class="math inline">\(\hat{\theta}\)</span>, define the <strong>likelihood</strong> of <span class="math inline">\(\hat{\theta}\)</span> given <span class="math inline">\((X,Y)\)</span> as the quantity:</p>
@@ -369,7 +369,7 @@ MSE(f) &amp;= E(Y^{(i)}-f(X^{(i)}))^2 \\
 \end{align*}
 \]</span></p>
 <p>In other words, <span class="math inline">\(\hat{\theta}\)</span> should be the parameter(s) for which the observed sample is most probable. Note that the we are able to split the probability into a product because we assume the each data point is drawn independently during the sampling process.</p>
-<p>We can convert the product into a sum by feeding the likelihood <span class="math inline">\(l(\hat{\theta})\)</span> into the <span class="math inline">\(\log\)</span> function. If we do this, we get:</p>
+<p>We can convert the product into a sum by feeding the likelihood <span class="math inline">\(l(\hat{\theta})\)</span> into the <span class="math inline">\(\log()\)</span> function. If we do this, we get:</p>
 <p><span class="math display">\[
 \begin{align*}
 \log(l(\hat{\theta})) &amp;= \log\left(\prod_{i=1}^n Pr(Y^{(i)}|X^{(i)},\hat{\theta})\right) \\
@@ -385,7 +385,7 @@ l(\hat{\theta}) &amp;= \prod_{i=1}^n Pr(Y^{(i)}|X^{(i)},\hat{\theta})\\
 &amp;= \prod_{i=1}^n\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}(Y^{(i)}-X^{(i)}\cdot\hat{\theta})^2}
 \end{align*}
 \]</span></p>
-<p>The best estimate <span class="math inline">\(\hat{\theta}\)</span> is the one which maximizes this quantity. As before, we can switch to the log likelihood since the maximums will be the same for both <span class="math inline">\(\l(\hat{\theta})\)</span> and <span class="math inline">\(\log(l(\hat{\theta}))\)</span>:</p>
+<p>The best estimate <span class="math inline">\(\hat{\theta}\)</span> is the one which maximizes this quantity. As before, we can switch to the log likelihood since the maximums will be the same for both <span class="math inline">\(l(\hat{\theta})\)</span> and <span class="math inline">\(\log(l(\hat{\theta}))\)</span>:</p>
 <p><span class="math display">\[\log(l(\hat{\theta})) = -\frac{n\log(2\pi)}{2} + \sum_{i=1}^n-\frac{1}{2}\left(Y^{(i)} - X^{(i)}\cdot\hat{\theta}\right)^2\]</span></p>
 <p>First term <span class="math inline">\(-\frac{n\log(2\pi)}{2}\)</span> is a constant and <span class="math inline">\(-\frac{1}{2}\)</span> is a constant factor. Thus maximizing the log likelihood can be done simply by maximizing the quantity:</p>
 <p><span class="math display">\[\max_{\hat{\theta}} \,\,\sum_{i=1}^n-\left(Y^{(i)} - X^{(i)}\cdot\hat{\theta}\right)^2\]</span></p>
